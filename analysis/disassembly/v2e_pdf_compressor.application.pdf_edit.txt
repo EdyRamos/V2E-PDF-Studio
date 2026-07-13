@@ -1,0 +1,1661 @@
+MODULE: v2e_pdf_compressor.application.pdf_edit
+SOURCE FILE: v2e_pdf_compressor\application\pdf_edit.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('annotations',))
+              IMPORT_NAME              0 (__future__)
+              IMPORT_FROM              1 (annotations)
+              STORE_NAME               1 (annotations)
+              POP_TOP
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              2 (re)
+              STORE_NAME               2 (re)
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('Path',))
+              IMPORT_NAME              3 (pathlib)
+              IMPORT_FROM              4 (Path)
+              STORE_NAME               4 (Path)
+              POP_TOP
+
+  6           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              5 (fitz)
+              STORE_NAME               5 (fitz)
+
+  8           LOAD_SMALL_INT           2
+              LOAD_CONST               4 (('ExportOptions', 'PdfDocumentSession', 'PdfPageItem', 'RenderedPage'))
+              IMPORT_NAME              6 (domain)
+              IMPORT_FROM              7 (ExportOptions)
+              STORE_NAME               7 (ExportOptions)
+              IMPORT_FROM              8 (PdfDocumentSession)
+              STORE_NAME               8 (PdfDocumentSession)
+              IMPORT_FROM              9 (PdfPageItem)
+              STORE_NAME               9 (PdfPageItem)
+              IMPORT_FROM             10 (RenderedPage)
+              STORE_NAME              10 (RenderedPage)
+              POP_TOP
+
+ 11           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               5 (<code object PdfEditError at 0x000000001B8B0F30, file "v2e_pdf_compressor\application\pdf_edit.py", line 11>)
+              MAKE_FUNCTION
+              LOAD_CONST               6 ('PdfEditError')
+              LOAD_NAME               11 (Exception)
+              CALL                     3
+              STORE_NAME              12 (PdfEditError)
+
+ 15           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               7 (<code object PdfPasswordRequiredError at 0x000000001B8B21F0, file "v2e_pdf_compressor\application\pdf_edit.py", line 15>)
+              MAKE_FUNCTION
+              LOAD_CONST               8 ('PdfPasswordRequiredError')
+              LOAD_NAME               12 (PdfEditError)
+              CALL                     3
+              STORE_NAME              13 (PdfPasswordRequiredError)
+
+ 19           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               9 (<code object PdfEditService at 0x000000001B556BB0, file "v2e_pdf_compressor\application\pdf_edit.py", line 19>)
+              MAKE_FUNCTION
+              LOAD_CONST              10 ('PdfEditService')
+              CALL                     2
+              STORE_NAME              14 (PdfEditService)
+
+177           LOAD_CONST              11 (<code object __annotate__ at 0x000000001BB61630, file "v2e_pdf_compressor\application\pdf_edit.py", line 177>)
+              MAKE_FUNCTION
+              LOAD_CONST              12 (<code object parse_page_ranges at 0x000000001BA0F3E0, file "v2e_pdf_compressor\application\pdf_edit.py", line 177>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              15 (parse_page_ranges)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object PdfEditError at 0x000000001B8B0F30, file "v2e_pdf_compressor\application\pdf_edit.py", line 11>:
+ 11           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('PdfEditError')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          11
+              STORE_NAME               3 (__firstlineno__)
+
+ 12           LOAD_CONST               1 (())
+              STORE_NAME               4 (__static_attributes__)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object PdfPasswordRequiredError at 0x000000001B8B21F0, file "v2e_pdf_compressor\application\pdf_edit.py", line 15>:
+ 15           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('PdfPasswordRequiredError')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          15
+              STORE_NAME               3 (__firstlineno__)
+
+ 16           LOAD_CONST               1 (())
+              STORE_NAME               4 (__static_attributes__)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object PdfEditService at 0x000000001B556BB0, file "v2e_pdf_compressor\application\pdf_edit.py", line 19>:
+ 19           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('PdfEditService')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          19
+              STORE_NAME               3 (__firstlineno__)
+
+ 20           LOAD_CONST               1 (<code object __annotate__ at 0x000000001B8B22E0, file "v2e_pdf_compressor\application\pdf_edit.py", line 20>)
+              MAKE_FUNCTION
+              LOAD_CONST               2 (<code object open_document at 0x000000001BA137B0, file "v2e_pdf_compressor\application\pdf_edit.py", line 20>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               4 (open_document)
+
+ 33           LOAD_CONST              25 ((1.0,))
+              LOAD_CONST               3 (<code object __annotate__ at 0x000000001B503E30, file "v2e_pdf_compressor\application\pdf_edit.py", line 33>)
+              MAKE_FUNCTION
+              LOAD_CONST               4 (<code object render_page at 0x000000001B9A1F30, file "v2e_pdf_compressor\application\pdf_edit.py", line 33>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               5 (render_page)
+
+ 52           LOAD_CONST               5 (<code object __annotate__ at 0x000000001B8A6530, file "v2e_pdf_compressor\application\pdf_edit.py", line 52>)
+              MAKE_FUNCTION
+              LOAD_CONST               6 (<code object reorder_by_page_ids at 0x000000001B4ED990, file "v2e_pdf_compressor\application\pdf_edit.py", line 52>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               6 (reorder_by_page_ids)
+
+ 59           LOAD_CONST               7 (<code object __annotate__ at 0x000000001B8A7230, file "v2e_pdf_compressor\application\pdf_edit.py", line 59>)
+              MAKE_FUNCTION
+              LOAD_CONST               8 (<code object remove_pages at 0x000000001B5123F0, file "v2e_pdf_compressor\application\pdf_edit.py", line 59>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               7 (remove_pages)
+
+ 63           LOAD_CONST              26 ((None,))
+              LOAD_CONST              10 (<code object __annotate__ at 0x000000001B8A6D30, file "v2e_pdf_compressor\application\pdf_edit.py", line 63>)
+              MAKE_FUNCTION
+              LOAD_CONST              11 (<code object insert_pdf at 0x000000001B9A0C10, file "v2e_pdf_compressor\application\pdf_edit.py", line 63>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               8 (insert_pdf)
+
+ 80           LOAD_CONST              26 ((None,))
+              LOAD_CONST              12 (<code object __annotate__ at 0x000000001BB61030, file "v2e_pdf_compressor\application\pdf_edit.py", line 80>)
+              MAKE_FUNCTION
+              LOAD_CONST              13 (<code object add_blank_page at 0x000000001B5468E0, file "v2e_pdf_compressor\application\pdf_edit.py", line 80>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               9 (add_blank_page)
+
+ 90           LOAD_CONST              14 (<code object __annotate__ at 0x000000001BB61130, file "v2e_pdf_compressor\application\pdf_edit.py", line 90>)
+              MAKE_FUNCTION
+              LOAD_CONST              15 (<code object export_document at 0x000000001B9A23D0, file "v2e_pdf_compressor\application\pdf_edit.py", line 90>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              10 (export_document)
+
+107           LOAD_CONST              27 ((False,))
+              LOAD_CONST              16 (<code object __annotate__ at 0x000000001BB61330, file "v2e_pdf_compressor\application\pdf_edit.py", line 107>)
+              MAKE_FUNCTION
+              LOAD_CONST              17 (<code object split_selected at 0x000000001B555E30, file "v2e_pdf_compressor\application\pdf_edit.py", line 107>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              11 (split_selected)
+
+119           LOAD_CONST              27 ((False,))
+              LOAD_CONST              18 (<code object __annotate__ at 0x000000001BB61430, file "v2e_pdf_compressor\application\pdf_edit.py", line 119>)
+              MAKE_FUNCTION
+              LOAD_CONST              19 (<code object split_ranges at 0x000000001B4FBA30, file "v2e_pdf_compressor\application\pdf_edit.py", line 119>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              12 (split_ranges)
+
+136           LOAD_CONST              20 (<code object __annotate__ at 0x000000001BB61530, file "v2e_pdf_compressor\application\pdf_edit.py", line 136>)
+              MAKE_FUNCTION
+              LOAD_CONST              21 (<code object _export_pages at 0x000000001B9A4220, file "v2e_pdf_compressor\application\pdf_edit.py", line 136>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              13 (_export_pages)
+
+150           LOAD_CONST              22 (<code object __annotate__ at 0x000000001B8B23D0, file "v2e_pdf_compressor\application\pdf_edit.py", line 150>)
+              MAKE_FUNCTION
+              LOAD_CONST              23 (<code object _build_document at 0x000000001BA0F030, file "v2e_pdf_compressor\application\pdf_edit.py", line 150>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              14 (_build_document)
+              LOAD_CONST              24 (())
+              STORE_NAME              15 (__static_attributes__)
+              LOAD_CONST               9 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B22E0, file "v2e_pdf_compressor\application\pdf_edit.py", line 20>:
+ 20           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('path')
+              LOAD_CONST               2 ('Path')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('PdfDocumentSession')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object open_document at 0x000000001BA137B0, file "v2e_pdf_compressor\application\pdf_edit.py", line 20>:
+  20            RESUME                   0
+
+  21            LOAD_FAST_BORROW         1 (path)
+                LOAD_ATTR                1 (resolve + NULL|self)
+                CALL                     0
+                STORE_FAST               1 (path)
+
+  22            LOAD_FAST_BORROW         1 (path)
+                LOAD_ATTR                3 (exists + NULL|self)
+                CALL                     0
+                TO_BOOL
+                POP_JUMP_IF_TRUE        12 (to L1)
+                NOT_TAKEN
+
+  23            LOAD_GLOBAL              5 (FileNotFoundError + NULL)
+                LOAD_FAST_BORROW         1 (path)
+                CALL                     1
+                RAISE_VARARGS            1
+
+  24    L1:     LOAD_FAST_BORROW         1 (path)
+                LOAD_ATTR                6 (suffix)
+                LOAD_ATTR                9 (lower + NULL|self)
+                CALL                     0
+                LOAD_CONST               0 ('.pdf')
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       12 (to L2)
+                NOT_TAKEN
+
+  25            LOAD_GLOBAL             11 (PdfEditError + NULL)
+                LOAD_CONST               1 ('Somente arquivos PDF sao aceitos.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+  27    L2:     LOAD_GLOBAL             12 (fitz)
+                LOAD_ATTR               14 (open)
+                PUSH_NULL
+                LOAD_FAST_BORROW         1 (path)
+                CALL                     1
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L3:     STORE_FAST               2 (document)
+
+  28            LOAD_FAST_BORROW         2 (document)
+                LOAD_ATTR               16 (needs_pass)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       12 (to L4)
+                NOT_TAKEN
+
+  29            LOAD_GLOBAL             19 (PdfPasswordRequiredError + NULL)
+                LOAD_CONST               2 ('PDF protegido por senha.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+  30    L4:     LOAD_GLOBAL             21 (range + NULL)
+                LOAD_FAST_BORROW         2 (document)
+                LOAD_ATTR               22 (page_count)
+                CALL                     1
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      3 (index)
+                SWAP                     2
+        L5:     BUILD_LIST               0
+                SWAP                     2
+        L6:     FOR_ITER                25 (to L7)
+                STORE_FAST               3 (index)
+                LOAD_GLOBAL             24 (PdfPageItem)
+                LOAD_ATTR               26 (from_source)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 19 (path, index)
+                CALL                     2
+                LIST_APPEND              2
+                JUMP_BACKWARD           27 (to L6)
+        L7:     END_FOR
+                POP_ITER
+        L8:     STORE_FAST               4 (pages)
+                STORE_FAST               3 (index)
+
+  27    L9:     LOAD_CONST               3 (None)
+                LOAD_CONST               3 (None)
+                LOAD_CONST               3 (None)
+                CALL                     3
+                POP_TOP
+
+  31   L10:     LOAD_GLOBAL             29 (PdfDocumentSession + NULL)
+                LOAD_FAST_BORROW         1 (path)
+                LOAD_FAST_CHECK          4 (pages)
+                LOAD_CONST               4 (False)
+                LOAD_CONST               5 (('original_path', 'pages', 'modified'))
+                CALL_KW                  3
+                RETURN_VALUE
+
+  --   L11:     SWAP                     2
+                POP_TOP
+
+  30            SWAP                     2
+                STORE_FAST               3 (index)
+                RERAISE                  0
+
+  27   L12:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L13)
+                NOT_TAKEN
+                RERAISE                  2
+       L13:     POP_TOP
+       L14:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 35 (to L10)
+
+  --   L15:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L3 to L5 -> L12 [2] lasti
+  L5 to L8 -> L11 [4]
+  L8 to L9 -> L12 [2] lasti
+  L11 to L12 -> L12 [2] lasti
+  L12 to L14 -> L15 [4] lasti
+
+Disassembly of <code object __annotate__ at 0x000000001B503E30, file "v2e_pdf_compressor\application\pdf_edit.py", line 33>:
+ 33           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('page')
+              LOAD_CONST               2 ('PdfPageItem')
+              LOAD_CONST               3 ('scale')
+              LOAD_CONST               4 ('float')
+              LOAD_CONST               5 ('return')
+              LOAD_CONST               6 ('RenderedPage')
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object render_page at 0x000000001B9A1F30, file "v2e_pdf_compressor\application\pdf_edit.py", line 33>:
+  33            RESUME                   0
+
+  34            LOAD_FAST_BORROW         1 (page)
+                LOAD_ATTR                0 (is_blank)
+                TO_BOOL
+                POP_JUMP_IF_FALSE      183 (to L3)
+                NOT_TAKEN
+
+  35            LOAD_GLOBAL              2 (fitz)
+                LOAD_ATTR                4 (open)
+                PUSH_NULL
+                CALL                     0
+                STORE_FAST               3 (doc)
+
+  36            LOAD_FAST_BORROW         3 (doc)
+                LOAD_ATTR                7 (new_page + NULL|self)
+                LOAD_FAST_BORROW         1 (page)
+                LOAD_ATTR                8 (blank_width)
+                LOAD_FAST_BORROW         1 (page)
+                LOAD_ATTR               10 (blank_height)
+                LOAD_CONST               0 (('width', 'height'))
+                CALL_KW                  2
+                POP_TOP
+
+  37            NOP
+
+  38    L1:     LOAD_FAST_BORROW         3 (doc)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_ATTR               13 (get_pixmap + NULL|self)
+                LOAD_GLOBAL              2 (fitz)
+                LOAD_ATTR               14 (Matrix)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 34 (scale, scale)
+                CALL                     2
+                LOAD_CONST               1 (False)
+                LOAD_CONST               2 (('matrix', 'alpha'))
+                CALL_KW                  2
+                STORE_FAST               4 (pixmap)
+
+  39            LOAD_GLOBAL             17 (RenderedPage + NULL)
+                LOAD_FAST_BORROW         1 (page)
+                LOAD_ATTR               18 (page_id)
+                LOAD_FAST_BORROW         4 (pixmap)
+                LOAD_ATTR               20 (width)
+                LOAD_FAST_BORROW         4 (pixmap)
+                LOAD_ATTR               22 (height)
+                LOAD_FAST_BORROW         4 (pixmap)
+                LOAD_ATTR               25 (tobytes + NULL|self)
+                LOAD_CONST               3 ('png')
+                CALL                     1
+                CALL                     4
+
+  41    L2:     LOAD_FAST_BORROW         3 (doc)
+                LOAD_ATTR               27 (close + NULL|self)
+                CALL                     0
+                POP_TOP
+                RETURN_VALUE
+
+  43    L3:     LOAD_FAST_BORROW         1 (page)
+                LOAD_ATTR               28 (source_path)
+                POP_JUMP_IF_NONE        15 (to L4)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         1 (page)
+                LOAD_ATTR               30 (source_page_index)
+                POP_JUMP_IF_NOT_NONE    12 (to L5)
+                NOT_TAKEN
+
+  44    L4:     LOAD_GLOBAL             33 (PdfEditError + NULL)
+                LOAD_CONST               5 ('Pagina sem origem valida.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+  46    L5:     LOAD_GLOBAL              2 (fitz)
+                LOAD_ATTR                4 (open)
+                PUSH_NULL
+                LOAD_FAST_BORROW         1 (page)
+                LOAD_ATTR               28 (source_path)
+                CALL                     1
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L6:     STORE_FAST               5 (document)
+
+  47            LOAD_FAST_BORROW         5 (document)
+                LOAD_ATTR               35 (load_page + NULL|self)
+                LOAD_FAST_BORROW         1 (page)
+                LOAD_ATTR               30 (source_page_index)
+                CALL                     1
+                STORE_FAST               6 (source_page)
+
+  48            LOAD_GLOBAL              2 (fitz)
+                LOAD_ATTR               14 (Matrix)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 34 (scale, scale)
+                CALL                     2
+                LOAD_ATTR               37 (prerotate + NULL|self)
+                LOAD_FAST_BORROW         1 (page)
+                LOAD_ATTR               38 (rotation)
+                CALL                     1
+                STORE_FAST               7 (matrix)
+
+  49            LOAD_FAST_BORROW         6 (source_page)
+                LOAD_ATTR               13 (get_pixmap + NULL|self)
+                LOAD_FAST_BORROW         7 (matrix)
+                LOAD_CONST               1 (False)
+                LOAD_CONST               2 (('matrix', 'alpha'))
+                CALL_KW                  2
+                STORE_FAST               4 (pixmap)
+
+  50            LOAD_GLOBAL             17 (RenderedPage + NULL)
+                LOAD_FAST_BORROW         1 (page)
+                LOAD_ATTR               18 (page_id)
+                LOAD_FAST_BORROW         4 (pixmap)
+                LOAD_ATTR               20 (width)
+                LOAD_FAST_BORROW         4 (pixmap)
+                LOAD_ATTR               22 (height)
+                LOAD_FAST_BORROW         4 (pixmap)
+                LOAD_ATTR               25 (tobytes + NULL|self)
+                LOAD_CONST               3 ('png')
+                CALL                     1
+                CALL                     4
+
+  46    L7:     SWAP                     3
+                SWAP                     2
+                LOAD_CONST               4 (None)
+                LOAD_CONST               4 (None)
+                LOAD_CONST               4 (None)
+                CALL                     3
+                POP_TOP
+                RETURN_VALUE
+
+  --    L8:     PUSH_EXC_INFO
+
+  41            LOAD_FAST                3 (doc)
+                LOAD_ATTR               27 (close + NULL|self)
+                CALL                     0
+                POP_TOP
+                RERAISE                  0
+
+  --    L9:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+  46   L10:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L11)
+                NOT_TAKEN
+                RERAISE                  2
+       L11:     POP_TOP
+       L12:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                LOAD_CONST               4 (None)
+                RETURN_VALUE
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L8 [0]
+  L6 to L7 -> L10 [2] lasti
+  L8 to L9 -> L9 [1] lasti
+  L10 to L12 -> L13 [4] lasti
+
+Disassembly of <code object __annotate__ at 0x000000001B8A6530, file "v2e_pdf_compressor\application\pdf_edit.py", line 52>:
+ 52           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('session')
+              LOAD_CONST               2 ('PdfDocumentSession')
+              LOAD_CONST               3 ('page_ids')
+              LOAD_CONST               4 ('list[str]')
+              LOAD_CONST               5 ('return')
+              LOAD_CONST               6 ('None')
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object reorder_by_page_ids at 0x000000001B4ED990, file "v2e_pdf_compressor\application\pdf_edit.py", line 52>:
+  52            RESUME                   0
+
+  53            LOAD_FAST_BORROW         1 (session)
+                LOAD_ATTR                0 (pages)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      3 (page)
+                SWAP                     2
+        L1:     BUILD_MAP                0
+                SWAP                     2
+        L2:     FOR_ITER                15 (to L3)
+                STORE_FAST_LOAD_FAST    51 (page, page)
+                LOAD_ATTR                2 (page_id)
+                LOAD_FAST_BORROW         3 (page)
+                MAP_ADD                  2
+                JUMP_BACKWARD           17 (to L2)
+        L3:     END_FOR
+                POP_ITER
+        L4:     STORE_FAST               4 (by_id)
+                STORE_FAST               3 (page)
+
+  54            LOAD_GLOBAL              5 (set + NULL)
+                LOAD_FAST_BORROW         4 (by_id)
+                CALL                     1
+                LOAD_GLOBAL              5 (set + NULL)
+                LOAD_FAST_BORROW         2 (page_ids)
+                CALL                     1
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       12 (to L5)
+                NOT_TAKEN
+
+  55            LOAD_GLOBAL              7 (PdfEditError + NULL)
+                LOAD_CONST               0 ('Ordem de paginas invalida.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+  56    L5:     LOAD_FAST_BORROW         2 (page_ids)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      5 (page_id)
+                SWAP                     2
+        L6:     BUILD_LIST               0
+                SWAP                     2
+        L7:     FOR_ITER                11 (to L8)
+                STORE_FAST_LOAD_FAST    84 (page_id, by_id)
+                LOAD_FAST_BORROW         5 (page_id)
+                BINARY_OP               26 ([])
+                LIST_APPEND              2
+                JUMP_BACKWARD           13 (to L7)
+        L8:     END_FOR
+                POP_ITER
+        L9:     SWAP                     2
+                STORE_FAST               5 (page_id)
+                LOAD_FAST_BORROW         1 (session)
+                STORE_ATTR               0 (pages)
+
+  57            LOAD_CONST               1 (True)
+                LOAD_FAST_BORROW         1 (session)
+                STORE_ATTR               4 (modified)
+                LOAD_CONST               2 (None)
+                RETURN_VALUE
+
+  --   L10:     SWAP                     2
+                POP_TOP
+
+  53            SWAP                     2
+                STORE_FAST               3 (page)
+                RERAISE                  0
+
+  --   L11:     SWAP                     2
+                POP_TOP
+
+  56            SWAP                     2
+                STORE_FAST               5 (page_id)
+                RERAISE                  0
+ExceptionTable:
+  L1 to L4 -> L10 [2]
+  L6 to L9 -> L11 [2]
+
+Disassembly of <code object __annotate__ at 0x000000001B8A7230, file "v2e_pdf_compressor\application\pdf_edit.py", line 59>:
+ 59           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('session')
+              LOAD_CONST               2 ('PdfDocumentSession')
+              LOAD_CONST               3 ('page_ids')
+              LOAD_CONST               4 ('set[str]')
+              LOAD_CONST               5 ('return')
+              LOAD_CONST               6 ('None')
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object remove_pages at 0x000000001B5123F0, file "v2e_pdf_compressor\application\pdf_edit.py", line 59>:
+  59           RESUME                   0
+
+  60           LOAD_FAST_BORROW         1 (session)
+               LOAD_ATTR                0 (pages)
+               GET_ITER
+               LOAD_FAST_AND_CLEAR      3 (page)
+               SWAP                     2
+       L1:     BUILD_LIST               0
+               SWAP                     2
+       L2:     FOR_ITER                23 (to L5)
+               STORE_FAST_LOAD_FAST    51 (page, page)
+               LOAD_ATTR                2 (page_id)
+               LOAD_FAST_BORROW         2 (page_ids)
+               CONTAINS_OP              1 (not in)
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           21 (to L2)
+       L4:     LOAD_FAST_BORROW         3 (page)
+               LIST_APPEND              2
+               JUMP_BACKWARD           25 (to L2)
+       L5:     END_FOR
+               POP_ITER
+       L6:     SWAP                     2
+               STORE_FAST               3 (page)
+               LOAD_FAST_BORROW         1 (session)
+               STORE_ATTR               0 (pages)
+
+  61           LOAD_CONST               0 (True)
+               LOAD_FAST_BORROW         1 (session)
+               STORE_ATTR               2 (modified)
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L7:     SWAP                     2
+               POP_TOP
+
+  60           SWAP                     2
+               STORE_FAST               3 (page)
+               RERAISE                  0
+ExceptionTable:
+  L1 to L3 -> L7 [2]
+  L4 to L6 -> L7 [2]
+
+Disassembly of <code object __annotate__ at 0x000000001B8A6D30, file "v2e_pdf_compressor\application\pdf_edit.py", line 63>:
+ 63           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('session')
+
+ 65           LOAD_CONST               2 ('PdfDocumentSession')
+
+ 63           LOAD_CONST               3 ('source_path')
+
+ 66           LOAD_CONST               4 ('Path')
+
+ 63           LOAD_CONST               5 ('after_page_id')
+
+ 67           LOAD_CONST               6 ('str | None')
+
+ 63           LOAD_CONST               7 ('return')
+
+ 68           LOAD_CONST               8 ('list[str]')
+
+ 63           BUILD_MAP                4
+              RETURN_VALUE
+
+Disassembly of <code object insert_pdf at 0x000000001B9A0C10, file "v2e_pdf_compressor\application\pdf_edit.py", line 63>:
+  63           RESUME                   0
+
+  69           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                1 (open_document + NULL|self)
+               LOAD_FAST_BORROW         2 (source_path)
+               CALL                     1
+               LOAD_ATTR                2 (pages)
+               STORE_FAST               4 (inserted)
+
+  70           LOAD_GLOBAL              5 (len + NULL)
+               LOAD_FAST_BORROW         1 (session)
+               LOAD_ATTR                2 (pages)
+               CALL                     1
+               STORE_FAST               5 (insert_at)
+
+  71           LOAD_FAST_BORROW         3 (after_page_id)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       59 (to L4)
+               NOT_TAKEN
+
+  72           LOAD_GLOBAL              7 (enumerate + NULL)
+               LOAD_FAST_BORROW         1 (session)
+               LOAD_ATTR                2 (pages)
+               CALL                     1
+               GET_ITER
+       L1:     FOR_ITER                33 (to L3)
+               UNPACK_SEQUENCE          2
+               STORE_FAST_STORE_FAST  103 (index, page)
+
+  73           LOAD_FAST_BORROW         7 (page)
+               LOAD_ATTR                8 (page_id)
+               LOAD_FAST_BORROW         3 (after_page_id)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_TRUE         3 (to L2)
+               NOT_TAKEN
+               JUMP_BACKWARD           24 (to L1)
+
+  74   L2:     LOAD_FAST_BORROW         6 (index)
+               LOAD_SMALL_INT           1
+               BINARY_OP                0 (+)
+               STORE_FAST               5 (insert_at)
+
+  75           POP_TOP
+               JUMP_FORWARD             2 (to L4)
+
+  72   L3:     END_FOR
+               POP_ITER
+
+  76   L4:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 65 (inserted, session)
+               LOAD_ATTR                2 (pages)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 85 (insert_at, insert_at)
+               STORE_SLICE
+
+  77           LOAD_CONST               1 (True)
+               LOAD_FAST_BORROW         1 (session)
+               STORE_ATTR               5 (modified)
+
+  78           LOAD_FAST_BORROW         4 (inserted)
+               GET_ITER
+               LOAD_FAST_AND_CLEAR      7 (page)
+               SWAP                     2
+       L5:     BUILD_LIST               0
+               SWAP                     2
+       L6:     FOR_ITER                14 (to L7)
+               STORE_FAST_LOAD_FAST   119 (page, page)
+               LOAD_ATTR                8 (page_id)
+               LIST_APPEND              2
+               JUMP_BACKWARD           16 (to L6)
+       L7:     END_FOR
+               POP_ITER
+       L8:     SWAP                     2
+               STORE_FAST               7 (page)
+               RETURN_VALUE
+
+  --   L9:     SWAP                     2
+               POP_TOP
+
+  78           SWAP                     2
+               STORE_FAST               7 (page)
+               RERAISE                  0
+ExceptionTable:
+  L5 to L8 -> L9 [2]
+
+Disassembly of <code object __annotate__ at 0x000000001BB61030, file "v2e_pdf_compressor\application\pdf_edit.py", line 80>:
+ 80           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('session')
+              LOAD_CONST               2 ('PdfDocumentSession')
+              LOAD_CONST               3 ('after_page_id')
+              LOAD_CONST               4 ('str | None')
+              LOAD_CONST               5 ('return')
+              LOAD_CONST               6 ('None')
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object add_blank_page at 0x000000001B5468E0, file "v2e_pdf_compressor\application\pdf_edit.py", line 80>:
+ 80           RESUME                   0
+
+ 81           LOAD_GLOBAL              1 (len + NULL)
+              LOAD_FAST_BORROW         1 (session)
+              LOAD_ATTR                2 (pages)
+              CALL                     1
+              STORE_FAST               3 (insert_at)
+
+ 82           LOAD_FAST_BORROW         2 (after_page_id)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       59 (to L4)
+              NOT_TAKEN
+
+ 83           LOAD_GLOBAL              5 (enumerate + NULL)
+              LOAD_FAST_BORROW         1 (session)
+              LOAD_ATTR                2 (pages)
+              CALL                     1
+              GET_ITER
+      L1:     FOR_ITER                33 (to L3)
+              UNPACK_SEQUENCE          2
+              STORE_FAST_STORE_FAST   69 (index, page)
+
+ 84           LOAD_FAST_BORROW         5 (page)
+              LOAD_ATTR                6 (page_id)
+              LOAD_FAST_BORROW         2 (after_page_id)
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_TRUE         3 (to L2)
+              NOT_TAKEN
+              JUMP_BACKWARD           24 (to L1)
+
+ 85   L2:     LOAD_FAST_BORROW         4 (index)
+              LOAD_SMALL_INT           1
+              BINARY_OP                0 (+)
+              STORE_FAST               3 (insert_at)
+
+ 86           POP_TOP
+              JUMP_FORWARD             2 (to L4)
+
+ 83   L3:     END_FOR
+              POP_ITER
+
+ 87   L4:     LOAD_FAST_BORROW         1 (session)
+              LOAD_ATTR                2 (pages)
+              LOAD_ATTR                9 (insert + NULL|self)
+              LOAD_FAST_BORROW         3 (insert_at)
+              LOAD_GLOBAL             10 (PdfPageItem)
+              LOAD_ATTR               12 (blank)
+              PUSH_NULL
+              CALL                     0
+              CALL                     2
+              POP_TOP
+
+ 88           LOAD_CONST               1 (True)
+              LOAD_FAST_BORROW         1 (session)
+              STORE_ATTR               7 (modified)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001BB61130, file "v2e_pdf_compressor\application\pdf_edit.py", line 90>:
+ 90           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('session')
+              LOAD_CONST               2 ('PdfDocumentSession')
+              LOAD_CONST               3 ('options')
+              LOAD_CONST               4 ('ExportOptions')
+              LOAD_CONST               5 ('return')
+              LOAD_CONST               6 ('Path')
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object export_document at 0x000000001B9A23D0, file "v2e_pdf_compressor\application\pdf_edit.py", line 90>:
+  90           RESUME                   0
+
+  91           LOAD_FAST_BORROW         2 (options)
+               LOAD_ATTR                0 (output_path)
+               LOAD_ATTR                3 (resolve + NULL|self)
+               CALL                     0
+               STORE_FAST               3 (output_path)
+
+  92           LOAD_FAST_BORROW         3 (output_path)
+               LOAD_ATTR                4 (suffix)
+               LOAD_ATTR                7 (lower + NULL|self)
+               CALL                     0
+               LOAD_CONST               0 ('.pdf')
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_FALSE       18 (to L1)
+               NOT_TAKEN
+
+  93           LOAD_FAST_BORROW         3 (output_path)
+               LOAD_ATTR                9 (with_suffix + NULL|self)
+               LOAD_CONST               0 ('.pdf')
+               CALL                     1
+               STORE_FAST               3 (output_path)
+
+  94   L1:     LOAD_FAST_BORROW         3 (output_path)
+               LOAD_ATTR               11 (exists + NULL|self)
+               CALL                     0
+               TO_BOOL
+               POP_JUMP_IF_FALSE       30 (to L2)
+               NOT_TAKEN
+               LOAD_FAST_BORROW         2 (options)
+               LOAD_ATTR               12 (overwrite)
+               TO_BOOL
+               POP_JUMP_IF_TRUE        12 (to L2)
+               NOT_TAKEN
+
+  95           LOAD_GLOBAL             15 (FileExistsError + NULL)
+               LOAD_FAST_BORROW         3 (output_path)
+               CALL                     1
+               RAISE_VARARGS            1
+
+  96   L2:     LOAD_FAST_BORROW         3 (output_path)
+               LOAD_ATTR               16 (parent)
+               LOAD_ATTR               19 (mkdir + NULL|self)
+               LOAD_CONST               1 (True)
+               LOAD_CONST               1 (True)
+               LOAD_CONST               2 (('parents', 'exist_ok'))
+               CALL_KW                  2
+               POP_TOP
+
+  98           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               21 (_build_document + NULL|self)
+               LOAD_FAST_BORROW         1 (session)
+               LOAD_ATTR               22 (pages)
+               CALL                     1
+               STORE_FAST               4 (document)
+
+  99           NOP
+
+ 100   L3:     LOAD_FAST_BORROW         4 (document)
+               LOAD_ATTR               25 (save + NULL|self)
+               LOAD_FAST_BORROW         3 (output_path)
+               LOAD_SMALL_INT           4
+               LOAD_CONST               1 (True)
+               LOAD_CONST               3 (('garbage', 'deflate'))
+               CALL_KW                  3
+               POP_TOP
+
+ 102   L4:     LOAD_FAST_BORROW         4 (document)
+               LOAD_ATTR               27 (close + NULL|self)
+               CALL                     0
+               POP_TOP
+
+ 103           LOAD_CONST               4 (False)
+               LOAD_FAST_BORROW         1 (session)
+               STORE_ATTR              14 (modified)
+
+ 104           LOAD_FAST_BORROW_LOAD_FAST_BORROW 49 (output_path, session)
+               STORE_ATTR              15 (original_path)
+
+ 105           LOAD_FAST_BORROW         3 (output_path)
+               RETURN_VALUE
+
+  --   L5:     PUSH_EXC_INFO
+
+ 102           LOAD_FAST                4 (document)
+               LOAD_ATTR               27 (close + NULL|self)
+               CALL                     0
+               POP_TOP
+               RERAISE                  0
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L3 to L4 -> L5 [0]
+  L5 to L6 -> L6 [1] lasti
+
+Disassembly of <code object __annotate__ at 0x000000001BB61330, file "v2e_pdf_compressor\application\pdf_edit.py", line 107>:
+107           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('session')
+
+109           LOAD_CONST               2 ('PdfDocumentSession')
+
+107           LOAD_CONST               3 ('page_ids')
+
+110           LOAD_CONST               4 ('set[str]')
+
+107           LOAD_CONST               5 ('output_path')
+
+111           LOAD_CONST               6 ('Path')
+
+107           LOAD_CONST               7 ('overwrite')
+
+112           LOAD_CONST               8 ('bool')
+
+107           LOAD_CONST               9 ('return')
+
+113           LOAD_CONST               6 ('Path')
+
+107           BUILD_MAP                5
+              RETURN_VALUE
+
+Disassembly of <code object split_selected at 0x000000001B555E30, file "v2e_pdf_compressor\application\pdf_edit.py", line 107>:
+ 107           RESUME                   0
+
+ 114           LOAD_FAST_BORROW         1 (session)
+               LOAD_ATTR                0 (pages)
+               GET_ITER
+               LOAD_FAST_AND_CLEAR      5 (page)
+               SWAP                     2
+       L1:     BUILD_LIST               0
+               SWAP                     2
+       L2:     FOR_ITER                23 (to L5)
+               STORE_FAST_LOAD_FAST    85 (page, page)
+               LOAD_ATTR                2 (page_id)
+               LOAD_FAST_BORROW         2 (page_ids)
+               CONTAINS_OP              0 (in)
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           21 (to L2)
+       L4:     LOAD_FAST_BORROW         5 (page)
+               LIST_APPEND              2
+               JUMP_BACKWARD           25 (to L2)
+       L5:     END_FOR
+               POP_ITER
+       L6:     STORE_FAST               6 (selected_pages)
+               STORE_FAST               5 (page)
+
+ 115           LOAD_FAST_BORROW         6 (selected_pages)
+               TO_BOOL
+               POP_JUMP_IF_TRUE        12 (to L7)
+               NOT_TAKEN
+
+ 116           LOAD_GLOBAL              5 (PdfEditError + NULL)
+               LOAD_CONST               0 ('Nenhuma pagina selecionada para dividir.')
+               CALL                     1
+               RAISE_VARARGS            1
+
+ 117   L7:     LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                7 (_export_pages + NULL|self)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 99 (selected_pages, output_path)
+               LOAD_FAST_BORROW         4 (overwrite)
+               CALL                     3
+               RETURN_VALUE
+
+  --   L8:     SWAP                     2
+               POP_TOP
+
+ 114           SWAP                     2
+               STORE_FAST               5 (page)
+               RERAISE                  0
+ExceptionTable:
+  L1 to L3 -> L8 [2]
+  L4 to L6 -> L8 [2]
+
+Disassembly of <code object __annotate__ at 0x000000001BB61430, file "v2e_pdf_compressor\application\pdf_edit.py", line 119>:
+119           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('session')
+
+121           LOAD_CONST               2 ('PdfDocumentSession')
+
+119           LOAD_CONST               3 ('ranges_text')
+
+122           LOAD_CONST               4 ('str')
+
+119           LOAD_CONST               5 ('output_dir')
+
+123           LOAD_CONST               6 ('Path')
+
+119           LOAD_CONST               7 ('base_name')
+
+124           LOAD_CONST               4 ('str')
+
+119           LOAD_CONST               8 ('overwrite')
+
+125           LOAD_CONST               9 ('bool')
+
+119           LOAD_CONST              10 ('return')
+
+126           LOAD_CONST              11 ('list[Path]')
+
+119           BUILD_MAP                6
+              RETURN_VALUE
+
+Disassembly of <code object split_ranges at 0x000000001B4FBA30, file "v2e_pdf_compressor\application\pdf_edit.py", line 119>:
+ 119           RESUME                   0
+
+ 127           LOAD_GLOBAL              1 (parse_page_ranges + NULL)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 33 (ranges_text, session)
+               LOAD_ATTR                2 (page_count)
+               CALL                     2
+               STORE_FAST               6 (ranges)
+
+ 128           LOAD_FAST_BORROW         3 (output_dir)
+               LOAD_ATTR                5 (mkdir + NULL|self)
+               LOAD_CONST               0 (True)
+               LOAD_CONST               0 (True)
+               LOAD_CONST               1 (('parents', 'exist_ok'))
+               CALL_KW                  2
+               POP_TOP
+
+ 129           BUILD_LIST               0
+               STORE_FAST               7 (outputs)
+
+ 130           LOAD_GLOBAL              7 (enumerate + NULL)
+               LOAD_FAST_BORROW         6 (ranges)
+               LOAD_SMALL_INT           1
+               LOAD_CONST               2 (('start',))
+               CALL_KW                  2
+               GET_ITER
+       L1:     FOR_ITER                85 (to L6)
+               UNPACK_SEQUENCE          2
+               STORE_FAST_STORE_FAST  137 (index, page_indexes)
+
+ 131           LOAD_FAST_BORROW         9 (page_indexes)
+               GET_ITER
+               LOAD_FAST_AND_CLEAR     10 (page_index)
+               SWAP                     2
+       L2:     BUILD_LIST               0
+               SWAP                     2
+       L3:     FOR_ITER                21 (to L4)
+               STORE_FAST_LOAD_FAST   161 (page_index, session)
+               LOAD_ATTR                8 (pages)
+               LOAD_FAST_BORROW        10 (page_index)
+               BINARY_OP               26 ([])
+               LIST_APPEND              2
+               JUMP_BACKWARD           23 (to L3)
+       L4:     END_FOR
+               POP_ITER
+       L5:     STORE_FAST              11 (pages)
+               STORE_FAST              10 (page_index)
+
+ 132           LOAD_FAST_BORROW_LOAD_FAST_BORROW 52 (output_dir, base_name)
+               FORMAT_SIMPLE
+               LOAD_CONST               3 ('_parte_')
+               LOAD_FAST_BORROW         8 (index)
+               FORMAT_SIMPLE
+               LOAD_CONST               4 ('.pdf')
+               BUILD_STRING             4
+               BINARY_OP               11 (/)
+               STORE_FAST              12 (output_path)
+
+ 133           LOAD_FAST_BORROW         7 (outputs)
+               LOAD_ATTR               11 (append + NULL|self)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               13 (_export_pages + NULL|self)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 188 (pages, output_path)
+               LOAD_FAST_BORROW         5 (overwrite)
+               CALL                     3
+               CALL                     1
+               POP_TOP
+               JUMP_BACKWARD           87 (to L1)
+
+ 130   L6:     END_FOR
+               POP_ITER
+
+ 134           LOAD_FAST_BORROW         7 (outputs)
+               RETURN_VALUE
+
+  --   L7:     SWAP                     2
+               POP_TOP
+
+ 131           SWAP                     2
+               STORE_FAST              10 (page_index)
+               RERAISE                  0
+ExceptionTable:
+  L2 to L5 -> L7 [3]
+
+Disassembly of <code object __annotate__ at 0x000000001BB61530, file "v2e_pdf_compressor\application\pdf_edit.py", line 136>:
+136           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('pages')
+              LOAD_CONST               2 ('list[PdfPageItem]')
+              LOAD_CONST               3 ('output_path')
+              LOAD_CONST               4 ('Path')
+              LOAD_CONST               5 ('overwrite')
+              LOAD_CONST               6 ('bool')
+              LOAD_CONST               7 ('return')
+              LOAD_CONST               4 ('Path')
+              BUILD_MAP                4
+              RETURN_VALUE
+
+Disassembly of <code object _export_pages at 0x000000001B9A4220, file "v2e_pdf_compressor\application\pdf_edit.py", line 136>:
+ 136           RESUME                   0
+
+ 137           LOAD_FAST_BORROW         2 (output_path)
+               LOAD_ATTR                1 (resolve + NULL|self)
+               CALL                     0
+               STORE_FAST               2 (output_path)
+
+ 138           LOAD_FAST_BORROW         2 (output_path)
+               LOAD_ATTR                2 (suffix)
+               LOAD_ATTR                5 (lower + NULL|self)
+               CALL                     0
+               LOAD_CONST               0 ('.pdf')
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_FALSE       18 (to L1)
+               NOT_TAKEN
+
+ 139           LOAD_FAST_BORROW         2 (output_path)
+               LOAD_ATTR                7 (with_suffix + NULL|self)
+               LOAD_CONST               0 ('.pdf')
+               CALL                     1
+               STORE_FAST               2 (output_path)
+
+ 140   L1:     LOAD_FAST_BORROW         2 (output_path)
+               LOAD_ATTR                9 (exists + NULL|self)
+               CALL                     0
+               TO_BOOL
+               POP_JUMP_IF_FALSE       20 (to L2)
+               NOT_TAKEN
+               LOAD_FAST_BORROW         3 (overwrite)
+               TO_BOOL
+               POP_JUMP_IF_TRUE        12 (to L2)
+               NOT_TAKEN
+
+ 141           LOAD_GLOBAL             11 (FileExistsError + NULL)
+               LOAD_FAST_BORROW         2 (output_path)
+               CALL                     1
+               RAISE_VARARGS            1
+
+ 142   L2:     LOAD_FAST_BORROW         2 (output_path)
+               LOAD_ATTR               12 (parent)
+               LOAD_ATTR               15 (mkdir + NULL|self)
+               LOAD_CONST               1 (True)
+               LOAD_CONST               1 (True)
+               LOAD_CONST               2 (('parents', 'exist_ok'))
+               CALL_KW                  2
+               POP_TOP
+
+ 143           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               17 (_build_document + NULL|self)
+               LOAD_FAST_BORROW         1 (pages)
+               CALL                     1
+               STORE_FAST               4 (document)
+
+ 144           NOP
+
+ 145   L3:     LOAD_FAST_BORROW         4 (document)
+               LOAD_ATTR               19 (save + NULL|self)
+               LOAD_FAST_BORROW         2 (output_path)
+               LOAD_SMALL_INT           4
+               LOAD_CONST               1 (True)
+               LOAD_CONST               3 (('garbage', 'deflate'))
+               CALL_KW                  3
+               POP_TOP
+
+ 147   L4:     LOAD_FAST_BORROW         4 (document)
+               LOAD_ATTR               21 (close + NULL|self)
+               CALL                     0
+               POP_TOP
+
+ 148           LOAD_FAST_BORROW         2 (output_path)
+               RETURN_VALUE
+
+  --   L5:     PUSH_EXC_INFO
+
+ 147           LOAD_FAST                4 (document)
+               LOAD_ATTR               21 (close + NULL|self)
+               CALL                     0
+               POP_TOP
+               RERAISE                  0
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L3 to L4 -> L5 [0]
+  L5 to L6 -> L6 [1] lasti
+
+Disassembly of <code object __annotate__ at 0x000000001B8B23D0, file "v2e_pdf_compressor\application\pdf_edit.py", line 150>:
+150           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('pages')
+              LOAD_CONST               2 ('list[PdfPageItem]')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('fitz.Document')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object _build_document at 0x000000001BA0F030, file "v2e_pdf_compressor\application\pdf_edit.py", line 150>:
+ 150            RESUME                   0
+
+ 151            LOAD_GLOBAL              0 (fitz)
+                LOAD_ATTR                2 (open)
+                PUSH_NULL
+                CALL                     0
+                STORE_FAST               2 (output)
+
+ 152            BUILD_MAP                0
+                STORE_FAST               3 (source_cache)
+
+ 153            NOP
+
+ 154    L1:     LOAD_FAST_BORROW         1 (pages)
+                GET_ITER
+        L2:     FOR_ITER               210 (to L6)
+                STORE_FAST               4 (page)
+
+ 155            LOAD_FAST_BORROW         4 (page)
+                LOAD_ATTR                4 (is_blank)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       42 (to L3)
+                NOT_TAKEN
+
+ 156            LOAD_FAST_BORROW         2 (output)
+                LOAD_ATTR                7 (new_page + NULL|self)
+                LOAD_FAST_BORROW         4 (page)
+                LOAD_ATTR                8 (blank_width)
+                LOAD_FAST_BORROW         4 (page)
+                LOAD_ATTR               10 (blank_height)
+                LOAD_CONST               0 (('width', 'height'))
+                CALL_KW                  2
+                POP_TOP
+
+ 157            JUMP_BACKWARD           62 (to L2)
+
+ 159    L3:     LOAD_FAST_BORROW         4 (page)
+                LOAD_ATTR               12 (source_path)
+                POP_JUMP_IF_NONE        15 (to L4)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         4 (page)
+                LOAD_ATTR               14 (source_page_index)
+                POP_JUMP_IF_NOT_NONE    12 (to L5)
+                NOT_TAKEN
+
+ 160    L4:     LOAD_GLOBAL             17 (PdfEditError + NULL)
+                LOAD_CONST               1 ('Pagina sem origem valida.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 161    L5:     LOAD_FAST_BORROW         3 (source_cache)
+                LOAD_ATTR               19 (setdefault + NULL|self)
+                LOAD_FAST_BORROW         4 (page)
+                LOAD_ATTR               12 (source_path)
+                LOAD_GLOBAL              0 (fitz)
+                LOAD_ATTR                2 (open)
+                PUSH_NULL
+                LOAD_FAST_BORROW         4 (page)
+                LOAD_ATTR               12 (source_path)
+                CALL                     1
+                CALL                     2
+                STORE_FAST               5 (source)
+
+ 162            LOAD_FAST_BORROW         2 (output)
+                LOAD_ATTR               21 (insert_pdf + NULL|self)
+
+ 163            LOAD_FAST_BORROW         5 (source)
+
+ 164            LOAD_FAST_BORROW         4 (page)
+                LOAD_ATTR               14 (source_page_index)
+
+ 165            LOAD_FAST_BORROW         4 (page)
+                LOAD_ATTR               14 (source_page_index)
+
+ 166            LOAD_FAST_BORROW         4 (page)
+                LOAD_ATTR               22 (rotation)
+
+ 162            LOAD_CONST               2 (('from_page', 'to_page', 'rotate'))
+                CALL_KW                  4
+                POP_TOP
+                JUMP_BACKWARD          212 (to L2)
+
+ 154    L6:     END_FOR
+                POP_ITER
+        L7:     NOP
+
+ 172            LOAD_FAST                3 (source_cache)
+                LOAD_ATTR               29 (values + NULL|self)
+                CALL                     0
+                GET_ITER
+        L8:     FOR_ITER                19 (to L9)
+                STORE_FAST               5 (source)
+
+ 173            LOAD_FAST                5 (source)
+                LOAD_ATTR               27 (close + NULL|self)
+                CALL                     0
+                POP_TOP
+                JUMP_BACKWARD           21 (to L8)
+
+ 172    L9:     END_FOR
+                POP_ITER
+
+ 174            LOAD_FAST                2 (output)
+                RETURN_VALUE
+
+  --   L10:     PUSH_EXC_INFO
+
+ 168            LOAD_GLOBAL             24 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       19 (to L11)
+                NOT_TAKEN
+                POP_TOP
+
+ 169            LOAD_FAST                2 (output)
+                LOAD_ATTR               27 (close + NULL|self)
+                CALL                     0
+                POP_TOP
+
+ 170            RAISE_VARARGS            0
+
+ 168   L11:     RERAISE                  0
+
+  --   L12:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L13:     PUSH_EXC_INFO
+
+ 172            LOAD_FAST                3 (source_cache)
+                LOAD_ATTR               29 (values + NULL|self)
+                CALL                     0
+                GET_ITER
+       L14:     FOR_ITER                19 (to L15)
+                STORE_FAST               5 (source)
+
+ 173            LOAD_FAST                5 (source)
+                LOAD_ATTR               27 (close + NULL|self)
+                CALL                     0
+                POP_TOP
+                JUMP_BACKWARD           21 (to L14)
+
+ 172   L15:     END_FOR
+                POP_ITER
+                RERAISE                  0
+
+  --   L16:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L7 -> L10 [0]
+  L10 to L12 -> L12 [1] lasti
+  L12 to L13 -> L13 [0]
+  L13 to L16 -> L16 [1] lasti
+
+Disassembly of <code object __annotate__ at 0x000000001BB61630, file "v2e_pdf_compressor\application\pdf_edit.py", line 177>:
+177           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('ranges_text')
+              LOAD_CONST               2 ('str')
+              LOAD_CONST               3 ('page_count')
+              LOAD_CONST               4 ('int')
+              LOAD_CONST               5 ('return')
+              LOAD_CONST               6 ('list[list[int]]')
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object parse_page_ranges at 0x000000001BA0F3E0, file "v2e_pdf_compressor\application\pdf_edit.py", line 177>:
+ 177            RESUME                   0
+
+ 178            LOAD_FAST_BORROW         1 (page_count)
+                LOAD_SMALL_INT           0
+                COMPARE_OP              58 (bool(<=))
+                POP_JUMP_IF_FALSE       12 (to L1)
+                NOT_TAKEN
+
+ 179            LOAD_GLOBAL              1 (PdfEditError + NULL)
+                LOAD_CONST               1 ('Documento sem paginas.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 180    L1:     LOAD_FAST_BORROW         0 (ranges_text)
+                LOAD_ATTR                3 (split + NULL|self)
+                LOAD_CONST               2 (',')
+                CALL                     1
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      2 (token)
+                SWAP                     2
+        L2:     BUILD_LIST               0
+                SWAP                     2
+        L3:     FOR_ITER                42 (to L6)
+                STORE_FAST_LOAD_FAST    34 (token, token)
+                LOAD_ATTR                5 (strip + NULL|self)
+                CALL                     0
+                TO_BOOL
+        L4:     POP_JUMP_IF_TRUE         3 (to L5)
+                NOT_TAKEN
+                JUMP_BACKWARD           26 (to L3)
+        L5:     LOAD_FAST_BORROW         2 (token)
+                LOAD_ATTR                5 (strip + NULL|self)
+                CALL                     0
+                LIST_APPEND              2
+                JUMP_BACKWARD           44 (to L3)
+        L6:     END_FOR
+                POP_ITER
+        L7:     STORE_FAST               3 (tokens)
+                STORE_FAST               2 (token)
+
+ 181            LOAD_FAST_BORROW         3 (tokens)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        12 (to L8)
+                NOT_TAKEN
+
+ 182            LOAD_GLOBAL              1 (PdfEditError + NULL)
+                LOAD_CONST               3 ('Informe ao menos um intervalo.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 184    L8:     BUILD_LIST               0
+                STORE_FAST               4 (ranges)
+
+ 185            LOAD_FAST_BORROW         3 (tokens)
+                GET_ITER
+        L9:     FOR_ITER               199 (to L14)
+                STORE_FAST               2 (token)
+
+ 186            LOAD_GLOBAL              6 (re)
+                LOAD_ATTR                8 (fullmatch)
+                PUSH_NULL
+                LOAD_CONST               4 ('(\\d+)(?:-(\\d+))?')
+                LOAD_FAST_BORROW         2 (token)
+                CALL                     2
+                STORE_FAST               5 (match)
+
+ 187            LOAD_FAST_BORROW         5 (match)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        15 (to L10)
+                NOT_TAKEN
+
+ 188            LOAD_GLOBAL              1 (PdfEditError + NULL)
+                LOAD_CONST               5 ('Intervalo invalido: ')
+                LOAD_FAST_BORROW         2 (token)
+                FORMAT_SIMPLE
+                BUILD_STRING             2
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 189   L10:     LOAD_GLOBAL             11 (int + NULL)
+                LOAD_FAST_BORROW         5 (match)
+                LOAD_ATTR               13 (group + NULL|self)
+                LOAD_SMALL_INT           1
+                CALL                     1
+                CALL                     1
+                STORE_FAST               6 (start)
+
+ 190            LOAD_GLOBAL             11 (int + NULL)
+                LOAD_FAST_BORROW         5 (match)
+                LOAD_ATTR               13 (group + NULL|self)
+                LOAD_SMALL_INT           2
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L11)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_FAST                6 (start)
+       L11:     CALL                     1
+                STORE_FAST               7 (end)
+
+ 191            LOAD_FAST_BORROW         6 (start)
+                LOAD_SMALL_INT           1
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_TRUE        26 (to L12)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         7 (end)
+                LOAD_SMALL_INT           1
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_TRUE        19 (to L12)
+                NOT_TAKEN
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 97 (start, page_count)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_TRUE        13 (to L12)
+                NOT_TAKEN
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 113 (end, page_count)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_TRUE         7 (to L12)
+                NOT_TAKEN
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 103 (start, end)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE       15 (to L13)
+                NOT_TAKEN
+
+ 192   L12:     LOAD_GLOBAL              1 (PdfEditError + NULL)
+                LOAD_CONST               6 ('Intervalo fora do documento: ')
+                LOAD_FAST_BORROW         2 (token)
+                FORMAT_SIMPLE
+                BUILD_STRING             2
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 193   L13:     LOAD_FAST_BORROW         4 (ranges)
+                LOAD_ATTR               15 (append + NULL|self)
+                LOAD_GLOBAL             17 (list + NULL)
+                LOAD_GLOBAL             19 (range + NULL)
+                LOAD_FAST_BORROW         6 (start)
+                LOAD_SMALL_INT           1
+                BINARY_OP               10 (-)
+                LOAD_FAST_BORROW         7 (end)
+                CALL                     2
+                CALL                     1
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD          201 (to L9)
+
+ 185   L14:     END_FOR
+                POP_ITER
+
+ 194            LOAD_FAST_BORROW         4 (ranges)
+                RETURN_VALUE
+
+  --   L15:     SWAP                     2
+                POP_TOP
+
+ 180            SWAP                     2
+                STORE_FAST               2 (token)
+                RERAISE                  0
+ExceptionTable:
+  L2 to L4 -> L15 [2]
+  L5 to L7 -> L15 [2]

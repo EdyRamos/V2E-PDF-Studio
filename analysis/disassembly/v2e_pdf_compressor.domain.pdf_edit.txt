@@ -1,0 +1,467 @@
+MODULE: v2e_pdf_compressor.domain.pdf_edit
+SOURCE FILE: v2e_pdf_compressor\domain\pdf_edit.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('annotations',))
+              IMPORT_NAME              0 (__future__)
+              IMPORT_FROM              1 (annotations)
+              STORE_NAME               1 (annotations)
+              POP_TOP
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('dataclass', 'field'))
+              IMPORT_NAME              2 (dataclasses)
+              IMPORT_FROM              3 (dataclass)
+              STORE_NAME               3 (dataclass)
+              IMPORT_FROM              4 (field)
+              STORE_NAME               4 (field)
+              POP_TOP
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('Path',))
+              IMPORT_NAME              5 (pathlib)
+              IMPORT_FROM              6 (Path)
+              STORE_NAME               6 (Path)
+              POP_TOP
+
+  5           LOAD_SMALL_INT           0
+              LOAD_CONST               4 (('uuid4',))
+              IMPORT_NAME              7 (uuid)
+              IMPORT_FROM              8 (uuid4)
+              STORE_NAME               8 (uuid4)
+              POP_TOP
+
+  8           LOAD_CONST               5 (595.0)
+              STORE_NAME               9 (A4_WIDTH_PT)
+
+  9           LOAD_CONST               6 (842.0)
+              STORE_NAME              10 (A4_HEIGHT_PT)
+
+ 12           LOAD_NAME                3 (dataclass)
+              PUSH_NULL
+              LOAD_CONST               7 (True)
+              LOAD_CONST               8 (('slots',))
+              CALL_KW                  1
+
+ 13           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               9 (<code object PdfPageItem at 0x000000001B556BB0, file "v2e_pdf_compressor\domain\pdf_edit.py", line 12>)
+              MAKE_FUNCTION
+              LOAD_CONST              10 ('PdfPageItem')
+              CALL                     2
+
+ 12           CALL                     0
+
+ 13           STORE_NAME              11 (PdfPageItem)
+
+ 38           LOAD_NAME                3 (dataclass)
+              PUSH_NULL
+              LOAD_CONST               7 (True)
+              LOAD_CONST               8 (('slots',))
+              CALL_KW                  1
+
+ 39           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              11 (<code object PdfDocumentSession at 0x000000001B8CF210, file "v2e_pdf_compressor\domain\pdf_edit.py", line 38>)
+              MAKE_FUNCTION
+              LOAD_CONST              12 ('PdfDocumentSession')
+              CALL                     2
+
+ 38           CALL                     0
+
+ 39           STORE_NAME              12 (PdfDocumentSession)
+
+ 55           LOAD_NAME                3 (dataclass)
+              PUSH_NULL
+              LOAD_CONST               7 (True)
+              LOAD_CONST               8 (('slots',))
+              CALL_KW                  1
+
+ 56           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              13 (<code object ExportOptions at 0x000000001BB5FDD0, file "v2e_pdf_compressor\domain\pdf_edit.py", line 55>)
+              MAKE_FUNCTION
+              LOAD_CONST              14 ('ExportOptions')
+              CALL                     2
+
+ 55           CALL                     0
+
+ 56           STORE_NAME              13 (ExportOptions)
+
+ 62           LOAD_NAME                3 (dataclass)
+              PUSH_NULL
+              LOAD_CONST               7 (True)
+              LOAD_CONST               8 (('slots',))
+              CALL_KW                  1
+
+ 63           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              15 (<code object RenderedPage at 0x000000001BB5FEE0, file "v2e_pdf_compressor\domain\pdf_edit.py", line 62>)
+              MAKE_FUNCTION
+              LOAD_CONST              16 ('RenderedPage')
+              CALL                     2
+
+ 62           CALL                     0
+
+ 63           STORE_NAME              14 (RenderedPage)
+              LOAD_CONST              17 (None)
+              RETURN_VALUE
+
+Disassembly of <code object PdfPageItem at 0x000000001B556BB0, file "v2e_pdf_compressor\domain\pdf_edit.py", line 12>:
+ 12           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('PdfPageItem')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          12
+              STORE_NAME               3 (__firstlineno__)
+              SETUP_ANNOTATIONS
+
+ 14           LOAD_CONST               1 ('str')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               2 ('page_id')
+              STORE_SUBSCR
+
+ 15           LOAD_CONST               3 ('Path | None')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               4 ('source_path')
+              STORE_SUBSCR
+
+ 16           LOAD_CONST               5 ('int | None')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               6 ('source_page_index')
+              STORE_SUBSCR
+
+ 17           LOAD_SMALL_INT           0
+              STORE_NAME               5 (rotation)
+              LOAD_CONST               7 ('int')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               8 ('rotation')
+              STORE_SUBSCR
+
+ 18           LOAD_NAME                6 (A4_WIDTH_PT)
+              STORE_NAME               7 (blank_width)
+              LOAD_CONST               9 ('float')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST              10 ('blank_width')
+              STORE_SUBSCR
+
+ 19           LOAD_NAME                8 (A4_HEIGHT_PT)
+              STORE_NAME               9 (blank_height)
+              LOAD_CONST               9 ('float')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST              11 ('blank_height')
+              STORE_SUBSCR
+
+ 21           LOAD_NAME               10 (classmethod)
+
+ 22           LOAD_CONST              12 (<code object __annotate__ at 0x000000001B8A6530, file "v2e_pdf_compressor\domain\pdf_edit.py", line 22>)
+              MAKE_FUNCTION
+              LOAD_CONST              13 (<code object from_source at 0x000000001B58EE80, file "v2e_pdf_compressor\domain\pdf_edit.py", line 21>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+
+ 21           CALL                     0
+
+ 22           STORE_NAME              11 (from_source)
+
+ 29           LOAD_NAME               10 (classmethod)
+
+ 30           LOAD_CONST              14 (<code object __annotate__ at 0x000000001B8B26A0, file "v2e_pdf_compressor\domain\pdf_edit.py", line 30>)
+              MAKE_FUNCTION
+              LOAD_CONST              15 (<code object blank at 0x000000001BB5FCC0, file "v2e_pdf_compressor\domain\pdf_edit.py", line 29>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+
+ 29           CALL                     0
+
+ 30           STORE_NAME              12 (blank)
+
+ 33           LOAD_NAME               13 (property)
+
+ 34           LOAD_CONST              16 (<code object __annotate__ at 0x000000001B8B2790, file "v2e_pdf_compressor\domain\pdf_edit.py", line 34>)
+              MAKE_FUNCTION
+              LOAD_CONST              17 (<code object is_blank at 0x000000001B8B24C0, file "v2e_pdf_compressor\domain\pdf_edit.py", line 33>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+
+ 33           CALL                     0
+
+ 34           STORE_NAME              14 (is_blank)
+              LOAD_CONST              18 (())
+              STORE_NAME              15 (__static_attributes__)
+              LOAD_CONST              19 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8A6530, file "v2e_pdf_compressor\domain\pdf_edit.py", line 22>:
+ 22           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('source_path')
+              LOAD_CONST               2 ('Path')
+              LOAD_CONST               3 ('source_page_index')
+              LOAD_CONST               4 ('int')
+              LOAD_CONST               5 ('return')
+              LOAD_CONST               6 ("'PdfPageItem'")
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object from_source at 0x000000001B58EE80, file "v2e_pdf_compressor\domain\pdf_edit.py", line 21>:
+ 21           RESUME                   0
+
+ 23           LOAD_FAST_BORROW         0 (cls)
+              PUSH_NULL
+
+ 24           LOAD_GLOBAL              1 (uuid4 + NULL)
+              CALL                     0
+              LOAD_ATTR                2 (hex)
+
+ 25           LOAD_FAST_BORROW         1 (source_path)
+              LOAD_ATTR                5 (resolve + NULL|self)
+              CALL                     0
+
+ 26           LOAD_FAST_BORROW         2 (source_page_index)
+
+ 23           LOAD_CONST               0 (('page_id', 'source_path', 'source_page_index'))
+              CALL_KW                  3
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B26A0, file "v2e_pdf_compressor\domain\pdf_edit.py", line 30>:
+ 30           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_CONST               2 ("'PdfPageItem'")
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object blank at 0x000000001BB5FCC0, file "v2e_pdf_compressor\domain\pdf_edit.py", line 29>:
+ 29           RESUME                   0
+
+ 31           LOAD_FAST_BORROW         0 (cls)
+              PUSH_NULL
+              LOAD_GLOBAL              1 (uuid4 + NULL)
+              CALL                     0
+              LOAD_ATTR                2 (hex)
+              LOAD_CONST               0 (None)
+              LOAD_CONST               0 (None)
+              LOAD_CONST               1 (('page_id', 'source_path', 'source_page_index'))
+              CALL_KW                  3
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B2790, file "v2e_pdf_compressor\domain\pdf_edit.py", line 34>:
+ 34           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_CONST               2 ('bool')
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object is_blank at 0x000000001B8B24C0, file "v2e_pdf_compressor\domain\pdf_edit.py", line 33>:
+ 33           RESUME                   0
+
+ 35           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (source_path)
+              LOAD_CONST               0 (None)
+              IS_OP                    0 (is)
+              RETURN_VALUE
+
+Disassembly of <code object PdfDocumentSession at 0x000000001B8CF210, file "v2e_pdf_compressor\domain\pdf_edit.py", line 38>:
+ 38           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('PdfDocumentSession')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          38
+              STORE_NAME               3 (__firstlineno__)
+              SETUP_ANNOTATIONS
+
+ 40           LOAD_CONST               1 ('Path | None')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               2 ('original_path')
+              STORE_SUBSCR
+
+ 41           LOAD_NAME                5 (field)
+              PUSH_NULL
+              LOAD_NAME                6 (list)
+              LOAD_CONST               3 (('default_factory',))
+              CALL_KW                  1
+              STORE_NAME               7 (pages)
+              LOAD_CONST               4 ('list[PdfPageItem]')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               5 ('pages')
+              STORE_SUBSCR
+
+ 42           LOAD_CONST               6 (False)
+              STORE_NAME               8 (modified)
+              LOAD_CONST               7 ('bool')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               8 ('modified')
+              STORE_SUBSCR
+
+ 44           LOAD_NAME                9 (property)
+
+ 45           LOAD_CONST               9 (<code object __annotate__ at 0x000000001B8B2880, file "v2e_pdf_compressor\domain\pdf_edit.py", line 45>)
+              MAKE_FUNCTION
+              LOAD_CONST              10 (<code object page_count at 0x000000001B8A7230, file "v2e_pdf_compressor\domain\pdf_edit.py", line 44>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+
+ 44           CALL                     0
+
+ 45           STORE_NAME              10 (page_count)
+
+ 48           LOAD_NAME                9 (property)
+
+ 49           LOAD_CONST              11 (<code object __annotate__ at 0x000000001B8B2970, file "v2e_pdf_compressor\domain\pdf_edit.py", line 49>)
+              MAKE_FUNCTION
+              LOAD_CONST              12 (<code object title at 0x000000001BB64160, file "v2e_pdf_compressor\domain\pdf_edit.py", line 48>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+
+ 48           CALL                     0
+
+ 49           STORE_NAME              11 (title)
+              LOAD_CONST              13 (())
+              STORE_NAME              12 (__static_attributes__)
+              LOAD_CONST              14 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B2880, file "v2e_pdf_compressor\domain\pdf_edit.py", line 45>:
+ 45           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_CONST               2 ('int')
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object page_count at 0x000000001B8A7230, file "v2e_pdf_compressor\domain\pdf_edit.py", line 44>:
+ 44           RESUME                   0
+
+ 46           LOAD_GLOBAL              1 (len + NULL)
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                2 (pages)
+              CALL                     1
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B2970, file "v2e_pdf_compressor\domain\pdf_edit.py", line 49>:
+ 49           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_CONST               2 ('str')
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object title at 0x000000001BB64160, file "v2e_pdf_compressor\domain\pdf_edit.py", line 48>:
+ 48           RESUME                   0
+
+ 50           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (original_path)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       23 (to L1)
+              NOT_TAKEN
+
+ 51           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (original_path)
+              LOAD_ATTR                2 (name)
+              RETURN_VALUE
+
+ 52   L1:     LOAD_CONST               0 ('Documento sem nome')
+              RETURN_VALUE
+
+Disassembly of <code object ExportOptions at 0x000000001BB5FDD0, file "v2e_pdf_compressor\domain\pdf_edit.py", line 55>:
+ 55           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('ExportOptions')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          55
+              STORE_NAME               3 (__firstlineno__)
+              SETUP_ANNOTATIONS
+
+ 57           LOAD_CONST               1 ('Path')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               2 ('output_path')
+              STORE_SUBSCR
+
+ 58           LOAD_CONST               3 (False)
+              STORE_NAME               5 (overwrite)
+              LOAD_CONST               4 ('bool')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               5 ('overwrite')
+              STORE_SUBSCR
+
+ 59           LOAD_CONST               3 (False)
+              STORE_NAME               6 (compress_after_export)
+              LOAD_CONST               4 ('bool')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               6 ('compress_after_export')
+              STORE_SUBSCR
+              LOAD_CONST               7 (())
+              STORE_NAME               7 (__static_attributes__)
+              LOAD_CONST               8 (None)
+              RETURN_VALUE
+
+Disassembly of <code object RenderedPage at 0x000000001BB5FEE0, file "v2e_pdf_compressor\domain\pdf_edit.py", line 62>:
+ 62           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('RenderedPage')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          62
+              STORE_NAME               3 (__firstlineno__)
+              SETUP_ANNOTATIONS
+
+ 64           LOAD_CONST               1 ('str')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               2 ('page_id')
+              STORE_SUBSCR
+
+ 65           LOAD_CONST               3 ('int')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               4 ('width')
+              STORE_SUBSCR
+
+ 66           LOAD_CONST               3 ('int')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               5 ('height')
+              STORE_SUBSCR
+
+ 67           LOAD_CONST               6 ('bytes')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               7 ('png_bytes')
+              STORE_SUBSCR
+              LOAD_CONST               8 (())
+              STORE_NAME               5 (__static_attributes__)
+              LOAD_CONST               9 (None)
+              RETURN_VALUE

@@ -1,0 +1,483 @@
+MODULE: v2e_pdf_compressor.infra.ghostscript.locator
+SOURCE FILE: v2e_pdf_compressor\infra\ghostscript\locator.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('annotations',))
+              IMPORT_NAME              0 (__future__)
+              IMPORT_FROM              1 (annotations)
+              STORE_NAME               1 (annotations)
+              POP_TOP
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              2 (os)
+              STORE_NAME               2 (os)
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              3 (shutil)
+              STORE_NAME               3 (shutil)
+
+  5           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              4 (sys)
+              STORE_NAME               4 (sys)
+
+  6           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('Path',))
+              IMPORT_NAME              5 (pathlib)
+              IMPORT_FROM              6 (Path)
+              STORE_NAME               6 (Path)
+              POP_TOP
+
+  9           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               4 (<code object GhostscriptLocator at 0x000000001B58F5A0, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 9>)
+              MAKE_FUNCTION
+              LOAD_CONST               5 ('GhostscriptLocator')
+              CALL                     2
+              STORE_NAME               7 (GhostscriptLocator)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object GhostscriptLocator at 0x000000001B58F5A0, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 9>:
+  9           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('GhostscriptLocator')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT           9
+              STORE_NAME               3 (__firstlineno__)
+
+ 10           LOAD_CONST              13 ((None, None, None, True))
+              LOAD_CONST               2 (<code object __annotate__ at 0x000000001B8A6530, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 10>)
+              MAKE_FUNCTION
+              LOAD_CONST               3 (<code object __init__ at 0x000000001B562010, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 10>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               4 (__init__)
+
+ 29           LOAD_CONST               4 (<code object __annotate__ at 0x000000001B8B2A60, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 29>)
+              MAKE_FUNCTION
+              LOAD_CONST               5 (<code object resolve_executable at 0x000000001B556BB0, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 29>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               5 (resolve_executable)
+
+ 44           LOAD_CONST               6 (<code object __annotate__ at 0x000000001B8B2790, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 44>)
+              MAKE_FUNCTION
+              LOAD_CONST               7 (<code object _find_embedded_executable at 0x000000001B557630, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 44>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               6 (_find_embedded_executable)
+
+ 51           LOAD_CONST               8 (<code object __annotate__ at 0x000000001B8B24C0, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 51>)
+              MAKE_FUNCTION
+              LOAD_CONST               9 (<code object _candidate_roots at 0x000000001B618030, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 51>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               7 (_candidate_roots)
+
+ 74           LOAD_CONST              10 (<code object __annotate__ at 0x000000001B8B2880, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 74>)
+              MAKE_FUNCTION
+              LOAD_CONST              11 (<code object _find_in_path at 0x000000001B512130, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 74>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               8 (_find_in_path)
+              LOAD_CONST              12 (('allow_path_fallback', 'embedded_rel_path', 'include_default_roots', 'search_roots'))
+              STORE_NAME               9 (__static_attributes__)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8A6530, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 10>:
+ 10           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('embedded_rel_path')
+
+ 12           LOAD_CONST               2 ('Path | None')
+
+ 10           LOAD_CONST               3 ('allow_path_fallback')
+
+ 13           LOAD_CONST               4 ('bool | None')
+
+ 10           LOAD_CONST               5 ('search_roots')
+
+ 14           LOAD_CONST               6 ('list[Path] | None')
+
+ 10           LOAD_CONST               7 ('include_default_roots')
+
+ 15           LOAD_CONST               8 ('bool')
+
+ 10           LOAD_CONST               9 ('return')
+
+ 16           LOAD_CONST              10 ('None')
+
+ 10           BUILD_MAP                5
+              RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x000000001B562010, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 10>:
+ 10           RESUME                   0
+
+ 17           LOAD_FAST                1 (embedded_rel_path)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        12 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_GLOBAL              1 (Path + NULL)
+
+ 18           LOAD_CONST               0 ('vendor/ghostscript/win64/bin/gswin64c.exe')
+
+ 17           CALL                     1
+      L1:     LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               1 (embedded_rel_path)
+
+ 20           LOAD_FAST_BORROW         2 (allow_path_fallback)
+              POP_JUMP_IF_NOT_NONE    74 (to L3)
+              NOT_TAKEN
+
+ 21           LOAD_GLOBAL              5 (bool + NULL)
+
+ 22           LOAD_GLOBAL              6 (os)
+              LOAD_ATTR                8 (environ)
+              LOAD_ATTR               11 (get + NULL|self)
+              LOAD_CONST               2 ('V2E_ALLOW_PATH_FALLBACK')
+              CALL                     1
+              LOAD_CONST               3 ('1')
+              COMPARE_OP              72 (==)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        23 (to L2)
+              NOT_TAKEN
+              POP_TOP
+
+ 23           LOAD_GLOBAL             13 (getattr + NULL)
+              LOAD_GLOBAL             14 (sys)
+              LOAD_CONST               4 ('frozen')
+              LOAD_CONST               5 (False)
+              CALL                     3
+              TO_BOOL
+              UNARY_NOT
+
+ 21   L2:     CALL                     1
+              STORE_FAST               2 (allow_path_fallback)
+
+ 25   L3:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 32 (allow_path_fallback, self)
+              STORE_ATTR               8 (allow_path_fallback)
+
+ 26           LOAD_FAST                3 (search_roots)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L4)
+              NOT_TAKEN
+              POP_TOP
+              BUILD_LIST               0
+      L4:     LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               9 (search_roots)
+
+ 27           LOAD_FAST_BORROW_LOAD_FAST_BORROW 64 (include_default_roots, self)
+              STORE_ATTR              10 (include_default_roots)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B2A60, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 29>:
+ 29           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_CONST               2 ('Path')
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object resolve_executable at 0x000000001B556BB0, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 29>:
+ 29           RESUME                   0
+
+ 30           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                1 (_find_embedded_executable + NULL|self)
+              CALL                     0
+              STORE_FAST               1 (embedded)
+
+ 31           LOAD_FAST_BORROW         1 (embedded)
+              TO_BOOL
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+
+ 32           LOAD_FAST_BORROW         1 (embedded)
+              RETURN_VALUE
+
+ 34   L1:     LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                2 (allow_path_fallback)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       27 (to L2)
+              NOT_TAKEN
+
+ 35           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                5 (_find_in_path + NULL|self)
+              CALL                     0
+              STORE_FAST               2 (path_exec)
+
+ 36           LOAD_FAST_BORROW         2 (path_exec)
+              TO_BOOL
+              POP_JUMP_IF_FALSE        3 (to L2)
+              NOT_TAKEN
+
+ 37           LOAD_FAST_BORROW         2 (path_exec)
+              RETURN_VALUE
+
+ 39   L2:     LOAD_GLOBAL              7 (FileNotFoundError + NULL)
+
+ 40           LOAD_CONST               0 ('Ghostscript nao encontrado. Esperado em vendor/ghostscript/win64/bin/gswin64c.exe ou no PATH quando fallback estiver habilitado.')
+
+ 39           CALL                     1
+              RAISE_VARARGS            1
+
+Disassembly of <code object __annotate__ at 0x000000001B8B2790, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 44>:
+ 44           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_CONST               2 ('Path | None')
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object _find_embedded_executable at 0x000000001B557630, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 44>:
+ 44           RESUME                   0
+
+ 45           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                1 (_candidate_roots + NULL|self)
+              CALL                     0
+              GET_ITER
+      L1:     FOR_ITER                61 (to L3)
+              STORE_FAST               1 (base)
+
+ 46           LOAD_FAST_BORROW_LOAD_FAST_BORROW 16 (base, self)
+              LOAD_ATTR                2 (embedded_rel_path)
+              BINARY_OP               11 (/)
+              LOAD_ATTR                5 (resolve + NULL|self)
+              CALL                     0
+              STORE_FAST               2 (candidate)
+
+ 47           LOAD_FAST_BORROW         2 (candidate)
+              LOAD_ATTR                7 (is_file + NULL|self)
+              CALL                     0
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L2)
+              NOT_TAKEN
+              JUMP_BACKWARD           59 (to L1)
+
+ 48   L2:     LOAD_FAST_BORROW         2 (candidate)
+              SWAP                     2
+              POP_TOP
+              RETURN_VALUE
+
+ 45   L3:     END_FOR
+              POP_ITER
+
+ 49           LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B24C0, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 51>:
+ 51           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_CONST               2 ('list[Path]')
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object _candidate_roots at 0x000000001B618030, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 51>:
+ 51           RESUME                   0
+
+ 52           BUILD_LIST               0
+              STORE_FAST               1 (roots)
+
+ 53           LOAD_FAST_BORROW         1 (roots)
+              LOAD_ATTR                1 (extend + NULL|self)
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                2 (search_roots)
+              CALL                     1
+              POP_TOP
+
+ 55           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                4 (include_default_roots)
+              TO_BOOL
+              POP_JUMP_IF_FALSE      223 (to L2)
+              NOT_TAKEN
+
+ 56           LOAD_GLOBAL              7 (getattr + NULL)
+              LOAD_GLOBAL              8 (sys)
+              LOAD_CONST               0 ('frozen')
+              LOAD_CONST               1 (False)
+              CALL                     3
+              TO_BOOL
+              POP_JUMP_IF_FALSE      116 (to L1)
+              NOT_TAKEN
+
+ 57           LOAD_FAST_BORROW         1 (roots)
+              LOAD_ATTR               11 (append + NULL|self)
+              LOAD_GLOBAL             13 (Path + NULL)
+              LOAD_GLOBAL              8 (sys)
+              LOAD_ATTR               14 (executable)
+              CALL                     1
+              LOAD_ATTR               17 (resolve + NULL|self)
+              CALL                     0
+              LOAD_ATTR               18 (parent)
+              CALL                     1
+              POP_TOP
+
+ 58           LOAD_GLOBAL              7 (getattr + NULL)
+              LOAD_GLOBAL              8 (sys)
+              LOAD_CONST               2 ('_MEIPASS')
+              LOAD_CONST               3 (None)
+              CALL                     3
+              STORE_FAST               2 (meipass)
+
+ 59           LOAD_FAST_BORROW         2 (meipass)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       27 (to L1)
+              NOT_TAKEN
+
+ 60           LOAD_FAST_BORROW         1 (roots)
+              LOAD_ATTR               11 (append + NULL|self)
+              LOAD_GLOBAL             13 (Path + NULL)
+              LOAD_FAST_BORROW         2 (meipass)
+              CALL                     1
+              CALL                     1
+              POP_TOP
+
+ 62   L1:     LOAD_GLOBAL             13 (Path + NULL)
+              LOAD_GLOBAL             20 (__file__)
+              CALL                     1
+              LOAD_ATTR               17 (resolve + NULL|self)
+              CALL                     0
+              LOAD_ATTR               22 (parents)
+              LOAD_SMALL_INT           4
+              BINARY_OP               26 ([])
+              STORE_FAST               3 (source_root)
+
+ 63           LOAD_FAST_BORROW         1 (roots)
+              LOAD_ATTR                1 (extend + NULL|self)
+              LOAD_FAST_BORROW         3 (source_root)
+              LOAD_GLOBAL             12 (Path)
+              LOAD_ATTR               24 (cwd)
+              PUSH_NULL
+              CALL                     0
+              BUILD_LIST               2
+              CALL                     1
+              POP_TOP
+
+ 65   L2:     BUILD_LIST               0
+              STORE_FAST               4 (deduped)
+
+ 66           LOAD_GLOBAL             27 (set + NULL)
+              CALL                     0
+              STORE_FAST               5 (seen)
+
+ 67           LOAD_FAST_BORROW         1 (roots)
+              GET_ITER
+      L3:     FOR_ITER                61 (to L5)
+              STORE_FAST               6 (root)
+
+ 68           LOAD_FAST_BORROW         6 (root)
+              LOAD_ATTR               17 (resolve + NULL|self)
+              CALL                     0
+              STORE_FAST               7 (resolved)
+
+ 69           LOAD_FAST_BORROW_LOAD_FAST_BORROW 117 (resolved, seen)
+              CONTAINS_OP              1 (not in)
+              POP_JUMP_IF_TRUE         3 (to L4)
+              NOT_TAKEN
+              JUMP_BACKWARD           27 (to L3)
+
+ 70   L4:     LOAD_FAST_BORROW         4 (deduped)
+              LOAD_ATTR               11 (append + NULL|self)
+              LOAD_FAST_BORROW         7 (resolved)
+              CALL                     1
+              POP_TOP
+
+ 71           LOAD_FAST_BORROW         5 (seen)
+              LOAD_ATTR               29 (add + NULL|self)
+              LOAD_FAST_BORROW         7 (resolved)
+              CALL                     1
+              POP_TOP
+              JUMP_BACKWARD           63 (to L3)
+
+ 67   L5:     END_FOR
+              POP_ITER
+
+ 72           LOAD_FAST_BORROW         4 (deduped)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B2880, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 74>:
+ 74           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_CONST               2 ('Path | None')
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object _find_in_path at 0x000000001B512130, file "v2e_pdf_compressor\infra\ghostscript\locator.py", line 74>:
+ 74           RESUME                   0
+
+ 75           LOAD_CONST               2 (('gswin64c.exe', 'gswin64c', 'gswin32c.exe', 'gswin32c'))
+              GET_ITER
+      L1:     FOR_ITER                60 (to L3)
+              STORE_FAST               1 (name)
+
+ 76           LOAD_GLOBAL              0 (shutil)
+              LOAD_ATTR                2 (which)
+              PUSH_NULL
+              LOAD_FAST_BORROW         1 (name)
+              CALL                     1
+              STORE_FAST               2 (found)
+
+ 77           LOAD_FAST_BORROW         2 (found)
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L2)
+              NOT_TAKEN
+              JUMP_BACKWARD           35 (to L1)
+
+ 78   L2:     LOAD_GLOBAL              5 (Path + NULL)
+              LOAD_FAST_BORROW         2 (found)
+              CALL                     1
+              LOAD_ATTR                7 (resolve + NULL|self)
+              CALL                     0
+              SWAP                     2
+              POP_TOP
+              RETURN_VALUE
+
+ 75   L3:     END_FOR
+              POP_ITER
+
+ 79           LOAD_CONST               1 (None)
+              RETURN_VALUE

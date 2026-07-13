@@ -1,0 +1,13 @@
+MODULE: v2e_pdf_compressor
+SOURCE FILE: v2e_pdf_compressor\__init__.py
+
+  0           RESUME                   0
+
+  1           LOAD_CONST               0 ('__version__')
+              BUILD_LIST               1
+              STORE_NAME               0 (__all__)
+
+  3           LOAD_CONST               1 ('0.1.0')
+              STORE_NAME               1 (__version__)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE

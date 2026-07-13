@@ -1,0 +1,357 @@
+MODULE: v2e_pdf_compressor.config.settings
+SOURCE FILE: v2e_pdf_compressor\config\settings.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('annotations',))
+              IMPORT_NAME              0 (__future__)
+              IMPORT_FROM              1 (annotations)
+              STORE_NAME               1 (annotations)
+              POP_TOP
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              2 (json)
+              STORE_NAME               2 (json)
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('asdict', 'dataclass'))
+              IMPORT_NAME              3 (dataclasses)
+              IMPORT_FROM              4 (asdict)
+              STORE_NAME               4 (asdict)
+              IMPORT_FROM              5 (dataclass)
+              STORE_NAME               5 (dataclass)
+              POP_TOP
+
+  5           LOAD_SMALL_INT           0
+              LOAD_CONST               4 (('Path',))
+              IMPORT_NAME              6 (pathlib)
+              IMPORT_FROM              7 (Path)
+              STORE_NAME               7 (Path)
+              POP_TOP
+
+  7           LOAD_SMALL_INT           2
+              LOAD_CONST               5 (('CompressionProfile',))
+              IMPORT_NAME              8 (domain)
+              IMPORT_FROM              9 (CompressionProfile)
+              STORE_NAME               9 (CompressionProfile)
+              POP_TOP
+
+  8           LOAD_SMALL_INT           1
+              LOAD_CONST               6 (('SETTINGS_FILE', 'ensure_app_dirs'))
+              IMPORT_NAME             10 (paths)
+              IMPORT_FROM             11 (SETTINGS_FILE)
+              STORE_NAME              11 (SETTINGS_FILE)
+              IMPORT_FROM             12 (ensure_app_dirs)
+              STORE_NAME              12 (ensure_app_dirs)
+              POP_TOP
+
+ 11           LOAD_NAME                5 (dataclass)
+              PUSH_NULL
+              LOAD_CONST               7 (True)
+              LOAD_CONST               8 (('slots',))
+              CALL_KW                  1
+
+ 12           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               9 (<code object AppSettings at 0x000000001B8C1BB0, file "v2e_pdf_compressor\config\settings.py", line 11>)
+              MAKE_FUNCTION
+              LOAD_CONST              10 ('AppSettings')
+              CALL                     2
+
+ 11           CALL                     0
+
+ 12           STORE_NAME              13 (AppSettings)
+
+ 18           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              11 (<code object SettingsRepository at 0x000000001B89B110, file "v2e_pdf_compressor\config\settings.py", line 18>)
+              MAKE_FUNCTION
+              LOAD_CONST              12 ('SettingsRepository')
+              CALL                     2
+              STORE_NAME              14 (SettingsRepository)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object AppSettings at 0x000000001B8C1BB0, file "v2e_pdf_compressor\config\settings.py", line 11>:
+ 11           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('AppSettings')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          11
+              STORE_NAME               3 (__firstlineno__)
+              SETUP_ANNOTATIONS
+
+ 13           LOAD_CONST               1 (None)
+              STORE_NAME               4 (last_directory)
+              LOAD_CONST               2 ('str | None')
+              LOAD_NAME                5 (__annotations__)
+              LOAD_CONST               3 ('last_directory')
+              STORE_SUBSCR
+
+ 14           LOAD_NAME                6 (CompressionProfile)
+              LOAD_ATTR               14 (EBOOK)
+              LOAD_ATTR               16 (value)
+              STORE_NAME               9 (default_profile)
+              LOAD_CONST               4 ('str')
+              LOAD_NAME                5 (__annotations__)
+              LOAD_CONST               5 ('default_profile')
+              STORE_SUBSCR
+
+ 15           LOAD_CONST               6 ('rename')
+              STORE_NAME              10 (overwrite_policy)
+              LOAD_CONST               4 ('str')
+              LOAD_NAME                5 (__annotations__)
+              LOAD_CONST               7 ('overwrite_policy')
+              STORE_SUBSCR
+              LOAD_CONST               8 (())
+              STORE_NAME              11 (__static_attributes__)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object SettingsRepository at 0x000000001B89B110, file "v2e_pdf_compressor\config\settings.py", line 18>:
+ 18           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('SettingsRepository')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          18
+              STORE_NAME               3 (__firstlineno__)
+
+ 19           LOAD_CONST               9 ((None,))
+              LOAD_CONST               2 (<code object __annotate__ at 0x000000001B8B25B0, file "v2e_pdf_compressor\config\settings.py", line 19>)
+              MAKE_FUNCTION
+              LOAD_CONST               3 (<code object __init__ at 0x000000001B8A6530, file "v2e_pdf_compressor\config\settings.py", line 19>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               4 (__init__)
+
+ 22           LOAD_CONST               4 (<code object __annotate__ at 0x000000001B8B26A0, file "v2e_pdf_compressor\config\settings.py", line 22>)
+              MAKE_FUNCTION
+              LOAD_CONST               5 (<code object load at 0x000000001B63CCB0, file "v2e_pdf_compressor\config\settings.py", line 22>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               5 (load)
+
+ 46           LOAD_CONST               6 (<code object __annotate__ at 0x000000001B8B2790, file "v2e_pdf_compressor\config\settings.py", line 46>)
+              MAKE_FUNCTION
+              LOAD_CONST               7 (<code object save at 0x000000001B593E00, file "v2e_pdf_compressor\config\settings.py", line 46>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               6 (save)
+              LOAD_CONST               8 (('settings_file',))
+              STORE_NAME               7 (__static_attributes__)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B25B0, file "v2e_pdf_compressor\config\settings.py", line 19>:
+ 19           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('settings_file')
+              LOAD_CONST               2 ('Path | None')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('None')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x000000001B8A6530, file "v2e_pdf_compressor\config\settings.py", line 19>:
+ 19           RESUME                   0
+
+ 20           LOAD_FAST                1 (settings_file)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         7 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_GLOBAL              0 (SETTINGS_FILE)
+      L1:     LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               1 (settings_file)
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B26A0, file "v2e_pdf_compressor\config\settings.py", line 22>:
+ 22           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_CONST               2 ('AppSettings')
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object load at 0x000000001B63CCB0, file "v2e_pdf_compressor\config\settings.py", line 22>:
+  22           RESUME                   0
+
+  23           LOAD_GLOBAL              1 (ensure_app_dirs + NULL)
+               CALL                     0
+               POP_TOP
+
+  24           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                2 (settings_file)
+               LOAD_ATTR                5 (exists + NULL|self)
+               CALL                     0
+               TO_BOOL
+               POP_JUMP_IF_TRUE        30 (to L1)
+               NOT_TAKEN
+
+  25           LOAD_GLOBAL              7 (AppSettings + NULL)
+               CALL                     0
+               STORE_FAST               1 (defaults)
+
+  26           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                9 (save + NULL|self)
+               LOAD_FAST_BORROW         1 (defaults)
+               CALL                     1
+               POP_TOP
+
+  27           LOAD_FAST_BORROW         1 (defaults)
+               RETURN_VALUE
+
+  29   L1:     NOP
+
+  30   L2:     LOAD_GLOBAL             10 (json)
+               LOAD_ATTR               12 (loads)
+               PUSH_NULL
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                2 (settings_file)
+               LOAD_ATTR               15 (read_text + NULL|self)
+               LOAD_CONST               0 ('utf-8')
+               LOAD_CONST               1 (('encoding',))
+               CALL_KW                  1
+               CALL                     1
+               STORE_FAST               2 (payload)
+
+  34   L3:     LOAD_GLOBAL              7 (AppSettings + NULL)
+
+  35           LOAD_FAST                2 (payload)
+               LOAD_ATTR               21 (get + NULL|self)
+               LOAD_CONST               2 ('last_directory')
+               CALL                     1
+
+  36           LOAD_GLOBAL             22 (CompressionProfile)
+               LOAD_ATTR               24 (from_value)
+               PUSH_NULL
+
+  37           LOAD_FAST                2 (payload)
+               LOAD_ATTR               21 (get + NULL|self)
+               LOAD_CONST               3 ('default_profile')
+               LOAD_GLOBAL             22 (CompressionProfile)
+               LOAD_ATTR               26 (EBOOK)
+               LOAD_ATTR               28 (value)
+               CALL                     2
+
+  36           CALL                     1
+
+  38           LOAD_ATTR               28 (value)
+
+  39           LOAD_FAST                2 (payload)
+               LOAD_ATTR               21 (get + NULL|self)
+               LOAD_CONST               4 ('overwrite_policy')
+               LOAD_CONST               5 ('rename')
+               CALL                     2
+
+  34           LOAD_CONST               6 (('last_directory', 'default_profile', 'overwrite_policy'))
+               CALL_KW                  3
+               STORE_FAST               3 (settings)
+
+  42           LOAD_FAST                3 (settings)
+               LOAD_ATTR               30 (overwrite_policy)
+               LOAD_CONST               7 (frozenset({'rename', 'overwrite'}))
+               CONTAINS_OP              1 (not in)
+               POP_JUMP_IF_FALSE        8 (to L4)
+               NOT_TAKEN
+
+  43           LOAD_CONST               5 ('rename')
+               LOAD_FAST                3 (settings)
+               STORE_ATTR              15 (overwrite_policy)
+
+  44   L4:     LOAD_FAST                3 (settings)
+               RETURN_VALUE
+
+  --   L5:     PUSH_EXC_INFO
+
+  31           LOAD_GLOBAL             10 (json)
+               LOAD_ATTR               16 (JSONDecodeError)
+               LOAD_GLOBAL             18 (OSError)
+               BUILD_TUPLE              2
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE       14 (to L7)
+               NOT_TAKEN
+               POP_TOP
+
+  32           LOAD_GLOBAL              7 (AppSettings + NULL)
+               CALL                     0
+               SWAP                     2
+       L6:     POP_EXCEPT
+               RETURN_VALUE
+
+  31   L7:     RERAISE                  0
+
+  --   L8:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L2 to L3 -> L5 [0]
+  L5 to L6 -> L8 [1] lasti
+  L7 to L8 -> L8 [1] lasti
+
+Disassembly of <code object __annotate__ at 0x000000001B8B2790, file "v2e_pdf_compressor\config\settings.py", line 46>:
+ 46           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('settings')
+              LOAD_CONST               2 ('AppSettings')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('None')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object save at 0x000000001B593E00, file "v2e_pdf_compressor\config\settings.py", line 46>:
+ 46           RESUME                   0
+
+ 47           LOAD_GLOBAL              1 (ensure_app_dirs + NULL)
+              CALL                     0
+              POP_TOP
+
+ 48           LOAD_GLOBAL              3 (asdict + NULL)
+              LOAD_FAST_BORROW         1 (settings)
+              CALL                     1
+              STORE_FAST               2 (payload)
+
+ 49           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                4 (settings_file)
+              LOAD_ATTR                7 (write_text + NULL|self)
+
+ 50           LOAD_GLOBAL              8 (json)
+              LOAD_ATTR               10 (dumps)
+              PUSH_NULL
+              LOAD_FAST_BORROW         2 (payload)
+              LOAD_CONST               0 (False)
+              LOAD_SMALL_INT           2
+              LOAD_CONST               1 (('ensure_ascii', 'indent'))
+              CALL_KW                  3
+              LOAD_CONST               2 ('utf-8')
+
+ 49           LOAD_CONST               3 (('encoding',))
+              CALL_KW                  2
+              POP_TOP
+              LOAD_CONST               4 (None)
+              RETURN_VALUE

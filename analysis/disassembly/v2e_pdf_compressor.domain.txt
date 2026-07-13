@@ -1,0 +1,41 @@
+MODULE: v2e_pdf_compressor.domain
+SOURCE FILE: v2e_pdf_compressor\domain\__init__.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           1
+              LOAD_CONST               1 (('BatchResult', 'CompressionJob', 'CompressionProfile', 'CompressionResult', 'CompressionStatus', 'ErrorCode'))
+              IMPORT_NAME              0 (models)
+              IMPORT_FROM              1 (BatchResult)
+              STORE_NAME               1 (BatchResult)
+              IMPORT_FROM              2 (CompressionJob)
+              STORE_NAME               2 (CompressionJob)
+              IMPORT_FROM              3 (CompressionProfile)
+              STORE_NAME               3 (CompressionProfile)
+              IMPORT_FROM              4 (CompressionResult)
+              STORE_NAME               4 (CompressionResult)
+              IMPORT_FROM              5 (CompressionStatus)
+              STORE_NAME               5 (CompressionStatus)
+              IMPORT_FROM              6 (ErrorCode)
+              STORE_NAME               6 (ErrorCode)
+              POP_TOP
+
+  9           LOAD_SMALL_INT           1
+              LOAD_CONST               2 (('ExportOptions', 'PdfDocumentSession', 'PdfPageItem', 'RenderedPage'))
+              IMPORT_NAME              7 (pdf_edit)
+              IMPORT_FROM              8 (ExportOptions)
+              STORE_NAME               8 (ExportOptions)
+              IMPORT_FROM              9 (PdfDocumentSession)
+              STORE_NAME               9 (PdfDocumentSession)
+              IMPORT_FROM             10 (PdfPageItem)
+              STORE_NAME              10 (PdfPageItem)
+              IMPORT_FROM             11 (RenderedPage)
+              STORE_NAME              11 (RenderedPage)
+              POP_TOP
+
+ 11           BUILD_LIST               0
+              LOAD_CONST               4 (('BatchResult', 'CompressionJob', 'CompressionProfile', 'CompressionResult', 'CompressionStatus', 'ErrorCode', 'ExportOptions', 'PdfDocumentSession', 'PdfPageItem', 'RenderedPage'))
+              LIST_EXTEND              1
+              STORE_NAME              12 (__all__)
+              LOAD_CONST               3 (None)
+              RETURN_VALUE

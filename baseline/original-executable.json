@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "file": "../V2E-PDF-Compressor.exe",
+  "size_bytes": 94787062,
+  "sha256": "A1D54B47975A7B1A81517A2BA99054E29D3FF44257239029417877E6BB9A0668",
+  "last_write_utc": "2026-07-09T15:15:08Z",
+  "platform": "Windows x64",
+  "policy": "Referencia imutavel; nao usar como artefato de build."
+}

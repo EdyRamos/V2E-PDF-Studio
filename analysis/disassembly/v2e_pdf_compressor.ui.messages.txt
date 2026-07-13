@@ -1,0 +1,262 @@
+MODULE: v2e_pdf_compressor.ui.messages
+SOURCE FILE: v2e_pdf_compressor\ui\messages.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('annotations',))
+              IMPORT_NAME              0 (__future__)
+              IMPORT_FROM              1 (annotations)
+              STORE_NAME               1 (annotations)
+              POP_TOP
+
+  3           LOAD_SMALL_INT           2
+              LOAD_CONST               2 (('CompressionResult', 'CompressionStatus', 'ErrorCode'))
+              IMPORT_NAME              2 (domain)
+              IMPORT_FROM              3 (CompressionResult)
+              STORE_NAME               3 (CompressionResult)
+              IMPORT_FROM              4 (CompressionStatus)
+              STORE_NAME               4 (CompressionStatus)
+              IMPORT_FROM              5 (ErrorCode)
+              STORE_NAME               5 (ErrorCode)
+              POP_TOP
+
+  7           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               12 (INPUT_NOT_FOUND)
+              LOAD_CONST               3 ('Arquivo de entrada nao encontrado.')
+
+  8           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               14 (INVALID_EXTENSION)
+              LOAD_CONST               4 ('Somente arquivos PDF sao aceitos.')
+
+  9           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               16 (SAME_INPUT_OUTPUT)
+              LOAD_CONST               5 ('Arquivo de saida deve ser diferente do arquivo de entrada.')
+
+ 10           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               18 (OUTPUT_EXISTS)
+              LOAD_CONST               6 ('Arquivo de saida ja existe. Ative sobrescrita ou altere o nome.')
+
+ 11           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               20 (OUTPUT_PARENT_MISSING)
+              LOAD_CONST               7 ('Nao foi possivel criar o diretorio de saida.')
+
+ 12           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               22 (PERMISSION_DENIED)
+              LOAD_CONST               8 ('Permissao negada para ler/escrever arquivo.')
+
+ 13           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               24 (GHOSTSCRIPT_NOT_FOUND)
+              LOAD_CONST               9 ('Ghostscript nao encontrado no app.')
+
+ 14           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               26 (GHOSTSCRIPT_RUNTIME_INVALID)
+              LOAD_CONST              10 ('Runtime do Ghostscript incompleto no pacote.')
+
+ 15           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               28 (PDF_PASSWORD_PROTECTED)
+              LOAD_CONST              11 ('PDF protegido por senha nao pode ser comprimido.')
+
+ 16           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               30 (PDF_CORRUPTED)
+              LOAD_CONST              12 ('PDF corrompido ou invalido.')
+
+ 17           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               32 (PROCESS_TIMEOUT)
+              LOAD_CONST              13 ('Tempo limite excedido durante compressao.')
+
+ 18           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               34 (PROCESS_FAILED)
+              LOAD_CONST              14 ('Falha ao executar o Ghostscript.')
+
+ 19           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               36 (CANCELLED)
+              LOAD_CONST              15 ('Operacao cancelada.')
+
+ 20           LOAD_NAME                5 (ErrorCode)
+              LOAD_ATTR               38 (UNKNOWN_ERROR)
+              LOAD_CONST              16 ('Erro inesperado durante compressao.')
+
+  6           BUILD_MAP               14
+              STORE_NAME              20 (ERROR_MESSAGES)
+
+ 24           LOAD_CONST              17 (<code object __annotate__ at 0x000000001BB86010, file "v2e_pdf_compressor\ui\messages.py", line 24>)
+              MAKE_FUNCTION
+              LOAD_CONST              18 (<code object result_to_user_message at 0x000000001B9BBF60, file "v2e_pdf_compressor\ui\messages.py", line 24>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              21 (result_to_user_message)
+              LOAD_CONST              19 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001BB86010, file "v2e_pdf_compressor\ui\messages.py", line 24>:
+ 24           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('result')
+              LOAD_CONST               2 ('CompressionResult')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('str')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object result_to_user_message at 0x000000001B9BBF60, file "v2e_pdf_compressor\ui\messages.py", line 24>:
+ 24           RESUME                   0
+
+ 25           LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR                0 (status)
+              LOAD_GLOBAL              2 (CompressionStatus)
+              LOAD_ATTR                4 (SUCCESS)
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE      128 (to L4)
+              NOT_TAKEN
+
+ 26           LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR                6 (reduction_percent)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               0 (0.0)
+      L1:     STORE_FAST               1 (reduction)
+
+ 27           LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR                8 (before_mb)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L2)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               0 (0.0)
+      L2:     STORE_FAST               2 (before_mb)
+
+ 28           LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR               10 (after_mb)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L3)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               0 (0.0)
+      L3:     STORE_FAST               3 (after_mb)
+
+ 30           LOAD_CONST               1 ('Concluido: ')
+              LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR               12 (input_path)
+              LOAD_ATTR               14 (name)
+              FORMAT_SIMPLE
+              LOAD_CONST               2 (' -> ')
+              LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR               16 (output_path)
+              LOAD_ATTR               14 (name)
+              FORMAT_SIMPLE
+              LOAD_CONST               3 (' | ')
+
+ 31           LOAD_FAST_BORROW         2 (before_mb)
+              LOAD_CONST               4 ('.2f')
+              FORMAT_WITH_SPEC
+              LOAD_CONST               5 (' MB -> ')
+              LOAD_FAST_BORROW         3 (after_mb)
+              LOAD_CONST               4 ('.2f')
+              FORMAT_WITH_SPEC
+              LOAD_CONST               6 (' MB (')
+              LOAD_FAST_BORROW         1 (reduction)
+              LOAD_CONST               7 ('.1f')
+              FORMAT_WITH_SPEC
+              LOAD_CONST               8 ('%)')
+
+ 30           BUILD_STRING            11
+
+ 29           RETURN_VALUE
+
+ 33   L4:     LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR                0 (status)
+              LOAD_GLOBAL              2 (CompressionStatus)
+              LOAD_ATTR               18 (CANCELLED)
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE       26 (to L5)
+              NOT_TAKEN
+
+ 34           LOAD_CONST               9 ('Cancelado: ')
+              LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR               12 (input_path)
+              LOAD_ATTR               14 (name)
+              FORMAT_SIMPLE
+              BUILD_STRING             2
+              RETURN_VALUE
+
+ 36   L5:     LOAD_CONST              10 ('')
+              STORE_FAST               4 (detail)
+
+ 37           LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR               20 (error_detail)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       68 (to L6)
+              NOT_TAKEN
+
+ 38           LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR               20 (error_detail)
+              LOAD_ATTR               23 (splitlines + NULL|self)
+              CALL                     0
+              LOAD_SMALL_INT           0
+              BINARY_OP               26 ([])
+              LOAD_ATTR               25 (strip + NULL|self)
+              CALL                     0
+              STORE_FAST               5 (first_line)
+
+ 39           LOAD_FAST_BORROW         5 (first_line)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       13 (to L6)
+              NOT_TAKEN
+
+ 40           LOAD_CONST              11 (' | Detalhe: ')
+              LOAD_FAST_BORROW         5 (first_line)
+              LOAD_CONST              12 (slice(None, 180, None))
+              BINARY_OP               26 ([])
+              FORMAT_SIMPLE
+              BUILD_STRING             2
+              STORE_FAST               4 (detail)
+
+ 42   L6:     LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR               26 (error_code)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       61 (to L7)
+              NOT_TAKEN
+
+ 44           LOAD_CONST              13 ('Falha: ')
+              LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR               12 (input_path)
+              LOAD_ATTR               14 (name)
+              FORMAT_SIMPLE
+              LOAD_CONST               3 (' | ')
+
+ 45           LOAD_GLOBAL             28 (ERROR_MESSAGES)
+              LOAD_ATTR               31 (get + NULL|self)
+              LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR               26 (error_code)
+              LOAD_CONST              14 ('Erro desconhecido')
+              CALL                     2
+              FORMAT_SIMPLE
+              LOAD_FAST_BORROW         4 (detail)
+              FORMAT_SIMPLE
+
+ 44           BUILD_STRING             5
+
+ 43           RETURN_VALUE
+
+ 47   L7:     LOAD_CONST              13 ('Falha: ')
+              LOAD_FAST_BORROW         0 (result)
+              LOAD_ATTR               12 (input_path)
+              LOAD_ATTR               14 (name)
+              FORMAT_SIMPLE
+              LOAD_CONST              15 (' | Erro nao identificado.')
+              LOAD_FAST_BORROW         4 (detail)
+              FORMAT_SIMPLE
+              BUILD_STRING             4
+              RETURN_VALUE

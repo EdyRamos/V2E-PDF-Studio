@@ -1,0 +1,33 @@
+MODULE: v2e_pdf_compressor.config
+SOURCE FILE: v2e_pdf_compressor\config\__init__.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           1
+              LOAD_CONST               1 (('APP_DATA_DIR', 'APP_LOG_DIR', 'SETTINGS_FILE', 'ensure_app_dirs'))
+              IMPORT_NAME              0 (paths)
+              IMPORT_FROM              1 (APP_DATA_DIR)
+              STORE_NAME               1 (APP_DATA_DIR)
+              IMPORT_FROM              2 (APP_LOG_DIR)
+              STORE_NAME               2 (APP_LOG_DIR)
+              IMPORT_FROM              3 (SETTINGS_FILE)
+              STORE_NAME               3 (SETTINGS_FILE)
+              IMPORT_FROM              4 (ensure_app_dirs)
+              STORE_NAME               4 (ensure_app_dirs)
+              POP_TOP
+
+  2           LOAD_SMALL_INT           1
+              LOAD_CONST               2 (('AppSettings', 'SettingsRepository'))
+              IMPORT_NAME              5 (settings)
+              IMPORT_FROM              6 (AppSettings)
+              STORE_NAME               6 (AppSettings)
+              IMPORT_FROM              7 (SettingsRepository)
+              STORE_NAME               7 (SettingsRepository)
+              POP_TOP
+
+  4           BUILD_LIST               0
+              LOAD_CONST               4 (('APP_DATA_DIR', 'APP_LOG_DIR', 'SETTINGS_FILE', 'AppSettings', 'SettingsRepository', 'ensure_app_dirs'))
+              LIST_EXTEND              1
+              STORE_NAME               8 (__all__)
+              LOAD_CONST               3 (None)
+              RETURN_VALUE

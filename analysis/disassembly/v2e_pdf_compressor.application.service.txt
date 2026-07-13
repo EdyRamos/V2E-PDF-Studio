@@ -1,0 +1,1812 @@
+MODULE: v2e_pdf_compressor.application.service
+SOURCE FILE: v2e_pdf_compressor\application\service.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('annotations',))
+              IMPORT_NAME              0 (__future__)
+              IMPORT_FROM              1 (annotations)
+              STORE_NAME               1 (annotations)
+              POP_TOP
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              2 (logging)
+              STORE_NAME               2 (logging)
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              3 (os)
+              STORE_NAME               3 (os)
+
+  5           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              4 (subprocess)
+              STORE_NAME               4 (subprocess)
+
+  6           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              5 (threading)
+              STORE_NAME               5 (threading)
+
+  7           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              6 (time)
+              STORE_NAME               6 (time)
+
+  8           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('Path',))
+              IMPORT_NAME              7 (pathlib)
+              IMPORT_FROM              8 (Path)
+              STORE_NAME               8 (Path)
+              POP_TOP
+
+  9           LOAD_SMALL_INT           0
+              LOAD_CONST               4 (('Callable',))
+              IMPORT_NAME              9 (typing)
+              IMPORT_FROM             10 (Callable)
+              STORE_NAME              10 (Callable)
+              POP_TOP
+
+ 11           LOAD_SMALL_INT           2
+              LOAD_CONST               5 (('BatchResult', 'CompressionJob', 'CompressionProfile', 'CompressionResult', 'CompressionStatus', 'ErrorCode'))
+              IMPORT_NAME             11 (domain)
+              IMPORT_FROM             12 (BatchResult)
+              STORE_NAME              12 (BatchResult)
+              IMPORT_FROM             13 (CompressionJob)
+              STORE_NAME              13 (CompressionJob)
+              IMPORT_FROM             14 (CompressionProfile)
+              STORE_NAME              14 (CompressionProfile)
+              IMPORT_FROM             15 (CompressionResult)
+              STORE_NAME              15 (CompressionResult)
+              IMPORT_FROM             16 (CompressionStatus)
+              STORE_NAME              16 (CompressionStatus)
+              IMPORT_FROM             17 (ErrorCode)
+              STORE_NAME              17 (ErrorCode)
+              POP_TOP
+
+ 19           LOAD_SMALL_INT           2
+              LOAD_CONST               6 (('GhostscriptLocator',))
+              IMPORT_NAME             18 (infra.ghostscript)
+              IMPORT_FROM             19 (GhostscriptLocator)
+              STORE_NAME              19 (GhostscriptLocator)
+              POP_TOP
+
+ 22           LOAD_NAME               10 (Callable)
+              LOAD_NAME               20 (int)
+              LOAD_NAME               20 (int)
+              LOAD_NAME               15 (CompressionResult)
+              BUILD_LIST               3
+              LOAD_CONST               2 (None)
+              BUILD_TUPLE              2
+              BINARY_OP               26 ([])
+              STORE_NAME              21 (ProgressCallback)
+
+ 25           LOAD_CONST               7 (<code object __annotate__ at 0x000000001B8B24C0, file "v2e_pdf_compressor\application\service.py", line 25>)
+              MAKE_FUNCTION
+              LOAD_CONST               8 (<code object _to_mb at 0x000000001B8B25B0, file "v2e_pdf_compressor\application\service.py", line 25>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              22 (_to_mb)
+
+ 29           LOAD_CONST               9 (<code object __annotate__ at 0x000000001BB61830, file "v2e_pdf_compressor\application\service.py", line 29>)
+              MAKE_FUNCTION
+              LOAD_CONST              10 (<code object _percent_reduction at 0x000000001B89B110, file "v2e_pdf_compressor\application\service.py", line 29>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              23 (_percent_reduction)
+
+ 35           LOAD_CONST              11 (<code object __annotate__ at 0x000000001BB61930, file "v2e_pdf_compressor\application\service.py", line 35>)
+              MAKE_FUNCTION
+              LOAD_CONST              12 (<code object _unique_output_path at 0x000000001B59A3A0, file "v2e_pdf_compressor\application\service.py", line 35>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              24 (_unique_output_path)
+
+ 47           LOAD_CONST              13 (<code object __annotate__ at 0x000000001BB61B30, file "v2e_pdf_compressor\application\service.py", line 47>)
+              MAKE_FUNCTION
+              LOAD_CONST              14 (<code object build_batch_jobs at 0x000000001B9E22F0, file "v2e_pdf_compressor\application\service.py", line 47>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              25 (build_batch_jobs)
+
+ 75           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              15 (<code object PdfCompressionService at 0x000000001B557630, file "v2e_pdf_compressor\application\service.py", line 75>)
+              MAKE_FUNCTION
+              LOAD_CONST              16 ('PdfCompressionService')
+              CALL                     2
+              STORE_NAME              26 (PdfCompressionService)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B24C0, file "v2e_pdf_compressor\application\service.py", line 25>:
+ 25           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('size_in_bytes')
+              LOAD_CONST               2 ('int')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('float')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object _to_mb at 0x000000001B8B25B0, file "v2e_pdf_compressor\application\service.py", line 25>:
+ 25           RESUME                   0
+
+ 26           LOAD_FAST_BORROW         0 (size_in_bytes)
+              LOAD_CONST               1 (1048576)
+              BINARY_OP               11 (/)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001BB61830, file "v2e_pdf_compressor\application\service.py", line 29>:
+ 29           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('before_mb')
+              LOAD_CONST               2 ('float')
+              LOAD_CONST               3 ('after_mb')
+              LOAD_CONST               2 ('float')
+              LOAD_CONST               4 ('return')
+              LOAD_CONST               2 ('float')
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object _percent_reduction at 0x000000001B89B110, file "v2e_pdf_compressor\application\service.py", line 29>:
+ 29           RESUME                   0
+
+ 30           LOAD_FAST_BORROW         0 (before_mb)
+              LOAD_SMALL_INT           0
+              COMPARE_OP              58 (bool(<=))
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+
+ 31           LOAD_CONST               1 (0.0)
+              RETURN_VALUE
+
+ 32   L1:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (before_mb, after_mb)
+              BINARY_OP               10 (-)
+              LOAD_FAST_BORROW         0 (before_mb)
+              BINARY_OP               11 (/)
+              LOAD_CONST               2 (100.0)
+              BINARY_OP                5 (*)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001BB61930, file "v2e_pdf_compressor\application\service.py", line 35>:
+ 35           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('base_output')
+              LOAD_CONST               2 ('Path')
+              LOAD_CONST               3 ('reserved')
+              LOAD_CONST               4 ('set[Path]')
+              LOAD_CONST               5 ('return')
+              LOAD_CONST               2 ('Path')
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object _unique_output_path at 0x000000001B59A3A0, file "v2e_pdf_compressor\application\service.py", line 35>:
+ 35           RESUME                   0
+
+ 36           LOAD_FAST                0 (base_output)
+              STORE_FAST               2 (candidate)
+
+ 37           LOAD_FAST_BORROW         0 (base_output)
+              LOAD_ATTR                0 (suffix)
+              STORE_FAST               3 (suffix)
+
+ 38           LOAD_FAST_BORROW         0 (base_output)
+              LOAD_ATTR                2 (stem)
+              STORE_FAST               4 (stem)
+
+ 39           LOAD_SMALL_INT           2
+              STORE_FAST               5 (index)
+
+ 41   L1:     LOAD_FAST_BORROW         2 (candidate)
+              LOAD_ATTR                5 (exists + NULL|self)
+              CALL                     0
+              TO_BOOL
+              POP_JUMP_IF_TRUE        22 (to L2)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         2 (candidate)
+              LOAD_ATTR                7 (resolve + NULL|self)
+              CALL                     0
+              LOAD_FAST_BORROW         1 (reserved)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_FALSE       36 (to L3)
+              NOT_TAKEN
+
+ 42   L2:     LOAD_FAST_BORROW         0 (base_output)
+              LOAD_ATTR                9 (with_name + NULL|self)
+              LOAD_FAST_BORROW         4 (stem)
+              FORMAT_SIMPLE
+              LOAD_CONST               1 ('_')
+              LOAD_FAST_BORROW         5 (index)
+              FORMAT_SIMPLE
+              LOAD_FAST_BORROW         3 (suffix)
+              FORMAT_SIMPLE
+              BUILD_STRING             4
+              CALL                     1
+              STORE_FAST               2 (candidate)
+
+ 43           LOAD_FAST_BORROW         5 (index)
+              LOAD_SMALL_INT           1
+              BINARY_OP               13 (+=)
+              STORE_FAST               5 (index)
+              JUMP_BACKWARD           78 (to L1)
+
+ 44   L3:     LOAD_FAST_BORROW         2 (candidate)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001BB61B30, file "v2e_pdf_compressor\application\service.py", line 47>:
+ 47           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('input_files')
+
+ 48           LOAD_CONST               2 ('list[Path]')
+
+ 47           LOAD_CONST               3 ('output_dir')
+
+ 49           LOAD_CONST               4 ('Path')
+
+ 47           LOAD_CONST               5 ('profile')
+
+ 50           LOAD_CONST               6 ('CompressionProfile')
+
+ 47           LOAD_CONST               7 ('overwrite')
+
+ 51           LOAD_CONST               8 ('bool')
+
+ 47           LOAD_CONST               9 ('optimize')
+
+ 52           LOAD_CONST               8 ('bool')
+
+ 47           LOAD_CONST              10 ('return')
+
+ 53           LOAD_CONST              11 ('list[CompressionJob]')
+
+ 47           BUILD_MAP                6
+              RETURN_VALUE
+
+Disassembly of <code object build_batch_jobs at 0x000000001B9E22F0, file "v2e_pdf_compressor\application\service.py", line 47>:
+ 47           RESUME                   0
+
+ 54           BUILD_LIST               0
+              STORE_FAST               5 (jobs)
+
+ 55           LOAD_GLOBAL              1 (set + NULL)
+              CALL                     0
+              STORE_FAST               6 (reserved)
+
+ 56           LOAD_FAST_BORROW         1 (output_dir)
+              LOAD_ATTR                3 (resolve + NULL|self)
+              CALL                     0
+              STORE_FAST               1 (output_dir)
+
+ 57           LOAD_FAST_BORROW         1 (output_dir)
+              LOAD_ATTR                5 (mkdir + NULL|self)
+              LOAD_CONST               0 (True)
+              LOAD_CONST               0 (True)
+              LOAD_CONST               1 (('parents', 'exist_ok'))
+              CALL_KW                  2
+              POP_TOP
+
+ 59           LOAD_FAST_BORROW         0 (input_files)
+              GET_ITER
+      L1:     FOR_ITER               135 (to L4)
+              STORE_FAST               7 (input_file)
+
+ 60           LOAD_FAST_BORROW_LOAD_FAST_BORROW 23 (output_dir, input_file)
+              LOAD_ATTR                6 (stem)
+              FORMAT_SIMPLE
+              LOAD_CONST               2 ('_comprimido.pdf')
+              BUILD_STRING             2
+              BINARY_OP               11 (/)
+              STORE_FAST               8 (base_output)
+
+ 61           LOAD_FAST_BORROW         3 (overwrite)
+              TO_BOOL
+              POP_JUMP_IF_FALSE        3 (to L2)
+              NOT_TAKEN
+              LOAD_FAST                8 (base_output)
+              JUMP_FORWARD            10 (to L3)
+      L2:     LOAD_GLOBAL              9 (_unique_output_path + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 134 (base_output, reserved)
+              CALL                     2
+      L3:     STORE_FAST               9 (target_output)
+
+ 62           LOAD_FAST_BORROW         6 (reserved)
+              LOAD_ATTR               11 (add + NULL|self)
+              LOAD_FAST_BORROW         9 (target_output)
+              LOAD_ATTR                3 (resolve + NULL|self)
+              CALL                     0
+              CALL                     1
+              POP_TOP
+
+ 63           LOAD_FAST_BORROW         5 (jobs)
+              LOAD_ATTR               13 (append + NULL|self)
+
+ 64           LOAD_GLOBAL             15 (CompressionJob + NULL)
+
+ 65           LOAD_FAST_BORROW         7 (input_file)
+              LOAD_ATTR                3 (resolve + NULL|self)
+              CALL                     0
+
+ 66           LOAD_FAST_BORROW         9 (target_output)
+              LOAD_ATTR                3 (resolve + NULL|self)
+              CALL                     0
+
+ 67           LOAD_FAST_BORROW         2 (profile)
+
+ 68           LOAD_FAST_BORROW         3 (overwrite)
+
+ 69           LOAD_FAST_BORROW         4 (optimize)
+
+ 64           LOAD_CONST               3 (('input_path', 'output_path', 'profile', 'overwrite', 'optimize'))
+              CALL_KW                  5
+
+ 63           CALL                     1
+              POP_TOP
+              JUMP_BACKWARD          137 (to L1)
+
+ 59   L4:     END_FOR
+              POP_ITER
+
+ 72           LOAD_FAST_BORROW         5 (jobs)
+              RETURN_VALUE
+
+Disassembly of <code object PdfCompressionService at 0x000000001B557630, file "v2e_pdf_compressor\application\service.py", line 75>:
+ 75           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('PdfCompressionService')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          75
+              STORE_NAME               3 (__firstlineno__)
+
+ 76           LOAD_CONST              25 ((600, None))
+              LOAD_CONST               2 (<code object __annotate__ at 0x000000001BB61C30, file "v2e_pdf_compressor\application\service.py", line 76>)
+              MAKE_FUNCTION
+              LOAD_CONST               3 (<code object __init__ at 0x000000001BBA0310, file "v2e_pdf_compressor\application\service.py", line 76>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               4 (__init__)
+
+ 87           LOAD_CONST               4 (<code object __annotate__ at 0x000000001B8B26A0, file "v2e_pdf_compressor\application\service.py", line 87>)
+              MAKE_FUNCTION
+              LOAD_CONST               5 (<code object reset_cancel at 0x000000001BB5FDD0, file "v2e_pdf_compressor\application\service.py", line 87>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               5 (reset_cancel)
+
+ 90           LOAD_CONST               6 (<code object __annotate__ at 0x000000001B8B2790, file "v2e_pdf_compressor\application\service.py", line 90>)
+              MAKE_FUNCTION
+              LOAD_CONST               7 (<code object cancel at 0x000000001BB5FEE0, file "v2e_pdf_compressor\application\service.py", line 90>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               6 (cancel)
+
+ 93           LOAD_CONST               8 (<code object __annotate__ at 0x000000001B8B2880, file "v2e_pdf_compressor\application\service.py", line 93>)
+              MAKE_FUNCTION
+              LOAD_CONST               9 (<code object compress at 0x000000001B9EC180, file "v2e_pdf_compressor\application\service.py", line 93>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               7 (compress)
+
+174           LOAD_CONST              26 ((None,))
+              LOAD_CONST              10 (<code object __annotate__ at 0x000000001BB61D30, file "v2e_pdf_compressor\application\service.py", line 174>)
+              MAKE_FUNCTION
+              LOAD_CONST              11 (<code object compress_many at 0x000000001B619990, file "v2e_pdf_compressor\application\service.py", line 174>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               8 (compress_many)
+
+214           LOAD_CONST              12 (<code object __annotate__ at 0x000000001BB61E30, file "v2e_pdf_compressor\application\service.py", line 214>)
+              MAKE_FUNCTION
+              LOAD_CONST              13 (<code object _build_command at 0x000000001B562010, file "v2e_pdf_compressor\application\service.py", line 214>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME               9 (_build_command)
+
+236           LOAD_CONST              14 (<code object __annotate__ at 0x000000001B8B2970, file "v2e_pdf_compressor\application\service.py", line 236>)
+              MAKE_FUNCTION
+              LOAD_CONST              15 (<code object _build_process_env at 0x000000001B9E87B0, file "v2e_pdf_compressor\application\service.py", line 236>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              10 (_build_process_env)
+
+264           LOAD_CONST              16 (<code object __annotate__ at 0x000000001B8B2A60, file "v2e_pdf_compressor\application\service.py", line 264>)
+              MAKE_FUNCTION
+              LOAD_CONST              17 (<code object _validate_job at 0x000000001B9E8DC0, file "v2e_pdf_compressor\application\service.py", line 264>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              11 (_validate_job)
+
+282           LOAD_CONST              18 (<code object __annotate__ at 0x000000001B8B2B50, file "v2e_pdf_compressor\application\service.py", line 282>)
+              MAKE_FUNCTION
+              LOAD_CONST              19 (<code object _map_subprocess_error at 0x000000001B9A0580, file "v2e_pdf_compressor\application\service.py", line 282>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              12 (_map_subprocess_error)
+
+298           LOAD_CONST              26 ((None,))
+              LOAD_CONST              20 (<code object __annotate__ at 0x000000001BB61F30, file "v2e_pdf_compressor\application\service.py", line 298>)
+              MAKE_FUNCTION
+              LOAD_CONST              21 (<code object _error_result at 0x000000001B50F0F0, file "v2e_pdf_compressor\application\service.py", line 298>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              13 (_error_result)
+
+318           LOAD_CONST              22 (<code object __annotate__ at 0x000000001BB62030, file "v2e_pdf_compressor\application\service.py", line 318>)
+              MAKE_FUNCTION
+              LOAD_CONST              23 (<code object _cancelled_result at 0x000000001B53E330, file "v2e_pdf_compressor\application\service.py", line 318>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              14 (_cancelled_result)
+              LOAD_CONST              24 (('_cancel_event', 'locator', 'logger', 'timeout_seconds'))
+              STORE_NAME              15 (__static_attributes__)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001BB61C30, file "v2e_pdf_compressor\application\service.py", line 76>:
+ 76           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('locator')
+
+ 78           LOAD_CONST               2 ('GhostscriptLocator')
+
+ 76           LOAD_CONST               3 ('timeout_seconds')
+
+ 79           LOAD_CONST               4 ('int')
+
+ 76           LOAD_CONST               5 ('logger')
+
+ 80           LOAD_CONST               6 ('logging.Logger | None')
+
+ 76           LOAD_CONST               7 ('return')
+
+ 81           LOAD_CONST               8 ('None')
+
+ 76           BUILD_MAP                4
+              RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x000000001BBA0310, file "v2e_pdf_compressor\application\service.py", line 76>:
+ 76           RESUME                   0
+
+ 82           LOAD_FAST_BORROW_LOAD_FAST_BORROW 16 (locator, self)
+              STORE_ATTR               0 (locator)
+
+ 83           LOAD_FAST_BORROW_LOAD_FAST_BORROW 32 (timeout_seconds, self)
+              STORE_ATTR               1 (timeout_seconds)
+
+ 84           LOAD_FAST                3 (logger)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        23 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_GLOBAL              4 (logging)
+              LOAD_ATTR                6 (getLogger)
+              PUSH_NULL
+              LOAD_CONST               0 ('v2e.service')
+              CALL                     1
+      L1:     LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               4 (logger)
+
+ 85           LOAD_GLOBAL             10 (threading)
+              LOAD_ATTR               12 (Event)
+              PUSH_NULL
+              CALL                     0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               7 (_cancel_event)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B26A0, file "v2e_pdf_compressor\application\service.py", line 87>:
+ 87           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_CONST               2 ('None')
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object reset_cancel at 0x000000001BB5FDD0, file "v2e_pdf_compressor\application\service.py", line 87>:
+ 87           RESUME                   0
+
+ 88           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_cancel_event)
+              LOAD_ATTR                3 (clear + NULL|self)
+              CALL                     0
+              POP_TOP
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B2790, file "v2e_pdf_compressor\application\service.py", line 90>:
+ 90           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_CONST               2 ('None')
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object cancel at 0x000000001BB5FEE0, file "v2e_pdf_compressor\application\service.py", line 90>:
+ 90           RESUME                   0
+
+ 91           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_cancel_event)
+              LOAD_ATTR                3 (set + NULL|self)
+              CALL                     0
+              POP_TOP
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B2880, file "v2e_pdf_compressor\application\service.py", line 93>:
+ 93           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('job')
+              LOAD_CONST               2 ('CompressionJob')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('CompressionResult')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object compress at 0x000000001B9EC180, file "v2e_pdf_compressor\application\service.py", line 93>:
+  93            RESUME                   0
+
+  94            LOAD_GLOBAL              0 (time)
+                LOAD_ATTR                2 (perf_counter)
+                PUSH_NULL
+                CALL                     0
+                STORE_FAST               2 (started)
+
+  95            NOP
+
+  96    L1:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                5 (_validate_job + NULL|self)
+                LOAD_FAST_BORROW         1 (job)
+                CALL                     1
+                STORE_FAST               3 (validation_error)
+
+  97            LOAD_FAST_BORROW         3 (validation_error)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       19 (to L5)
+        L2:     NOT_TAKEN
+
+  98    L3:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                7 (_error_result + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 19 (job, validation_error)
+                LOAD_FAST_BORROW         2 (started)
+                CALL                     3
+        L4:     RETURN_VALUE
+
+ 100    L5:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                8 (_cancel_event)
+                LOAD_ATTR               11 (is_set + NULL|self)
+                CALL                     0
+                TO_BOOL
+                POP_JUMP_IF_FALSE       18 (to L9)
+        L6:     NOT_TAKEN
+
+ 101    L7:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               13 (_cancelled_result + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (job, started)
+                CALL                     2
+        L8:     RETURN_VALUE
+
+ 103    L9:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               14 (locator)
+                LOAD_ATTR               17 (resolve_executable + NULL|self)
+                CALL                     0
+                STORE_FAST               4 (gs_executable)
+
+ 105            LOAD_GLOBAL             19 (_to_mb + NULL)
+                LOAD_FAST_BORROW         1 (job)
+                LOAD_ATTR               20 (input_path)
+                LOAD_ATTR               23 (stat + NULL|self)
+                CALL                     0
+                LOAD_ATTR               24 (st_size)
+                CALL                     1
+                STORE_FAST               5 (before_mb)
+
+ 106            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               27 (_build_command + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 65 (gs_executable, job)
+                CALL                     2
+                STORE_FAST               6 (command)
+
+ 107            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               29 (_build_process_env + NULL|self)
+                LOAD_FAST_BORROW         4 (gs_executable)
+                CALL                     1
+                STORE_FAST               7 (process_env)
+
+ 108            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               30 (logger)
+                LOAD_ATTR               33 (info + NULL|self)
+                LOAD_CONST               0 ('Executando Ghostscript: %s')
+                LOAD_FAST_BORROW         6 (command)
+                CALL                     2
+                POP_TOP
+
+ 111            LOAD_GLOBAL             35 (hasattr + NULL)
+                LOAD_GLOBAL             36 (subprocess)
+                LOAD_CONST               1 ('CREATE_NO_WINDOW')
+                CALL                     2
+                TO_BOOL
+                POP_JUMP_IF_FALSE       17 (to L10)
+                NOT_TAKEN
+                LOAD_GLOBAL             36 (subprocess)
+                LOAD_ATTR               38 (CREATE_NO_WINDOW)
+                JUMP_FORWARD             1 (to L11)
+       L10:     LOAD_SMALL_INT           0
+
+ 110   L11:     STORE_FAST               8 (creationflags)
+
+ 113            LOAD_GLOBAL             36 (subprocess)
+                LOAD_ATTR               40 (run)
+                PUSH_NULL
+
+ 114            LOAD_FAST_BORROW         6 (command)
+
+ 115            LOAD_CONST               2 (True)
+
+ 116            LOAD_CONST               2 (True)
+
+ 117            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               42 (timeout_seconds)
+
+ 118            LOAD_FAST_BORROW         8 (creationflags)
+
+ 119            LOAD_CONST               3 (False)
+
+ 120            LOAD_FAST_BORROW         7 (process_env)
+
+ 113            LOAD_CONST               4 (('capture_output', 'text', 'timeout', 'creationflags', 'check', 'env'))
+                CALL_KW                  7
+                STORE_FAST               9 (completed)
+
+ 123            LOAD_FAST_BORROW         9 (completed)
+                LOAD_ATTR               44 (returncode)
+                LOAD_SMALL_INT           0
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE      166 (to L22)
+                NOT_TAKEN
+
+ 124            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               47 (_map_subprocess_error + NULL|self)
+                LOAD_FAST_BORROW         9 (completed)
+                LOAD_ATTR               48 (stderr)
+                CALL                     1
+                STORE_FAST              10 (error_code)
+
+ 125            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               30 (logger)
+                LOAD_ATTR               51 (error + NULL|self)
+
+ 126            LOAD_CONST               5 ('Falha Ghostscript returncode=%s stderr=%s')
+
+ 127            LOAD_FAST_BORROW         9 (completed)
+                LOAD_ATTR               44 (returncode)
+
+ 128            LOAD_FAST_BORROW         9 (completed)
+                LOAD_ATTR               48 (stderr)
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L14)
+       L12:     NOT_TAKEN
+       L13:     POP_TOP
+                LOAD_CONST               6 ('')
+       L14:     LOAD_ATTR               53 (strip + NULL|self)
+                CALL                     0
+
+ 125            CALL                     3
+                POP_TOP
+
+ 130            LOAD_FAST                0 (self)
+                LOAD_ATTR                7 (_error_result + NULL|self)
+
+ 131            LOAD_FAST                1 (job)
+
+ 132            LOAD_FAST               10 (error_code)
+
+ 133            LOAD_FAST                2 (started)
+
+ 134            LOAD_FAST_BORROW         9 (completed)
+                LOAD_ATTR               48 (stderr)
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L17)
+       L15:     NOT_TAKEN
+       L16:     POP_TOP
+                LOAD_CONST               6 ('')
+       L17:     LOAD_ATTR               53 (strip + NULL|self)
+                CALL                     0
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L20)
+       L18:     NOT_TAKEN
+       L19:     POP_TOP
+                LOAD_CONST               7 (None)
+
+ 130   L20:     LOAD_CONST               8 (('detail',))
+                CALL_KW                  4
+       L21:     RETURN_VALUE
+
+ 137   L22:     LOAD_FAST_BORROW         1 (job)
+                LOAD_ATTR               54 (output_path)
+                LOAD_ATTR               57 (exists + NULL|self)
+                CALL                     0
+                TO_BOOL
+                POP_JUMP_IF_TRUE        36 (to L26)
+       L23:     NOT_TAKEN
+
+ 138   L24:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                7 (_error_result + NULL|self)
+
+ 139            LOAD_FAST_BORROW         1 (job)
+
+ 140            LOAD_GLOBAL             58 (ErrorCode)
+                LOAD_ATTR               60 (PROCESS_FAILED)
+
+ 141            LOAD_FAST_BORROW         2 (started)
+
+ 142            LOAD_CONST               9 ('Ghostscript finalizou sem gerar arquivo de saida.')
+
+ 138            LOAD_CONST               8 (('detail',))
+                CALL_KW                  4
+       L25:     RETURN_VALUE
+
+ 145   L26:     LOAD_GLOBAL             19 (_to_mb + NULL)
+                LOAD_FAST_BORROW         1 (job)
+                LOAD_ATTR               54 (output_path)
+                LOAD_ATTR               23 (stat + NULL|self)
+                CALL                     0
+                LOAD_ATTR               24 (st_size)
+                CALL                     1
+                STORE_FAST              11 (after_mb)
+
+ 146            LOAD_GLOBAL             63 (_percent_reduction + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 91 (before_mb, after_mb)
+                CALL                     2
+                STORE_FAST              12 (reduction_percent)
+
+ 147            LOAD_GLOBAL             65 (int + NULL)
+                LOAD_GLOBAL              0 (time)
+                LOAD_ATTR                2 (perf_counter)
+                PUSH_NULL
+                CALL                     0
+                LOAD_FAST_BORROW         2 (started)
+                BINARY_OP               10 (-)
+                LOAD_CONST              10 (1000)
+                BINARY_OP                5 (*)
+                CALL                     1
+                STORE_FAST              13 (elapsed_ms)
+
+ 148            LOAD_GLOBAL             67 (CompressionResult + NULL)
+
+ 149            LOAD_FAST_BORROW         1 (job)
+                LOAD_ATTR               20 (input_path)
+
+ 150            LOAD_FAST_BORROW         1 (job)
+                LOAD_ATTR               54 (output_path)
+
+ 151            LOAD_GLOBAL             68 (CompressionStatus)
+                LOAD_ATTR               70 (SUCCESS)
+
+ 152            LOAD_CONST               7 (None)
+
+ 153            LOAD_FAST_BORROW         5 (before_mb)
+
+ 154            LOAD_FAST_BORROW        11 (after_mb)
+
+ 155            LOAD_FAST_BORROW        12 (reduction_percent)
+
+ 156            LOAD_FAST_BORROW        13 (elapsed_ms)
+
+ 148            LOAD_CONST              11 (('input_path', 'output_path', 'status', 'error_code', 'before_mb', 'after_mb', 'reduction_percent', 'elapsed_ms'))
+                CALL_KW                  8
+       L27:     RETURN_VALUE
+
+  --   L28:     PUSH_EXC_INFO
+
+ 158            LOAD_GLOBAL             72 (FileNotFoundError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       55 (to L33)
+                NOT_TAKEN
+                STORE_FAST              14 (exc)
+
+ 159   L29:     LOAD_FAST                0 (self)
+                LOAD_ATTR                7 (_error_result + NULL|self)
+
+ 160            LOAD_FAST                1 (job)
+                LOAD_GLOBAL             58 (ErrorCode)
+                LOAD_ATTR               74 (GHOSTSCRIPT_NOT_FOUND)
+                LOAD_FAST                2 (started)
+                LOAD_GLOBAL             77 (str + NULL)
+                LOAD_FAST               14 (exc)
+                CALL                     1
+
+ 159            LOAD_CONST               8 (('detail',))
+                CALL_KW                  4
+       L30:     SWAP                     2
+       L31:     POP_EXCEPT
+                LOAD_CONST               7 (None)
+                STORE_FAST              14 (exc)
+                DELETE_FAST             14 (exc)
+                RETURN_VALUE
+
+  --   L32:     LOAD_CONST               7 (None)
+                STORE_FAST              14 (exc)
+                DELETE_FAST             14 (exc)
+                RERAISE                  1
+
+ 162   L33:     LOAD_GLOBAL             36 (subprocess)
+                LOAD_ATTR               78 (TimeoutExpired)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       55 (to L40)
+       L34:     NOT_TAKEN
+       L35:     STORE_FAST              14 (exc)
+
+ 163   L36:     LOAD_FAST                0 (self)
+                LOAD_ATTR                7 (_error_result + NULL|self)
+
+ 164            LOAD_FAST                1 (job)
+                LOAD_GLOBAL             58 (ErrorCode)
+                LOAD_ATTR               80 (PROCESS_TIMEOUT)
+                LOAD_FAST                2 (started)
+                LOAD_GLOBAL             77 (str + NULL)
+                LOAD_FAST               14 (exc)
+                CALL                     1
+
+ 163            LOAD_CONST               8 (('detail',))
+                CALL_KW                  4
+       L37:     SWAP                     2
+       L38:     POP_EXCEPT
+                LOAD_CONST               7 (None)
+                STORE_FAST              14 (exc)
+                DELETE_FAST             14 (exc)
+                RETURN_VALUE
+
+  --   L39:     LOAD_CONST               7 (None)
+                STORE_FAST              14 (exc)
+                DELETE_FAST             14 (exc)
+                RERAISE                  1
+
+ 166   L40:     LOAD_GLOBAL             82 (PermissionError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       55 (to L47)
+       L41:     NOT_TAKEN
+       L42:     STORE_FAST              14 (exc)
+
+ 167   L43:     LOAD_FAST                0 (self)
+                LOAD_ATTR                7 (_error_result + NULL|self)
+
+ 168            LOAD_FAST                1 (job)
+                LOAD_GLOBAL             58 (ErrorCode)
+                LOAD_ATTR               84 (PERMISSION_DENIED)
+                LOAD_FAST                2 (started)
+                LOAD_GLOBAL             77 (str + NULL)
+                LOAD_FAST               14 (exc)
+                CALL                     1
+
+ 167            LOAD_CONST               8 (('detail',))
+                CALL_KW                  4
+       L44:     SWAP                     2
+       L45:     POP_EXCEPT
+                LOAD_CONST               7 (None)
+                STORE_FAST              14 (exc)
+                DELETE_FAST             14 (exc)
+                RETURN_VALUE
+
+  --   L46:     LOAD_CONST               7 (None)
+                STORE_FAST              14 (exc)
+                DELETE_FAST             14 (exc)
+                RERAISE                  1
+
+ 170   L47:     LOAD_GLOBAL             86 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       82 (to L54)
+       L48:     NOT_TAKEN
+       L49:     STORE_FAST              14 (exc)
+
+ 171   L50:     LOAD_FAST                0 (self)
+                LOAD_ATTR               30 (logger)
+                LOAD_ATTR               89 (exception + NULL|self)
+                LOAD_CONST              12 ('Erro inesperado na compressao')
+                CALL                     1
+                POP_TOP
+
+ 172            LOAD_FAST                0 (self)
+                LOAD_ATTR                7 (_error_result + NULL|self)
+                LOAD_FAST                1 (job)
+                LOAD_GLOBAL             58 (ErrorCode)
+                LOAD_ATTR               90 (UNKNOWN_ERROR)
+                LOAD_FAST                2 (started)
+                LOAD_GLOBAL             77 (str + NULL)
+                LOAD_FAST               14 (exc)
+                CALL                     1
+                LOAD_CONST               8 (('detail',))
+                CALL_KW                  4
+       L51:     SWAP                     2
+       L52:     POP_EXCEPT
+                LOAD_CONST               7 (None)
+                STORE_FAST              14 (exc)
+                DELETE_FAST             14 (exc)
+                RETURN_VALUE
+
+  --   L53:     LOAD_CONST               7 (None)
+                STORE_FAST              14 (exc)
+                DELETE_FAST             14 (exc)
+                RERAISE                  1
+
+ 170   L54:     RERAISE                  0
+
+  --   L55:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L28 [0]
+  L3 to L4 -> L28 [0]
+  L5 to L6 -> L28 [0]
+  L7 to L8 -> L28 [0]
+  L9 to L12 -> L28 [0]
+  L13 to L15 -> L28 [0]
+  L16 to L18 -> L28 [0]
+  L19 to L21 -> L28 [0]
+  L22 to L23 -> L28 [0]
+  L24 to L25 -> L28 [0]
+  L26 to L27 -> L28 [0]
+  L28 to L29 -> L55 [1] lasti
+  L29 to L30 -> L32 [1] lasti
+  L30 to L31 -> L55 [1] lasti
+  L32 to L34 -> L55 [1] lasti
+  L35 to L36 -> L55 [1] lasti
+  L36 to L37 -> L39 [1] lasti
+  L37 to L38 -> L55 [1] lasti
+  L39 to L41 -> L55 [1] lasti
+  L42 to L43 -> L55 [1] lasti
+  L43 to L44 -> L46 [1] lasti
+  L44 to L45 -> L55 [1] lasti
+  L46 to L48 -> L55 [1] lasti
+  L49 to L50 -> L55 [1] lasti
+  L50 to L51 -> L53 [1] lasti
+  L51 to L52 -> L55 [1] lasti
+  L53 to L55 -> L55 [1] lasti
+
+Disassembly of <code object __annotate__ at 0x000000001BB61D30, file "v2e_pdf_compressor\application\service.py", line 174>:
+174           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('jobs')
+
+176           LOAD_CONST               2 ('list[CompressionJob]')
+
+174           LOAD_CONST               3 ('progress_cb')
+
+177           LOAD_CONST               4 ('ProgressCallback | None')
+
+174           LOAD_CONST               5 ('return')
+
+178           LOAD_CONST               6 ('BatchResult')
+
+174           BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object compress_many at 0x000000001B619990, file "v2e_pdf_compressor\application\service.py", line 174>:
+174            RESUME                   0
+
+179            BUILD_LIST               0
+               STORE_FAST               3 (results)
+
+180            LOAD_GLOBAL              1 (len + NULL)
+               LOAD_FAST_BORROW         1 (jobs)
+               CALL                     1
+               STORE_FAST               4 (total)
+
+181            LOAD_SMALL_INT           0
+               COPY                     1
+               STORE_FAST               5 (success)
+               COPY                     1
+               STORE_FAST_STORE_FAST  103 (failed, cancelled)
+
+183            LOAD_GLOBAL              3 (enumerate + NULL)
+               LOAD_FAST_BORROW         1 (jobs)
+               LOAD_SMALL_INT           1
+               LOAD_CONST               1 (('start',))
+               CALL_KW                  2
+               GET_ITER
+       L1:     EXTENDED_ARG             1
+               FOR_ITER               303 (to L10)
+               UNPACK_SEQUENCE          2
+               STORE_FAST_STORE_FAST  137 (index, job)
+
+184            LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                4 (_cancel_event)
+               LOAD_ATTR                7 (is_set + NULL|self)
+               CALL                     0
+               TO_BOOL
+               POP_JUMP_IF_FALSE      112 (to L5)
+               NOT_TAKEN
+
+185            LOAD_FAST_BORROW_LOAD_FAST_BORROW 24 (jobs, index)
+               LOAD_SMALL_INT           1
+               BINARY_OP               10 (-)
+               LOAD_CONST               2 (None)
+               BINARY_SLICE
+               GET_ITER
+       L2:     FOR_ITER                94 (to L4)
+               STORE_FAST              10 (remaining)
+
+186            LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                9 (_cancelled_result + NULL|self)
+               LOAD_FAST_BORROW        10 (remaining)
+               LOAD_GLOBAL             10 (time)
+               LOAD_ATTR               12 (perf_counter)
+               PUSH_NULL
+               CALL                     0
+               CALL                     2
+               STORE_FAST              11 (result)
+
+187            LOAD_FAST_BORROW         3 (results)
+               LOAD_ATTR               15 (append + NULL|self)
+               LOAD_FAST_BORROW        11 (result)
+               CALL                     1
+               POP_TOP
+
+188            LOAD_FAST_BORROW         7 (cancelled)
+               LOAD_SMALL_INT           1
+               BINARY_OP               13 (+=)
+               STORE_FAST               7 (cancelled)
+
+189            LOAD_FAST_BORROW         2 (progress_cb)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L3)
+               NOT_TAKEN
+               JUMP_BACKWARD           76 (to L2)
+
+190    L3:     LOAD_FAST_BORROW         2 (progress_cb)
+               PUSH_NULL
+               LOAD_GLOBAL              1 (len + NULL)
+               LOAD_FAST_BORROW         3 (results)
+               CALL                     1
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 75 (total, result)
+               CALL                     3
+               POP_TOP
+               JUMP_BACKWARD           96 (to L2)
+
+185    L4:     END_FOR
+               POP_ITER
+
+191            POP_TOP
+               JUMP_FORWARD           159 (to L11)
+
+193    L5:     LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               17 (compress + NULL|self)
+               LOAD_FAST_BORROW         9 (job)
+               CALL                     1
+               STORE_FAST              11 (result)
+
+194            LOAD_FAST_BORROW         3 (results)
+               LOAD_ATTR               15 (append + NULL|self)
+               LOAD_FAST_BORROW        11 (result)
+               CALL                     1
+               POP_TOP
+
+196            LOAD_FAST_BORROW        11 (result)
+               LOAD_ATTR               18 (status)
+               LOAD_GLOBAL             20 (CompressionStatus)
+               LOAD_ATTR               22 (SUCCESS)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE       11 (to L6)
+               NOT_TAKEN
+
+197            LOAD_FAST_BORROW         5 (success)
+               LOAD_SMALL_INT           1
+               BINARY_OP               13 (+=)
+               STORE_FAST               5 (success)
+               JUMP_FORWARD            50 (to L8)
+
+198    L6:     LOAD_FAST_BORROW        11 (result)
+               LOAD_ATTR               18 (status)
+               LOAD_GLOBAL             20 (CompressionStatus)
+               LOAD_ATTR               24 (CANCELLED)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE       11 (to L7)
+               NOT_TAKEN
+
+199            LOAD_FAST_BORROW         7 (cancelled)
+               LOAD_SMALL_INT           1
+               BINARY_OP               13 (+=)
+               STORE_FAST               7 (cancelled)
+               JUMP_FORWARD             9 (to L8)
+
+201    L7:     LOAD_FAST_BORROW         6 (failed)
+               LOAD_SMALL_INT           1
+               BINARY_OP               13 (+=)
+               STORE_FAST               6 (failed)
+
+203    L8:     LOAD_FAST_BORROW         2 (progress_cb)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         4 (to L9)
+               NOT_TAKEN
+               EXTENDED_ARG             1
+               JUMP_BACKWARD          285 (to L1)
+
+204    L9:     LOAD_FAST_BORROW         2 (progress_cb)
+               PUSH_NULL
+               LOAD_GLOBAL              1 (len + NULL)
+               LOAD_FAST_BORROW         3 (results)
+               CALL                     1
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 75 (total, result)
+               CALL                     3
+               POP_TOP
+               EXTENDED_ARG             1
+               JUMP_BACKWARD          306 (to L1)
+
+183   L10:     END_FOR
+               POP_ITER
+
+206   L11:     LOAD_GLOBAL             27 (BatchResult + NULL)
+
+207            LOAD_FAST_BORROW         4 (total)
+
+208            LOAD_FAST_BORROW         5 (success)
+
+209            LOAD_FAST_BORROW         6 (failed)
+
+210            LOAD_FAST_BORROW         7 (cancelled)
+
+211            LOAD_FAST_BORROW         3 (results)
+
+206            LOAD_CONST               3 (('total', 'success', 'failed', 'cancelled', 'items'))
+               CALL_KW                  5
+               RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001BB61E30, file "v2e_pdf_compressor\application\service.py", line 214>:
+214           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('gs_executable')
+              LOAD_CONST               2 ('Path')
+              LOAD_CONST               3 ('job')
+              LOAD_CONST               4 ('CompressionJob')
+              LOAD_CONST               5 ('return')
+              LOAD_CONST               6 ('list[str]')
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object _build_command at 0x000000001B562010, file "v2e_pdf_compressor\application\service.py", line 214>:
+214           RESUME                   0
+
+216           LOAD_GLOBAL              1 (str + NULL)
+              LOAD_FAST_BORROW         1 (gs_executable)
+              CALL                     1
+
+217           LOAD_CONST               0 ('-sDEVICE=pdfwrite')
+
+218           LOAD_CONST               1 ('-dCompatibilityLevel=1.4')
+
+219           LOAD_CONST               2 ('-dPDFSETTINGS=/')
+              LOAD_FAST_BORROW         2 (job)
+              LOAD_ATTR                2 (profile)
+              LOAD_ATTR                4 (value)
+              FORMAT_SIMPLE
+              BUILD_STRING             2
+
+220           LOAD_CONST               3 ('-dNOPAUSE')
+
+221           LOAD_CONST               4 ('-dQUIET')
+
+222           LOAD_CONST               5 ('-dBATCH')
+
+215           BUILD_LIST               7
+              STORE_FAST               3 (command)
+
+224           LOAD_FAST_BORROW         2 (job)
+              LOAD_ATTR                6 (optimize)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       20 (to L1)
+              NOT_TAKEN
+
+225           LOAD_FAST_BORROW         3 (command)
+              LOAD_ATTR                9 (extend + NULL|self)
+
+226           BUILD_LIST               0
+              LOAD_CONST               7 (('-dDetectDuplicateImages=true', '-dCompressFonts=true', '-dSubsetFonts=true'))
+              LIST_EXTEND              1
+
+225           CALL                     1
+              POP_TOP
+
+233   L1:     LOAD_FAST_BORROW         3 (command)
+              LOAD_ATTR                9 (extend + NULL|self)
+              LOAD_CONST               6 ('-sOutputFile=')
+              LOAD_FAST_BORROW         2 (job)
+              LOAD_ATTR               10 (output_path)
+              FORMAT_SIMPLE
+              BUILD_STRING             2
+              LOAD_GLOBAL              1 (str + NULL)
+              LOAD_FAST_BORROW         2 (job)
+              LOAD_ATTR               12 (input_path)
+              CALL                     1
+              BUILD_LIST               2
+              CALL                     1
+              POP_TOP
+
+234           LOAD_FAST_BORROW         3 (command)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B2970, file "v2e_pdf_compressor\application\service.py", line 236>:
+236           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('gs_executable')
+              LOAD_CONST               2 ('Path')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('dict[str, str]')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object _build_process_env at 0x000000001B9E87B0, file "v2e_pdf_compressor\application\service.py", line 236>:
+236           RESUME                   0
+
+237           LOAD_GLOBAL              1 (dict + NULL)
+              LOAD_GLOBAL              2 (os)
+              LOAD_ATTR                4 (environ)
+              CALL                     1
+              STORE_FAST               2 (env)
+
+238           LOAD_FAST_BORROW         1 (gs_executable)
+              LOAD_ATTR                6 (parent)
+              STORE_FAST               3 (gs_bin)
+
+239           LOAD_FAST_BORROW         3 (gs_bin)
+              LOAD_ATTR                6 (parent)
+              STORE_FAST               4 (gs_root)
+
+241           LOAD_GLOBAL              9 (str + NULL)
+              LOAD_FAST_BORROW         3 (gs_bin)
+              CALL                     1
+              BUILD_LIST               1
+              STORE_FAST               5 (path_entries)
+
+242           LOAD_FAST_BORROW         2 (env)
+              LOAD_ATTR               11 (get + NULL|self)
+              LOAD_CONST               0 ('PATH')
+              LOAD_CONST               1 ('')
+              CALL                     2
+              STORE_FAST               6 (existing_path)
+
+243           LOAD_FAST_BORROW         6 (existing_path)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       18 (to L1)
+              NOT_TAKEN
+
+244           LOAD_FAST_BORROW         5 (path_entries)
+              LOAD_ATTR               13 (append + NULL|self)
+              LOAD_FAST_BORROW         6 (existing_path)
+              CALL                     1
+              POP_TOP
+
+245   L1:     LOAD_CONST               2 (';')
+              LOAD_ATTR               15 (join + NULL|self)
+              LOAD_FAST_BORROW         5 (path_entries)
+              CALL                     1
+              LOAD_FAST_BORROW         2 (env)
+              LOAD_CONST               0 ('PATH')
+              STORE_SUBSCR
+
+247           BUILD_LIST               0
+              STORE_FAST               7 (lib_entries)
+
+248           LOAD_FAST_BORROW         4 (gs_root)
+              LOAD_CONST               3 ('lib')
+              BINARY_OP               11 (/)
+              STORE_FAST               8 (lib_dir)
+
+249           LOAD_FAST_BORROW         4 (gs_root)
+              LOAD_CONST               4 ('Resource')
+              BINARY_OP               11 (/)
+              STORE_FAST               9 (resource_dir)
+
+250           LOAD_FAST_BORROW         9 (resource_dir)
+              LOAD_CONST               5 ('Init')
+              BINARY_OP               11 (/)
+              STORE_FAST              10 (resource_init)
+
+251           LOAD_FAST_BORROW         9 (resource_dir)
+              LOAD_CONST               6 ('Font')
+              BINARY_OP               11 (/)
+              STORE_FAST              11 (resource_font)
+
+252           LOAD_FAST_BORROW_LOAD_FAST_BORROW 138 (lib_dir, resource_init)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 185 (resource_font, resource_dir)
+              BUILD_TUPLE              4
+              GET_ITER
+      L2:     FOR_ITER                53 (to L4)
+              STORE_FAST              12 (candidate)
+
+253           LOAD_FAST_BORROW        12 (candidate)
+              LOAD_ATTR               17 (exists + NULL|self)
+              CALL                     0
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L3)
+              NOT_TAKEN
+              JUMP_BACKWARD           27 (to L2)
+
+254   L3:     LOAD_FAST_BORROW         7 (lib_entries)
+              LOAD_ATTR               13 (append + NULL|self)
+              LOAD_GLOBAL              9 (str + NULL)
+              LOAD_FAST_BORROW        12 (candidate)
+              CALL                     1
+              CALL                     1
+              POP_TOP
+              JUMP_BACKWARD           55 (to L2)
+
+252   L4:     END_FOR
+              POP_ITER
+
+256           LOAD_FAST_BORROW         2 (env)
+              LOAD_ATTR               11 (get + NULL|self)
+              LOAD_CONST               7 ('GS_LIB')
+              LOAD_CONST               1 ('')
+              CALL                     2
+              STORE_FAST              13 (existing_gs_lib)
+
+257           LOAD_FAST_BORROW        13 (existing_gs_lib)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       18 (to L5)
+              NOT_TAKEN
+
+258           LOAD_FAST_BORROW         7 (lib_entries)
+              LOAD_ATTR               13 (append + NULL|self)
+              LOAD_FAST_BORROW        13 (existing_gs_lib)
+              CALL                     1
+              POP_TOP
+
+260   L5:     LOAD_FAST_BORROW         7 (lib_entries)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       21 (to L6)
+              NOT_TAKEN
+
+261           LOAD_CONST               2 (';')
+              LOAD_ATTR               15 (join + NULL|self)
+              LOAD_FAST_BORROW         7 (lib_entries)
+              CALL                     1
+              LOAD_FAST_BORROW         2 (env)
+              LOAD_CONST               7 ('GS_LIB')
+              STORE_SUBSCR
+
+262   L6:     LOAD_FAST_BORROW         2 (env)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B2A60, file "v2e_pdf_compressor\application\service.py", line 264>:
+264           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('job')
+              LOAD_CONST               2 ('CompressionJob')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('ErrorCode | None')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object _validate_job at 0x000000001B9E8DC0, file "v2e_pdf_compressor\application\service.py", line 264>:
+ 264            RESUME                   0
+
+ 265            LOAD_FAST_BORROW         1 (job)
+                LOAD_ATTR                0 (input_path)
+                LOAD_ATTR                3 (exists + NULL|self)
+                CALL                     0
+                TO_BOOL
+                POP_JUMP_IF_TRUE        17 (to L1)
+                NOT_TAKEN
+
+ 266            LOAD_GLOBAL              4 (ErrorCode)
+                LOAD_ATTR                6 (INPUT_NOT_FOUND)
+                RETURN_VALUE
+
+ 267    L1:     LOAD_FAST_BORROW         1 (job)
+                LOAD_ATTR                0 (input_path)
+                LOAD_ATTR                8 (suffix)
+                LOAD_ATTR               11 (lower + NULL|self)
+                CALL                     0
+                LOAD_CONST               0 ('.pdf')
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       17 (to L2)
+                NOT_TAKEN
+
+ 268            LOAD_GLOBAL              4 (ErrorCode)
+                LOAD_ATTR               12 (INVALID_EXTENSION)
+                RETURN_VALUE
+
+ 269    L2:     LOAD_FAST_BORROW         1 (job)
+                LOAD_ATTR                0 (input_path)
+                LOAD_ATTR               15 (resolve + NULL|self)
+                CALL                     0
+                LOAD_FAST_BORROW         1 (job)
+                LOAD_ATTR               16 (output_path)
+                LOAD_ATTR               15 (resolve + NULL|self)
+                CALL                     0
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       17 (to L3)
+                NOT_TAKEN
+
+ 270            LOAD_GLOBAL              4 (ErrorCode)
+                LOAD_ATTR               18 (SAME_INPUT_OUTPUT)
+                RETURN_VALUE
+
+ 271    L3:     LOAD_FAST_BORROW         1 (job)
+                LOAD_ATTR               16 (output_path)
+                LOAD_ATTR                3 (exists + NULL|self)
+                CALL                     0
+                TO_BOOL
+                POP_JUMP_IF_FALSE       35 (to L4)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         1 (job)
+                LOAD_ATTR               20 (overwrite)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        17 (to L4)
+                NOT_TAKEN
+
+ 272            LOAD_GLOBAL              4 (ErrorCode)
+                LOAD_ATTR               22 (OUTPUT_EXISTS)
+                RETURN_VALUE
+
+ 274    L4:     NOP
+
+ 275    L5:     LOAD_FAST_BORROW         1 (job)
+                LOAD_ATTR               16 (output_path)
+                LOAD_ATTR               24 (parent)
+                LOAD_ATTR               27 (mkdir + NULL|self)
+                LOAD_CONST               1 (True)
+                LOAD_CONST               1 (True)
+                LOAD_CONST               2 (('parents', 'exist_ok'))
+                CALL_KW                  2
+                POP_TOP
+
+ 280    L6:     LOAD_CONST               3 (None)
+                RETURN_VALUE
+
+  --    L7:     PUSH_EXC_INFO
+
+ 276            LOAD_GLOBAL             28 (PermissionError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       20 (to L9)
+                NOT_TAKEN
+                POP_TOP
+
+ 277            LOAD_GLOBAL              4 (ErrorCode)
+                LOAD_ATTR               30 (PERMISSION_DENIED)
+                SWAP                     2
+        L8:     POP_EXCEPT
+                RETURN_VALUE
+
+ 278    L9:     LOAD_GLOBAL             32 (OSError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       20 (to L13)
+       L10:     NOT_TAKEN
+       L11:     POP_TOP
+
+ 279            LOAD_GLOBAL              4 (ErrorCode)
+                LOAD_ATTR               34 (OUTPUT_PARENT_MISSING)
+                SWAP                     2
+       L12:     POP_EXCEPT
+                RETURN_VALUE
+
+ 278   L13:     RERAISE                  0
+
+  --   L14:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L5 to L6 -> L7 [0]
+  L7 to L8 -> L14 [1] lasti
+  L9 to L10 -> L14 [1] lasti
+  L11 to L12 -> L14 [1] lasti
+  L13 to L14 -> L14 [1] lasti
+
+Disassembly of <code object __annotate__ at 0x000000001B8B2B50, file "v2e_pdf_compressor\application\service.py", line 282>:
+282           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('stderr')
+              LOAD_CONST               2 ('str')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('ErrorCode')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object _map_subprocess_error at 0x000000001B9A0580, file "v2e_pdf_compressor\application\service.py", line 282>:
+282           RESUME                   0
+
+283           LOAD_FAST                1 (stderr)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               0 ('')
+      L1:     LOAD_ATTR                1 (lower + NULL|self)
+              CALL                     0
+              STORE_FAST               2 (output)
+
+285           LOAD_CONST               1 ('gs_init.ps')
+              LOAD_FAST_BORROW         2 (output)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_TRUE        15 (to L2)
+              NOT_TAKEN
+
+286           LOAD_CONST               2 ("can't find initialization file")
+              LOAD_FAST_BORROW         2 (output)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_TRUE         8 (to L2)
+              NOT_TAKEN
+
+287           LOAD_CONST               3 ('unable to open the initial device')
+              LOAD_FAST_BORROW         2 (output)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_FALSE       17 (to L3)
+              NOT_TAKEN
+
+289   L2:     LOAD_GLOBAL              2 (ErrorCode)
+              LOAD_ATTR                4 (GHOSTSCRIPT_RUNTIME_INVALID)
+              RETURN_VALUE
+
+290   L3:     LOAD_CONST               4 ('password')
+              LOAD_FAST_BORROW         2 (output)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_FALSE       17 (to L4)
+              NOT_TAKEN
+
+291           LOAD_GLOBAL              2 (ErrorCode)
+              LOAD_ATTR                6 (PDF_PASSWORD_PROTECTED)
+              RETURN_VALUE
+
+292   L4:     LOAD_CONST               5 ('undefined')
+              LOAD_FAST_BORROW         2 (output)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_TRUE        15 (to L5)
+              NOT_TAKEN
+              LOAD_CONST               6 ('syntaxerror')
+              LOAD_FAST_BORROW         2 (output)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_TRUE         8 (to L5)
+              NOT_TAKEN
+              LOAD_CONST               7 ('corrupt')
+              LOAD_FAST_BORROW         2 (output)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_FALSE       17 (to L6)
+              NOT_TAKEN
+
+293   L5:     LOAD_GLOBAL              2 (ErrorCode)
+              LOAD_ATTR                8 (PDF_CORRUPTED)
+              RETURN_VALUE
+
+294   L6:     LOAD_CONST               8 ('permission')
+              LOAD_FAST_BORROW         2 (output)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_TRUE         8 (to L7)
+              NOT_TAKEN
+              LOAD_CONST               9 ('access denied')
+              LOAD_FAST_BORROW         2 (output)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_FALSE       17 (to L8)
+              NOT_TAKEN
+
+295   L7:     LOAD_GLOBAL              2 (ErrorCode)
+              LOAD_ATTR               10 (PERMISSION_DENIED)
+              RETURN_VALUE
+
+296   L8:     LOAD_GLOBAL              2 (ErrorCode)
+              LOAD_ATTR               12 (PROCESS_FAILED)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001BB61F30, file "v2e_pdf_compressor\application\service.py", line 298>:
+298           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('job')
+
+300           LOAD_CONST               2 ('CompressionJob')
+
+298           LOAD_CONST               3 ('error_code')
+
+301           LOAD_CONST               4 ('ErrorCode')
+
+298           LOAD_CONST               5 ('started')
+
+302           LOAD_CONST               6 ('float')
+
+298           LOAD_CONST               7 ('detail')
+
+303           LOAD_CONST               8 ('str | None')
+
+298           LOAD_CONST               9 ('return')
+
+304           LOAD_CONST              10 ('CompressionResult')
+
+298           BUILD_MAP                5
+              RETURN_VALUE
+
+Disassembly of <code object _error_result at 0x000000001B50F0F0, file "v2e_pdf_compressor\application\service.py", line 298>:
+298           RESUME                   0
+
+305           LOAD_GLOBAL              1 (int + NULL)
+              LOAD_GLOBAL              2 (time)
+              LOAD_ATTR                4 (perf_counter)
+              PUSH_NULL
+              CALL                     0
+              LOAD_FAST_BORROW         3 (started)
+              BINARY_OP               10 (-)
+              LOAD_CONST               0 (1000)
+              BINARY_OP                5 (*)
+              CALL                     1
+              STORE_FAST               5 (elapsed_ms)
+
+306           LOAD_GLOBAL              7 (CompressionResult + NULL)
+
+307           LOAD_FAST_BORROW         1 (job)
+              LOAD_ATTR                8 (input_path)
+
+308           LOAD_FAST_BORROW         1 (job)
+              LOAD_ATTR               10 (output_path)
+
+309           LOAD_GLOBAL             12 (CompressionStatus)
+              LOAD_ATTR               14 (FAILED)
+
+310           LOAD_FAST_BORROW         2 (error_code)
+
+311           LOAD_CONST               1 (None)
+
+312           LOAD_CONST               1 (None)
+
+313           LOAD_CONST               1 (None)
+
+314           LOAD_FAST_BORROW         5 (elapsed_ms)
+
+315           LOAD_FAST_BORROW         4 (detail)
+
+306           LOAD_CONST               2 (('input_path', 'output_path', 'status', 'error_code', 'before_mb', 'after_mb', 'reduction_percent', 'elapsed_ms', 'error_detail'))
+              CALL_KW                  9
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001BB62030, file "v2e_pdf_compressor\application\service.py", line 318>:
+318           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('job')
+              LOAD_CONST               2 ('CompressionJob')
+              LOAD_CONST               3 ('started')
+              LOAD_CONST               4 ('float')
+              LOAD_CONST               5 ('return')
+              LOAD_CONST               6 ('CompressionResult')
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object _cancelled_result at 0x000000001B53E330, file "v2e_pdf_compressor\application\service.py", line 318>:
+318           RESUME                   0
+
+319           LOAD_GLOBAL              1 (int + NULL)
+              LOAD_GLOBAL              2 (time)
+              LOAD_ATTR                4 (perf_counter)
+              PUSH_NULL
+              CALL                     0
+              LOAD_FAST_BORROW         2 (started)
+              BINARY_OP               10 (-)
+              LOAD_CONST               0 (1000)
+              BINARY_OP                5 (*)
+              CALL                     1
+              STORE_FAST               3 (elapsed_ms)
+
+320           LOAD_GLOBAL              7 (CompressionResult + NULL)
+
+321           LOAD_FAST_BORROW         1 (job)
+              LOAD_ATTR                8 (input_path)
+
+322           LOAD_FAST_BORROW         1 (job)
+              LOAD_ATTR               10 (output_path)
+
+323           LOAD_GLOBAL             12 (CompressionStatus)
+              LOAD_ATTR               14 (CANCELLED)
+
+324           LOAD_GLOBAL             16 (ErrorCode)
+              LOAD_ATTR               14 (CANCELLED)
+
+325           LOAD_CONST               1 (None)
+
+326           LOAD_CONST               1 (None)
+
+327           LOAD_CONST               1 (None)
+
+328           LOAD_FAST_BORROW         3 (elapsed_ms)
+
+329           LOAD_CONST               2 ('Cancelado pelo usuario.')
+
+320           LOAD_CONST               3 (('input_path', 'output_path', 'status', 'error_code', 'before_mb', 'after_mb', 'reduction_percent', 'elapsed_ms', 'error_detail'))
+              CALL_KW                  9
+              RETURN_VALUE

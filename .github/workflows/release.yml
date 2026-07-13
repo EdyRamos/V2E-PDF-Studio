@@ -1,0 +1,92 @@
+name: Release portable EXE
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  release:
+    runs-on: windows-latest
+    environment: release
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14.6"
+          cache: pip
+          cache-dependency-path: requirements-dev.lock
+      - run: python -m pip install --requirement requirements-dev.lock
+      - run: python -m ruff check src tests
+      - run: python -m mypy
+      - run: python -m pytest
+        env:
+          QT_QPA_PLATFORM: offscreen
+      - name: Configure official update source
+        run: python scripts/configure-update-source.py --repository "${{ github.repository }}"
+      - run: python -m PyInstaller --noconfirm --clean V2E-PDF-Compressor.spec
+      - name: Smoke-test packaged executable
+        shell: pwsh
+        run: |
+          $process = Start-Process .\dist\V2E-PDF-Compressor.exe -ArgumentList '--smoke-test' -Wait -PassThru
+          if ($process.ExitCode -ne 0) { throw "Smoke-test empacotado falhou: $($process.ExitCode)" }
+      - name: Upload unsigned artifact for origin verification
+        id: upload-unsigned
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2e-unsigned-${{ github.ref_name }}
+          path: dist/V2E-PDF-Compressor.exe
+          if-no-files-found: error
+      - name: Submit SignPath signing request
+        if: ${{ vars.SIGNPATH_ENABLED == 'true' }}
+        uses: signpath/github-action-submit-signing-request@v2
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG }}
+          artifact-configuration-slug: ${{ vars.SIGNPATH_ARTIFACT_CONFIGURATION_SLUG }}
+          github-artifact-id: ${{ steps.upload-unsigned.outputs.artifact-id }}
+          wait-for-completion: true
+          output-artifact-directory: signed
+          parameters: |
+            version: "${{ github.ref_name }}"
+      - name: Select signed or unsigned artifact
+        shell: pwsh
+        run: |
+          if ('${{ vars.SIGNPATH_ENABLED }}' -eq 'true') {
+            $signed = Get-ChildItem .\signed -Recurse -Filter V2E-PDF-Compressor.exe | Select-Object -First 1
+            if (-not $signed) { throw 'SignPath nao retornou o executavel assinado.' }
+            Copy-Item $signed.FullName .\dist\V2E-PDF-Compressor.exe -Force
+            'V2E_SIGNATURE_STATUS=signed' >> $env:GITHUB_ENV
+            'V2E_ALLOW_UNSIGNED=false' >> $env:GITHUB_ENV
+          } else {
+            'V2E_SIGNATURE_STATUS=unsigned' >> $env:GITHUB_ENV
+            'V2E_ALLOW_UNSIGNED=true' >> $env:GITHUB_ENV
+          }
+          $version = '${{ github.ref_name }}'.TrimStart('v')
+          "V2E_VERSION=$version" >> $env:GITHUB_ENV
+      - name: Generate manifest and SBOM
+        shell: pwsh
+        run: |
+          python scripts/generate-release-metadata.py --exe dist/V2E-PDF-Compressor.exe --output dist/release-manifest.json --version $env:V2E_VERSION
+          cyclonedx-py requirements requirements.lock --output-file dist/sbom.cdx.json
+      - name: Verify release
+        shell: pwsh
+        run: |
+          if ($env:V2E_ALLOW_UNSIGNED -eq 'true') {
+            .\scripts\verify-release.ps1 -Executable .\dist\V2E-PDF-Compressor.exe -Manifest .\dist\release-manifest.json -AllowUnsigned
+          } else {
+            .\scripts\verify-release.ps1 -Executable .\dist\V2E-PDF-Compressor.exe -Manifest .\dist\release-manifest.json
+          }
+      - name: Publish GitHub release after protected approval
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create '${{ github.ref_name }}' .\dist\V2E-PDF-Compressor.exe .\dist\release-manifest.json .\dist\sbom.cdx.json --verify-tag --generate-notes --title "V2E PDF Studio ${{ github.ref_name }}"

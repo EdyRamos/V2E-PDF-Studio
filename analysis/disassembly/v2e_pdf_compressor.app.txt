@@ -1,0 +1,892 @@
+MODULE: v2e_pdf_compressor.app
+SOURCE FILE: v2e_pdf_compressor\app.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('annotations',))
+              IMPORT_NAME              0 (__future__)
+              IMPORT_FROM              1 (annotations)
+              STORE_NAME               1 (annotations)
+              POP_TOP
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              2 (argparse)
+              STORE_NAME               2 (argparse)
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              3 (json)
+              STORE_NAME               3 (json)
+
+  5           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              4 (logging)
+              STORE_NAME               4 (logging)
+
+  6           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              5 (os)
+              STORE_NAME               5 (os)
+
+  7           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              6 (tempfile)
+              STORE_NAME               6 (tempfile)
+
+  8           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('Path',))
+              IMPORT_NAME              7 (pathlib)
+              IMPORT_FROM              8 (Path)
+              STORE_NAME               8 (Path)
+              POP_TOP
+
+ 10           LOAD_SMALL_INT           0
+              LOAD_CONST               4 (('QApplication',))
+              IMPORT_NAME              9 (PySide6.QtWidgets)
+              IMPORT_FROM             10 (QApplication)
+              STORE_NAME              10 (QApplication)
+              POP_TOP
+
+ 12           LOAD_SMALL_INT           1
+              LOAD_CONST               5 (('PdfCompressionService', 'PdfEditService'))
+              IMPORT_NAME             11 (application)
+              IMPORT_FROM             12 (PdfCompressionService)
+              STORE_NAME              12 (PdfCompressionService)
+              IMPORT_FROM             13 (PdfEditService)
+              STORE_NAME              13 (PdfEditService)
+              POP_TOP
+
+ 13           LOAD_SMALL_INT           1
+              LOAD_CONST               6 (('SettingsRepository',))
+              IMPORT_NAME             14 (config)
+              IMPORT_FROM             15 (SettingsRepository)
+              STORE_NAME              15 (SettingsRepository)
+              POP_TOP
+
+ 14           LOAD_SMALL_INT           1
+              LOAD_CONST               7 (('CompressionJob', 'CompressionProfile', 'CompressionStatus', 'ExportOptions'))
+              IMPORT_NAME             16 (domain)
+              IMPORT_FROM             17 (CompressionJob)
+              STORE_NAME              17 (CompressionJob)
+              IMPORT_FROM             18 (CompressionProfile)
+              STORE_NAME              18 (CompressionProfile)
+              IMPORT_FROM             19 (CompressionStatus)
+              STORE_NAME              19 (CompressionStatus)
+              IMPORT_FROM             20 (ExportOptions)
+              STORE_NAME              20 (ExportOptions)
+              POP_TOP
+
+ 15           LOAD_SMALL_INT           1
+              LOAD_CONST               8 (('configure_logging',))
+              IMPORT_NAME             21 (infra)
+              IMPORT_FROM             22 (configure_logging)
+              STORE_NAME              22 (configure_logging)
+              POP_TOP
+
+ 16           LOAD_SMALL_INT           1
+              LOAD_CONST               9 (('GhostscriptLocator',))
+              IMPORT_NAME             23 (infra.ghostscript)
+              IMPORT_FROM             24 (GhostscriptLocator)
+              STORE_NAME              24 (GhostscriptLocator)
+              POP_TOP
+
+ 17           LOAD_SMALL_INT           1
+              LOAD_CONST              10 (('MainWindow',))
+              IMPORT_NAME             25 (ui)
+              IMPORT_FROM             26 (MainWindow)
+              STORE_NAME              26 (MainWindow)
+              POP_TOP
+
+ 20           LOAD_CONST              20 ((None,))
+              LOAD_CONST              11 (<code object __annotate__ at 0x000000001B8B0F30, file "v2e_pdf_compressor\app.py", line 20>)
+              MAKE_FUNCTION
+              LOAD_CONST              12 (<code object _parse_args at 0x000000001B555E30, file "v2e_pdf_compressor\app.py", line 20>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              27 (_parse_args)
+
+ 35           LOAD_CONST              13 (<code object __annotate__ at 0x000000001B8B21F0, file "v2e_pdf_compressor\app.py", line 35>)
+              MAKE_FUNCTION
+              LOAD_CONST              14 (<code object _run_smoke_test at 0x000000001B9BD590, file "v2e_pdf_compressor\app.py", line 35>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              28 (_run_smoke_test)
+
+ 58           LOAD_CONST              15 (<code object __annotate__ at 0x000000001B8B23D0, file "v2e_pdf_compressor\app.py", line 58>)
+              MAKE_FUNCTION
+              LOAD_CONST              16 (<code object _run_full_smoke_test at 0x000000001BA56600, file "v2e_pdf_compressor\app.py", line 58>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              29 (_run_full_smoke_test)
+
+129           LOAD_CONST              20 ((None,))
+              LOAD_CONST              17 (<code object __annotate__ at 0x000000001B8B24C0, file "v2e_pdf_compressor\app.py", line 129>)
+              MAKE_FUNCTION
+              LOAD_CONST              18 (<code object main at 0x000000001B9A6740, file "v2e_pdf_compressor\app.py", line 129>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              30 (main)
+
+152           LOAD_NAME               31 (__name__)
+              LOAD_CONST              19 ('__main__')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE       14 (to L1)
+              NOT_TAKEN
+
+153           LOAD_NAME               32 (SystemExit)
+              PUSH_NULL
+              LOAD_NAME               30 (main)
+              PUSH_NULL
+              CALL                     0
+              CALL                     1
+              RAISE_VARARGS            1
+
+152   L1:     LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B0F30, file "v2e_pdf_compressor\app.py", line 20>:
+ 20           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('argv')
+              LOAD_CONST               2 ('list[str] | None')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('argparse.Namespace')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object _parse_args at 0x000000001B555E30, file "v2e_pdf_compressor\app.py", line 20>:
+ 20           RESUME                   0
+
+ 21           LOAD_GLOBAL              0 (argparse)
+              LOAD_ATTR                2 (ArgumentParser)
+              PUSH_NULL
+              LOAD_CONST               0 ('v2e-pdf-compressor')
+              LOAD_CONST               1 (('prog',))
+              CALL_KW                  1
+              STORE_FAST               1 (parser)
+
+ 22           LOAD_FAST_BORROW         1 (parser)
+              LOAD_ATTR                5 (add_argument + NULL|self)
+
+ 23           LOAD_CONST               2 ('--smoke-test')
+
+ 24           LOAD_CONST               3 ('store_true')
+
+ 25           LOAD_CONST               4 ('Executa verificacoes de ambiente e finaliza sem abrir UI.')
+
+ 22           LOAD_CONST               5 (('action', 'help'))
+              CALL_KW                  3
+              POP_TOP
+
+ 27           LOAD_FAST_BORROW         1 (parser)
+              LOAD_ATTR                5 (add_argument + NULL|self)
+
+ 28           LOAD_CONST               6 ('--full-smoke-test')
+
+ 29           LOAD_CONST               3 ('store_true')
+
+ 30           LOAD_CONST               7 ('Valida UI offscreen, edicao PDF e compressao Ghostscript sem abrir janela.')
+
+ 27           LOAD_CONST               5 (('action', 'help'))
+              CALL_KW                  3
+              POP_TOP
+
+ 32           LOAD_FAST_BORROW         1 (parser)
+              LOAD_ATTR                7 (parse_args + NULL|self)
+              LOAD_FAST_BORROW         0 (argv)
+              CALL                     1
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B21F0, file "v2e_pdf_compressor\app.py", line 35>:
+ 35           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('logger')
+              LOAD_CONST               2 ('logging.Logger')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('int')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object _run_smoke_test at 0x000000001B9BD590, file "v2e_pdf_compressor\app.py", line 35>:
+  35           RESUME                   0
+
+  36           LOAD_GLOBAL              1 (SettingsRepository + NULL)
+               CALL                     0
+               STORE_FAST               1 (settings_repo)
+
+  37           LOAD_FAST_BORROW         1 (settings_repo)
+               LOAD_ATTR                3 (load + NULL|self)
+               CALL                     0
+               STORE_FAST               2 (settings)
+
+  38           LOAD_GLOBAL              5 (GhostscriptLocator + NULL)
+               CALL                     0
+               STORE_FAST               3 (locator)
+
+  41           LOAD_CONST               0 ('settings_file')
+               LOAD_GLOBAL              7 (str + NULL)
+               LOAD_FAST_BORROW         1 (settings_repo)
+               LOAD_ATTR                8 (settings_file)
+               CALL                     1
+
+  42           LOAD_CONST               1 ('default_profile')
+               LOAD_FAST_BORROW         2 (settings)
+               LOAD_ATTR               10 (default_profile)
+
+  43           LOAD_CONST               2 ('overwrite_policy')
+               LOAD_FAST_BORROW         2 (settings)
+               LOAD_ATTR               12 (overwrite_policy)
+
+  40           BUILD_MAP                3
+               STORE_FAST               4 (payload)
+
+  46           NOP
+
+  47   L1:     LOAD_GLOBAL              7 (str + NULL)
+               LOAD_FAST_BORROW         3 (locator)
+               LOAD_ATTR               15 (resolve_executable + NULL|self)
+               CALL                     0
+               CALL                     1
+               LOAD_FAST_BORROW         4 (payload)
+               LOAD_CONST               3 ('ghostscript_executable')
+               STORE_SUBSCR
+
+  48           LOAD_CONST               4 (True)
+               LOAD_FAST_BORROW         4 (payload)
+               LOAD_CONST               5 ('ghostscript_available')
+               STORE_SUBSCR
+
+  54   L2:     LOAD_GLOBAL             21 (print + NULL)
+               LOAD_GLOBAL             22 (json)
+               LOAD_ATTR               24 (dumps)
+               PUSH_NULL
+               LOAD_FAST_BORROW         4 (payload)
+               LOAD_CONST               7 (False)
+               LOAD_CONST              10 (('ensure_ascii',))
+               CALL_KW                  2
+               CALL                     1
+               POP_TOP
+
+  55           LOAD_SMALL_INT           0
+               RETURN_VALUE
+
+  --   L3:     PUSH_EXC_INFO
+
+  49           LOAD_GLOBAL             16 (FileNotFoundError)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE       48 (to L7)
+               NOT_TAKEN
+               STORE_FAST               5 (exc)
+
+  50   L4:     LOAD_FAST                0 (logger)
+               LOAD_ATTR               19 (warning + NULL|self)
+               LOAD_CONST               6 ('Ghostscript nao encontrado no smoke-test: %s')
+               LOAD_FAST                5 (exc)
+               CALL                     2
+               POP_TOP
+
+  51           LOAD_CONST               7 (False)
+               LOAD_FAST                4 (payload)
+               LOAD_CONST               5 ('ghostscript_available')
+               STORE_SUBSCR
+
+  52           LOAD_GLOBAL              7 (str + NULL)
+               LOAD_FAST                5 (exc)
+               CALL                     1
+               LOAD_FAST                4 (payload)
+               LOAD_CONST               8 ('ghostscript_error')
+               STORE_SUBSCR
+       L5:     POP_EXCEPT
+               LOAD_CONST               9 (None)
+               STORE_FAST               5 (exc)
+               DELETE_FAST              5 (exc)
+               JUMP_BACKWARD_NO_INTERRUPT 88 (to L2)
+
+  --   L6:     LOAD_CONST               9 (None)
+               STORE_FAST               5 (exc)
+               DELETE_FAST              5 (exc)
+               RERAISE                  1
+
+  49   L7:     RERAISE                  0
+
+  --   L8:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [0]
+  L3 to L4 -> L8 [1] lasti
+  L4 to L5 -> L6 [1] lasti
+  L6 to L8 -> L8 [1] lasti
+
+Disassembly of <code object __annotate__ at 0x000000001B8B23D0, file "v2e_pdf_compressor\app.py", line 58>:
+ 58           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('logger')
+              LOAD_CONST               2 ('logging.Logger')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('int')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object _run_full_smoke_test at 0x000000001BA56600, file "v2e_pdf_compressor\app.py", line 58>:
+  58            RESUME                   0
+
+  59            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              0 (fitz)
+                STORE_FAST               1 (fitz)
+
+  61            LOAD_GLOBAL              2 (os)
+                LOAD_ATTR                4 (environ)
+                LOAD_ATTR                7 (setdefault + NULL|self)
+                LOAD_CONST               2 ('QT_QPA_PLATFORM')
+                LOAD_CONST               3 ('offscreen')
+                CALL                     2
+                POP_TOP
+
+  62            LOAD_GLOBAL              9 (GhostscriptLocator + NULL)
+                CALL                     0
+                STORE_FAST               2 (locator)
+
+  63            LOAD_GLOBAL             11 (PdfEditService + NULL)
+                CALL                     0
+                STORE_FAST               3 (edit_service)
+
+  64            LOAD_GLOBAL             13 (PdfCompressionService + NULL)
+                LOAD_FAST_BORROW         2 (locator)
+                LOAD_GLOBAL             14 (logging)
+                LOAD_ATTR               16 (getLogger)
+                PUSH_NULL
+                LOAD_CONST               4 ('v2e.service')
+                CALL                     1
+                LOAD_CONST               5 (('locator', 'logger'))
+                CALL_KW                  2
+                STORE_FAST               4 (compression_service)
+
+  66            LOAD_GLOBAL             18 (tempfile)
+                LOAD_ATTR               20 (TemporaryDirectory)
+                PUSH_NULL
+                CALL                     0
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L1:     STORE_FAST               5 (temp_dir)
+
+  67            LOAD_GLOBAL             23 (Path + NULL)
+                LOAD_FAST_BORROW         5 (temp_dir)
+                CALL                     1
+                STORE_FAST               6 (temp_root)
+
+  68            LOAD_FAST_BORROW         6 (temp_root)
+                LOAD_CONST               6 ('full_smoke_source.pdf')
+                BINARY_OP               11 (/)
+                STORE_FAST               7 (source_path)
+
+  69            LOAD_FAST_BORROW         6 (temp_root)
+                LOAD_CONST               7 ('full_smoke_edited.pdf')
+                BINARY_OP               11 (/)
+                STORE_FAST               8 (edited_path)
+
+  70            LOAD_FAST_BORROW         6 (temp_root)
+                LOAD_CONST               8 ('full_smoke_compressed.pdf')
+                BINARY_OP               11 (/)
+                STORE_FAST               9 (compressed_path)
+
+  72            LOAD_FAST_BORROW         1 (fitz)
+                LOAD_ATTR               25 (open + NULL|self)
+                CALL                     0
+                STORE_FAST              10 (document)
+
+  73            LOAD_GLOBAL             27 (range + NULL)
+                LOAD_SMALL_INT           2
+                CALL                     1
+                GET_ITER
+        L2:     FOR_ITER                50 (to L3)
+                STORE_FAST              11 (page_number)
+
+  74            LOAD_FAST_BORROW        10 (document)
+                LOAD_ATTR               29 (new_page + NULL|self)
+                LOAD_CONST               9 (300)
+                LOAD_CONST               9 (300)
+                LOAD_CONST              10 (('width', 'height'))
+                CALL_KW                  2
+                STORE_FAST              12 (page)
+
+  75            LOAD_FAST_BORROW        12 (page)
+                LOAD_ATTR               31 (insert_text + NULL|self)
+                LOAD_CONST              31 ((40, 120))
+                LOAD_CONST              11 ('V2E full smoke ')
+                LOAD_FAST_BORROW        11 (page_number)
+                LOAD_SMALL_INT           1
+                BINARY_OP                0 (+)
+                FORMAT_SIMPLE
+                BUILD_STRING             2
+                CALL                     2
+                POP_TOP
+                JUMP_BACKWARD           52 (to L2)
+
+  73    L3:     END_FOR
+                POP_ITER
+
+  76            LOAD_FAST_BORROW        10 (document)
+                LOAD_ATTR               33 (save + NULL|self)
+                LOAD_FAST_BORROW         7 (source_path)
+                CALL                     1
+                POP_TOP
+
+  77            LOAD_FAST_BORROW        10 (document)
+                LOAD_ATTR               35 (close + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  79            LOAD_GLOBAL             36 (QApplication)
+                LOAD_ATTR               38 (instance)
+                PUSH_NULL
+                CALL                     0
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        12 (to L6)
+        L4:     NOT_TAKEN
+        L5:     POP_TOP
+                LOAD_GLOBAL             37 (QApplication + NULL)
+                BUILD_LIST               0
+                CALL                     1
+        L6:     STORE_FAST              13 (qt_app)
+
+  80            LOAD_GLOBAL             41 (MainWindow + NULL)
+
+  81            LOAD_FAST_BORROW         3 (edit_service)
+
+  82            LOAD_FAST_BORROW         4 (compression_service)
+
+  83            LOAD_GLOBAL             43 (SettingsRepository + NULL)
+                CALL                     0
+
+  80            LOAD_CONST              12 (('edit_service', 'compression_service', 'settings_repository'))
+                CALL_KW                  3
+                STORE_FAST              14 (window)
+
+  85            LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               45 (load_pdf + NULL|self)
+                LOAD_FAST_BORROW         7 (source_path)
+                CALL                     1
+                POP_TOP
+
+  86            LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               46 (session)
+                POP_JUMP_IF_NONE        32 (to L7)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               48 (thumbnail_list)
+                LOAD_ATTR               51 (count + NULL|self)
+                CALL                     0
+                LOAD_SMALL_INT           2
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       12 (to L8)
+                NOT_TAKEN
+
+  87    L7:     LOAD_GLOBAL             53 (RuntimeError + NULL)
+                LOAD_CONST              13 ('UI nao carregou miniatura do PDF de smoke-test.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+  88    L8:     LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               54 (preview)
+                LOAD_ATTR               57 (pixmap + NULL|self)
+                CALL                     0
+                LOAD_ATTR               59 (isNull + NULL|self)
+                CALL                     0
+                TO_BOOL
+                POP_JUMP_IF_FALSE       12 (to L11)
+        L9:     NOT_TAKEN
+
+  89   L10:     LOAD_GLOBAL             53 (RuntimeError + NULL)
+                LOAD_CONST              14 ('UI nao renderizou preview do PDF de smoke-test.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+  91   L11:     LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               46 (session)
+                LOAD_ATTR               60 (pages)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     12 (page)
+                SWAP                     2
+       L12:     BUILD_LIST               0
+                SWAP                     2
+       L13:     FOR_ITER                14 (to L14)
+                STORE_FAST_LOAD_FAST   204 (page, page)
+                LOAD_ATTR               62 (page_id)
+                LIST_APPEND              2
+                JUMP_BACKWARD           16 (to L13)
+       L14:     END_FOR
+                POP_ITER
+       L15:     STORE_FAST              15 (original_order)
+                STORE_FAST              12 (page)
+
+  92            LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               48 (thumbnail_list)
+                LOAD_ATTR               65 (takeItem + NULL|self)
+                LOAD_SMALL_INT           1
+                CALL                     1
+                STORE_FAST              16 (moved_item)
+
+  93            LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               48 (thumbnail_list)
+                LOAD_ATTR               67 (insertItem + NULL|self)
+                LOAD_SMALL_INT           0
+                LOAD_FAST_BORROW        16 (moved_item)
+                CALL                     2
+                POP_TOP
+
+  94            LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               48 (thumbnail_list)
+                LOAD_ATTR               69 (setCurrentRow + NULL|self)
+                LOAD_SMALL_INT           0
+                CALL                     1
+                POP_TOP
+
+  95            LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               71 (sync_session_order_from_ui + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  96            LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               46 (session)
+                LOAD_ATTR               60 (pages)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     12 (page)
+                SWAP                     2
+       L16:     BUILD_LIST               0
+                SWAP                     2
+       L17:     FOR_ITER                14 (to L18)
+                STORE_FAST_LOAD_FAST   204 (page, page)
+                LOAD_ATTR               62 (page_id)
+                LIST_APPEND              2
+                JUMP_BACKWARD           16 (to L17)
+       L18:     END_FOR
+                POP_ITER
+       L19:     STORE_FAST              17 (reordered)
+                STORE_FAST              12 (page)
+
+  97            LOAD_FAST_BORROW        17 (reordered)
+                LOAD_FAST_BORROW        15 (original_order)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW        15 (original_order)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                BUILD_LIST               2
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       12 (to L20)
+                NOT_TAKEN
+
+  98            LOAD_GLOBAL             53 (RuntimeError + NULL)
+                LOAD_CONST              15 ('Reordenacao de paginas falhou no smoke-test.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 100   L20:     LOAD_FAST_BORROW         3 (edit_service)
+                LOAD_ATTR               73 (add_blank_page + NULL|self)
+                LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               46 (session)
+                CALL                     1
+                POP_TOP
+
+ 101            LOAD_FAST_BORROW         3 (edit_service)
+                LOAD_ATTR               75 (export_document + NULL|self)
+                LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               46 (session)
+                LOAD_GLOBAL             77 (ExportOptions + NULL)
+                LOAD_FAST_BORROW         8 (edited_path)
+                LOAD_CONST              16 (True)
+                LOAD_CONST              17 (('output_path', 'overwrite'))
+                CALL_KW                  2
+                CALL                     2
+                POP_TOP
+
+ 103            LOAD_GLOBAL             79 (CompressionJob + NULL)
+
+ 104            LOAD_FAST_BORROW         8 (edited_path)
+
+ 105            LOAD_FAST_BORROW         9 (compressed_path)
+
+ 106            LOAD_GLOBAL             80 (CompressionProfile)
+                LOAD_ATTR               82 (EBOOK)
+
+ 107            LOAD_CONST              16 (True)
+
+ 108            LOAD_CONST              16 (True)
+
+ 103            LOAD_CONST              18 (('input_path', 'output_path', 'profile', 'overwrite', 'optimize'))
+                CALL_KW                  5
+                STORE_FAST              18 (job)
+
+ 110            LOAD_FAST_BORROW         4 (compression_service)
+                LOAD_ATTR               85 (compress + NULL|self)
+                LOAD_FAST_BORROW        18 (job)
+                CALL                     1
+                STORE_FAST              19 (result)
+
+ 111            LOAD_FAST_BORROW        19 (result)
+                LOAD_ATTR               86 (status)
+                LOAD_GLOBAL             88 (CompressionStatus)
+                LOAD_ATTR               90 (SUCCESS)
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       38 (to L21)
+                NOT_TAKEN
+
+ 112            LOAD_GLOBAL             53 (RuntimeError + NULL)
+                LOAD_CONST              19 ('Compressao falhou no smoke-test: ')
+                LOAD_FAST_BORROW        19 (result)
+                LOAD_ATTR               92 (error_code)
+                FORMAT_SIMPLE
+                LOAD_CONST              20 (' ')
+                LOAD_FAST_BORROW        19 (result)
+                LOAD_ATTR               94 (error_detail)
+                FORMAT_SIMPLE
+                BUILD_STRING             4
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 115   L21:     LOAD_CONST              21 ('ui_loaded')
+                LOAD_CONST              16 (True)
+
+ 116            LOAD_CONST              22 ('thumbnail_count')
+                LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               48 (thumbnail_list)
+                LOAD_ATTR               51 (count + NULL|self)
+                CALL                     0
+
+ 117            LOAD_CONST              23 ('page_reorder_ok')
+                LOAD_CONST              16 (True)
+
+ 118            LOAD_CONST              24 ('session_page_count')
+                LOAD_FAST_BORROW        14 (window)
+                LOAD_ATTR               46 (session)
+                LOAD_ATTR               96 (page_count)
+
+ 119            LOAD_CONST              25 ('edited_pdf_exists')
+                LOAD_FAST_BORROW         8 (edited_path)
+                LOAD_ATTR               99 (exists + NULL|self)
+                CALL                     0
+
+ 120            LOAD_CONST              26 ('compression_status')
+                LOAD_FAST_BORROW        19 (result)
+                LOAD_ATTR               86 (status)
+                LOAD_ATTR              100 (value)
+
+ 121            LOAD_CONST              27 ('ghostscript_executable')
+                LOAD_GLOBAL            103 (str + NULL)
+                LOAD_FAST_BORROW         2 (locator)
+                LOAD_ATTR              105 (resolve_executable + NULL|self)
+                CALL                     0
+                CALL                     1
+
+ 114            BUILD_MAP                7
+                STORE_FAST              20 (payload)
+
+ 123            LOAD_GLOBAL            107 (print + NULL)
+                LOAD_GLOBAL            108 (json)
+                LOAD_ATTR              110 (dumps)
+                PUSH_NULL
+                LOAD_FAST_BORROW        20 (payload)
+                LOAD_CONST              28 (False)
+                LOAD_CONST              29 (('ensure_ascii',))
+                CALL_KW                  2
+                CALL                     1
+                POP_TOP
+
+ 124            LOAD_FAST_BORROW        13 (qt_app)
+                LOAD_ATTR              113 (processEvents + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  66   L22:     LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+
+ 125   L23:     LOAD_FAST_BORROW         0 (logger)
+                LOAD_ATTR              115 (info + NULL|self)
+                LOAD_CONST              30 ('Full smoke-test concluido com sucesso.')
+                CALL                     1
+                POP_TOP
+
+ 126            LOAD_SMALL_INT           0
+                RETURN_VALUE
+
+  --   L24:     SWAP                     2
+                POP_TOP
+
+  91            SWAP                     2
+                STORE_FAST              12 (page)
+                RERAISE                  0
+
+  --   L25:     SWAP                     2
+                POP_TOP
+
+  96            SWAP                     2
+                STORE_FAST              12 (page)
+                RERAISE                  0
+
+  66   L26:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L27)
+                NOT_TAKEN
+                RERAISE                  2
+       L27:     POP_TOP
+       L28:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 45 (to L23)
+
+  --   L29:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L26 [2] lasti
+  L5 to L9 -> L26 [2] lasti
+  L10 to L12 -> L26 [2] lasti
+  L12 to L15 -> L24 [4]
+  L15 to L16 -> L26 [2] lasti
+  L16 to L19 -> L25 [4]
+  L19 to L22 -> L26 [2] lasti
+  L24 to L26 -> L26 [2] lasti
+  L26 to L28 -> L29 [4] lasti
+
+Disassembly of <code object __annotate__ at 0x000000001B8B24C0, file "v2e_pdf_compressor\app.py", line 129>:
+129           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('argv')
+              LOAD_CONST               2 ('list[str] | None')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('int')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object main at 0x000000001B9A6740, file "v2e_pdf_compressor\app.py", line 129>:
+129           RESUME                   0
+
+130           LOAD_GLOBAL              1 (_parse_args + NULL)
+              LOAD_FAST_BORROW         0 (argv)
+              CALL                     1
+              STORE_FAST               1 (args)
+
+131           LOAD_GLOBAL              3 (configure_logging + NULL)
+              CALL                     0
+              STORE_FAST               2 (logger)
+
+133           LOAD_FAST_BORROW         1 (args)
+              LOAD_ATTR                4 (smoke_test)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       12 (to L1)
+              NOT_TAKEN
+
+134           LOAD_GLOBAL              7 (_run_smoke_test + NULL)
+              LOAD_FAST_BORROW         2 (logger)
+              CALL                     1
+              RETURN_VALUE
+
+135   L1:     LOAD_FAST_BORROW         1 (args)
+              LOAD_ATTR                8 (full_smoke_test)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       12 (to L2)
+              NOT_TAKEN
+
+136           LOAD_GLOBAL             11 (_run_full_smoke_test + NULL)
+              LOAD_FAST_BORROW         2 (logger)
+              CALL                     1
+              RETURN_VALUE
+
+138   L2:     LOAD_GLOBAL             13 (SettingsRepository + NULL)
+              CALL                     0
+              STORE_FAST               3 (settings_repo)
+
+139           LOAD_GLOBAL             15 (GhostscriptLocator + NULL)
+              CALL                     0
+              STORE_FAST               4 (locator)
+
+140           LOAD_GLOBAL             17 (PdfCompressionService + NULL)
+              LOAD_FAST_BORROW         4 (locator)
+              LOAD_GLOBAL             18 (logging)
+              LOAD_ATTR               20 (getLogger)
+              PUSH_NULL
+              LOAD_CONST               0 ('v2e.service')
+              CALL                     1
+              LOAD_CONST               1 (('locator', 'logger'))
+              CALL_KW                  2
+              STORE_FAST               5 (service)
+
+141           LOAD_GLOBAL             22 (QApplication)
+              LOAD_ATTR               24 (instance)
+              PUSH_NULL
+              CALL                     0
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        12 (to L3)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_GLOBAL             23 (QApplication + NULL)
+              BUILD_LIST               0
+              CALL                     1
+      L3:     STORE_FAST               6 (qt_app)
+
+142           LOAD_GLOBAL             27 (MainWindow + NULL)
+
+143           LOAD_GLOBAL             29 (PdfEditService + NULL)
+              CALL                     0
+
+144           LOAD_FAST_BORROW         5 (service)
+
+145           LOAD_FAST_BORROW         3 (settings_repo)
+
+142           LOAD_CONST               2 (('edit_service', 'compression_service', 'settings_repository'))
+              CALL_KW                  3
+              STORE_FAST               7 (window)
+
+147           LOAD_FAST_BORROW         7 (window)
+              LOAD_ATTR               31 (show + NULL|self)
+              CALL                     0
+              POP_TOP
+
+148           LOAD_FAST_BORROW         6 (qt_app)
+              LOAD_ATTR               33 (exec + NULL|self)
+              CALL                     0
+              POP_TOP
+
+149           LOAD_SMALL_INT           0
+              RETURN_VALUE

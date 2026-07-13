@@ -1,0 +1,179 @@
+MODULE: v2e_pdf_compressor.infra.logging_config
+SOURCE FILE: v2e_pdf_compressor\infra\logging_config.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('annotations',))
+              IMPORT_NAME              0 (__future__)
+              IMPORT_FROM              1 (annotations)
+              STORE_NAME               1 (annotations)
+              POP_TOP
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              2 (logging)
+              STORE_NAME               2 (logging)
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('RotatingFileHandler',))
+              IMPORT_NAME              3 (logging.handlers)
+              IMPORT_FROM              4 (RotatingFileHandler)
+              STORE_NAME               4 (RotatingFileHandler)
+              POP_TOP
+
+  5           LOAD_SMALL_INT           0
+              LOAD_CONST               4 (('Path',))
+              IMPORT_NAME              5 (pathlib)
+              IMPORT_FROM              6 (Path)
+              STORE_NAME               6 (Path)
+              POP_TOP
+
+  7           LOAD_SMALL_INT           2
+              LOAD_CONST               5 (('APP_LOG_DIR', 'ensure_app_dirs'))
+              IMPORT_NAME              7 (config)
+              IMPORT_FROM              8 (APP_LOG_DIR)
+              STORE_NAME               8 (APP_LOG_DIR)
+              IMPORT_FROM              9 (ensure_app_dirs)
+              STORE_NAME               9 (ensure_app_dirs)
+              POP_TOP
+
+ 10           LOAD_CONST               8 ((None,))
+              LOAD_CONST               6 (<code object __annotate__ at 0x000000001B8B26A0, file "v2e_pdf_compressor\infra\logging_config.py", line 10>)
+              MAKE_FUNCTION
+              LOAD_CONST               7 (<code object configure_logging at 0x000000001B63CCB0, file "v2e_pdf_compressor\infra\logging_config.py", line 10>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              10 (configure_logging)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B26A0, file "v2e_pdf_compressor\infra\logging_config.py", line 10>:
+ 10           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('log_file')
+              LOAD_CONST               2 ('Path | None')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ('logging.Logger')
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object configure_logging at 0x000000001B63CCB0, file "v2e_pdf_compressor\infra\logging_config.py", line 10>:
+ 10           RESUME                   0
+
+ 11           LOAD_GLOBAL              1 (ensure_app_dirs + NULL)
+              CALL                     0
+              POP_TOP
+
+ 12           LOAD_FAST                0 (log_file)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        14 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_GLOBAL              2 (APP_LOG_DIR)
+              LOAD_CONST               0 ('app.log')
+              BINARY_OP               11 (/)
+      L1:     STORE_FAST               1 (target_file)
+
+ 13           LOAD_FAST_BORROW         1 (target_file)
+              LOAD_ATTR                4 (parent)
+              LOAD_ATTR                7 (mkdir + NULL|self)
+              LOAD_CONST               1 (True)
+              LOAD_CONST               1 (True)
+              LOAD_CONST               2 (('parents', 'exist_ok'))
+              CALL_KW                  2
+              POP_TOP
+
+ 15           LOAD_GLOBAL              8 (logging)
+              LOAD_ATTR               10 (getLogger)
+              PUSH_NULL
+              LOAD_CONST               3 ('v2e')
+              CALL                     1
+              STORE_FAST               2 (logger)
+
+ 16           LOAD_FAST_BORROW         2 (logger)
+              LOAD_ATTR               13 (setLevel + NULL|self)
+              LOAD_GLOBAL              8 (logging)
+              LOAD_ATTR               14 (INFO)
+              CALL                     1
+              POP_TOP
+
+ 17           LOAD_CONST               4 (False)
+              LOAD_FAST_BORROW         2 (logger)
+              STORE_ATTR               8 (propagate)
+
+ 19           LOAD_FAST_BORROW         2 (logger)
+              LOAD_ATTR               18 (handlers)
+              TO_BOOL
+              POP_JUMP_IF_FALSE        3 (to L2)
+              NOT_TAKEN
+
+ 20           LOAD_FAST_BORROW         2 (logger)
+              RETURN_VALUE
+
+ 22   L2:     LOAD_GLOBAL              8 (logging)
+              LOAD_ATTR               20 (Formatter)
+              PUSH_NULL
+
+ 23           LOAD_CONST               5 ('%(asctime)s | %(levelname)s | %(name)s | %(message)s')
+
+ 24           LOAD_CONST               6 ('%Y-%m-%d %H:%M:%S')
+
+ 22           LOAD_CONST               7 (('fmt', 'datefmt'))
+              CALL_KW                  2
+              STORE_FAST               3 (formatter)
+
+ 27           LOAD_GLOBAL             23 (RotatingFileHandler + NULL)
+
+ 28           LOAD_FAST_BORROW         1 (target_file)
+
+ 29           LOAD_CONST               8 (1000000)
+
+ 30           LOAD_SMALL_INT           5
+
+ 31           LOAD_CONST               9 ('utf-8')
+
+ 27           LOAD_CONST              10 (('maxBytes', 'backupCount', 'encoding'))
+              CALL_KW                  4
+              STORE_FAST               4 (file_handler)
+
+ 33           LOAD_FAST_BORROW         4 (file_handler)
+              LOAD_ATTR               25 (setFormatter + NULL|self)
+              LOAD_FAST_BORROW         3 (formatter)
+              CALL                     1
+              POP_TOP
+
+ 34           LOAD_FAST_BORROW         2 (logger)
+              LOAD_ATTR               27 (addHandler + NULL|self)
+              LOAD_FAST_BORROW         4 (file_handler)
+              CALL                     1
+              POP_TOP
+
+ 36           LOAD_GLOBAL              8 (logging)
+              LOAD_ATTR               28 (StreamHandler)
+              PUSH_NULL
+              CALL                     0
+              STORE_FAST               5 (stream_handler)
+
+ 37           LOAD_FAST_BORROW         5 (stream_handler)
+              LOAD_ATTR               25 (setFormatter + NULL|self)
+              LOAD_FAST_BORROW         3 (formatter)
+              CALL                     1
+              POP_TOP
+
+ 38           LOAD_FAST_BORROW         2 (logger)
+              LOAD_ATTR               27 (addHandler + NULL|self)
+              LOAD_FAST_BORROW         5 (stream_handler)
+              CALL                     1
+              POP_TOP
+
+ 39           LOAD_FAST_BORROW         2 (logger)
+              RETURN_VALUE

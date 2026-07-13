@@ -1,0 +1,109 @@
+MODULE: v2e_pdf_compressor.config.paths
+SOURCE FILE: v2e_pdf_compressor\config\paths.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('annotations',))
+              IMPORT_NAME              0 (__future__)
+              IMPORT_FROM              1 (annotations)
+              STORE_NAME               1 (annotations)
+              POP_TOP
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (None)
+              IMPORT_NAME              2 (os)
+              STORE_NAME               2 (os)
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('Path',))
+              IMPORT_NAME              3 (pathlib)
+              IMPORT_FROM              4 (Path)
+              STORE_NAME               4 (Path)
+              POP_TOP
+
+  7           LOAD_CONST               4 ('V2ECompressor')
+              STORE_NAME               5 (APP_NAME)
+
+  8           LOAD_NAME                4 (Path)
+              PUSH_NULL
+
+  9           LOAD_NAME                2 (os)
+              LOAD_ATTR               12 (environ)
+              LOAD_ATTR               15 (get + NULL|self)
+              LOAD_CONST               5 ('LOCALAPPDATA')
+              LOAD_NAME                4 (Path)
+              LOAD_ATTR               16 (home)
+              PUSH_NULL
+              CALL                     0
+              LOAD_CONST               6 ('AppData')
+              BINARY_OP               11 (/)
+              LOAD_CONST               7 ('Local')
+              BINARY_OP               11 (/)
+              CALL                     2
+
+  8           CALL                     1
+
+ 10           LOAD_ATTR               19 (expanduser + NULL|self)
+              CALL                     0
+
+  8           STORE_NAME              10 (LOCAL_APPDATA)
+
+ 11           LOAD_NAME               10 (LOCAL_APPDATA)
+              LOAD_NAME                5 (APP_NAME)
+              BINARY_OP               11 (/)
+              STORE_NAME              11 (APP_DATA_DIR)
+
+ 12           LOAD_NAME               11 (APP_DATA_DIR)
+              LOAD_CONST               8 ('logs')
+              BINARY_OP               11 (/)
+              STORE_NAME              12 (APP_LOG_DIR)
+
+ 13           LOAD_NAME               11 (APP_DATA_DIR)
+              LOAD_CONST               9 ('settings.json')
+              BINARY_OP               11 (/)
+              STORE_NAME              13 (SETTINGS_FILE)
+
+ 16           LOAD_CONST              10 (<code object __annotate__ at 0x000000001B8B24C0, file "v2e_pdf_compressor\config\paths.py", line 16>)
+              MAKE_FUNCTION
+              LOAD_CONST              11 (<code object ensure_app_dirs at 0x000000001B8C0DF0, file "v2e_pdf_compressor\config\paths.py", line 16>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              14 (ensure_app_dirs)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B24C0, file "v2e_pdf_compressor\config\paths.py", line 16>:
+ 16           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_CONST               2 ('None')
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object ensure_app_dirs at 0x000000001B8C0DF0, file "v2e_pdf_compressor\config\paths.py", line 16>:
+ 16           RESUME                   0
+
+ 17           LOAD_GLOBAL              0 (APP_DATA_DIR)
+              LOAD_ATTR                3 (mkdir + NULL|self)
+              LOAD_CONST               0 (True)
+              LOAD_CONST               0 (True)
+              LOAD_CONST               1 (('parents', 'exist_ok'))
+              CALL_KW                  2
+              POP_TOP
+
+ 18           LOAD_GLOBAL              4 (APP_LOG_DIR)
+              LOAD_ATTR                3 (mkdir + NULL|self)
+              LOAD_CONST               0 (True)
+              LOAD_CONST               0 (True)
+              LOAD_CONST               1 (('parents', 'exist_ok'))
+              CALL_KW                  2
+              POP_TOP
+              LOAD_CONST               2 (None)
+              RETURN_VALUE

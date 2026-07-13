@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/work/
+build/V2E-PDF-Compressor/
+dist/
+*.spec.bak
+*.log

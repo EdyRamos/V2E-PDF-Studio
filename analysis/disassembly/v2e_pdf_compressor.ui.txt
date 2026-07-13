@@ -1,0 +1,17 @@
+MODULE: v2e_pdf_compressor.ui
+SOURCE FILE: v2e_pdf_compressor\ui\__init__.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           1
+              LOAD_CONST               1 (('MainWindow',))
+              IMPORT_NAME              0 (main_window)
+              IMPORT_FROM              1 (MainWindow)
+              STORE_NAME               1 (MainWindow)
+              POP_TOP
+
+  3           LOAD_CONST               2 ('MainWindow')
+              BUILD_LIST               1
+              STORE_NAME               2 (__all__)
+              LOAD_CONST               3 (None)
+              RETURN_VALUE

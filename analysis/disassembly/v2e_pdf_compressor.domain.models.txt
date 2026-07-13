@@ -1,0 +1,437 @@
+MODULE: v2e_pdf_compressor.domain.models
+SOURCE FILE: v2e_pdf_compressor\domain\models.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('annotations',))
+              IMPORT_NAME              0 (__future__)
+              IMPORT_FROM              1 (annotations)
+              STORE_NAME               1 (annotations)
+              POP_TOP
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('dataclass', 'field'))
+              IMPORT_NAME              2 (dataclasses)
+              IMPORT_FROM              3 (dataclass)
+              STORE_NAME               3 (dataclass)
+              IMPORT_FROM              4 (field)
+              STORE_NAME               4 (field)
+              POP_TOP
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('Enum',))
+              IMPORT_NAME              5 (enum)
+              IMPORT_FROM              6 (Enum)
+              STORE_NAME               6 (Enum)
+              POP_TOP
+
+  5           LOAD_SMALL_INT           0
+              LOAD_CONST               4 (('Path',))
+              IMPORT_NAME              7 (pathlib)
+              IMPORT_FROM              8 (Path)
+              STORE_NAME               8 (Path)
+              POP_TOP
+
+  8           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               5 (<code object CompressionProfile at 0x000000001B89B110, file "v2e_pdf_compressor\domain\models.py", line 8>)
+              MAKE_FUNCTION
+              LOAD_CONST               6 ('CompressionProfile')
+              LOAD_NAME                9 (str)
+              LOAD_NAME                6 (Enum)
+              CALL                     4
+              STORE_NAME              10 (CompressionProfile)
+
+ 22           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               7 (<code object CompressionStatus at 0x000000001B503E30, file "v2e_pdf_compressor\domain\models.py", line 22>)
+              MAKE_FUNCTION
+              LOAD_CONST               8 ('CompressionStatus')
+              LOAD_NAME                9 (str)
+              LOAD_NAME                6 (Enum)
+              CALL                     4
+              STORE_NAME              11 (CompressionStatus)
+
+ 28           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               9 (<code object ErrorCode at 0x000000001B8B69D0, file "v2e_pdf_compressor\domain\models.py", line 28>)
+              MAKE_FUNCTION
+              LOAD_CONST              10 ('ErrorCode')
+              LOAD_NAME                9 (str)
+              LOAD_NAME                6 (Enum)
+              CALL                     4
+              STORE_NAME              12 (ErrorCode)
+
+ 45           LOAD_NAME                3 (dataclass)
+              PUSH_NULL
+              LOAD_CONST              11 (True)
+              LOAD_CONST              12 (('slots',))
+              CALL_KW                  1
+
+ 46           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              13 (<code object CompressionJob at 0x000000001B8C0DF0, file "v2e_pdf_compressor\domain\models.py", line 45>)
+              MAKE_FUNCTION
+              LOAD_CONST              14 ('CompressionJob')
+              CALL                     2
+
+ 45           CALL                     0
+
+ 46           STORE_NAME              13 (CompressionJob)
+
+ 54           LOAD_NAME                3 (dataclass)
+              PUSH_NULL
+              LOAD_CONST              11 (True)
+              LOAD_CONST              12 (('slots',))
+              CALL_KW                  1
+
+ 55           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              15 (<code object CompressionResult at 0x000000001B8CCC00, file "v2e_pdf_compressor\domain\models.py", line 54>)
+              MAKE_FUNCTION
+              LOAD_CONST              16 ('CompressionResult')
+              CALL                     2
+
+ 54           CALL                     0
+
+ 55           STORE_NAME              14 (CompressionResult)
+
+ 67           LOAD_NAME                3 (dataclass)
+              PUSH_NULL
+              LOAD_CONST              11 (True)
+              LOAD_CONST              12 (('slots',))
+              CALL_KW                  1
+
+ 68           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              17 (<code object BatchResult at 0x000000001B58E760, file "v2e_pdf_compressor\domain\models.py", line 67>)
+              MAKE_FUNCTION
+              LOAD_CONST              18 ('BatchResult')
+              CALL                     2
+
+ 67           CALL                     0
+
+ 68           STORE_NAME              15 (BatchResult)
+              LOAD_CONST              19 (None)
+              RETURN_VALUE
+
+Disassembly of <code object CompressionProfile at 0x000000001B89B110, file "v2e_pdf_compressor\domain\models.py", line 8>:
+  8           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('CompressionProfile')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT           8
+              STORE_NAME               3 (__firstlineno__)
+
+  9           LOAD_CONST               1 ('screen')
+              STORE_NAME               4 (SCREEN)
+
+ 10           LOAD_CONST               2 ('ebook')
+              STORE_NAME               5 (EBOOK)
+
+ 11           LOAD_CONST               3 ('printer')
+              STORE_NAME               6 (PRINTER)
+
+ 13           LOAD_NAME                7 (classmethod)
+
+ 14           LOAD_CONST               4 (<code object __annotate__ at 0x000000001B8B25B0, file "v2e_pdf_compressor\domain\models.py", line 14>)
+              MAKE_FUNCTION
+              LOAD_CONST               5 (<code object from_value at 0x000000001B557630, file "v2e_pdf_compressor\domain\models.py", line 13>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+
+ 13           CALL                     0
+
+ 14           STORE_NAME               8 (from_value)
+              LOAD_CONST               6 (())
+              STORE_NAME               9 (__static_attributes__)
+              LOAD_CONST               7 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x000000001B8B25B0, file "v2e_pdf_compressor\domain\models.py", line 14>:
+ 14           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('value')
+              LOAD_CONST               2 ('str')
+              LOAD_CONST               3 ('return')
+              LOAD_CONST               4 ("'CompressionProfile'")
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object from_value at 0x000000001B557630, file "v2e_pdf_compressor\domain\models.py", line 13>:
+ 13           RESUME                   0
+
+ 15           LOAD_FAST                1 (value)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               0 ('')
+      L1:     LOAD_ATTR                1 (strip + NULL|self)
+              CALL                     0
+              LOAD_ATTR                3 (lower + NULL|self)
+              CALL                     0
+              STORE_FAST               2 (normalized)
+
+ 16           LOAD_FAST_BORROW         0 (cls)
+              GET_ITER
+      L2:     FOR_ITER                24 (to L4)
+              STORE_FAST               3 (option)
+
+ 17           LOAD_FAST_BORROW         3 (option)
+              LOAD_ATTR                4 (value)
+              LOAD_FAST_BORROW         2 (normalized)
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_TRUE         3 (to L3)
+              NOT_TAKEN
+              JUMP_BACKWARD           22 (to L2)
+
+ 18   L3:     LOAD_FAST_BORROW         3 (option)
+              SWAP                     2
+              POP_TOP
+              RETURN_VALUE
+
+ 16   L4:     END_FOR
+              POP_ITER
+
+ 19           LOAD_FAST_BORROW         0 (cls)
+              LOAD_ATTR                6 (EBOOK)
+              RETURN_VALUE
+
+Disassembly of <code object CompressionStatus at 0x000000001B503E30, file "v2e_pdf_compressor\domain\models.py", line 22>:
+ 22           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('CompressionStatus')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          22
+              STORE_NAME               3 (__firstlineno__)
+
+ 23           LOAD_CONST               1 ('success')
+              STORE_NAME               4 (SUCCESS)
+
+ 24           LOAD_CONST               2 ('failed')
+              STORE_NAME               5 (FAILED)
+
+ 25           LOAD_CONST               3 ('cancelled')
+              STORE_NAME               6 (CANCELLED)
+              LOAD_CONST               4 (())
+              STORE_NAME               7 (__static_attributes__)
+              LOAD_CONST               5 (None)
+              RETURN_VALUE
+
+Disassembly of <code object ErrorCode at 0x000000001B8B69D0, file "v2e_pdf_compressor\domain\models.py", line 28>:
+ 28           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('ErrorCode')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          28
+              STORE_NAME               3 (__firstlineno__)
+
+ 29           LOAD_CONST               1 ('INPUT_NOT_FOUND')
+              STORE_NAME               4 (INPUT_NOT_FOUND)
+
+ 30           LOAD_CONST               2 ('INVALID_EXTENSION')
+              STORE_NAME               5 (INVALID_EXTENSION)
+
+ 31           LOAD_CONST               3 ('SAME_INPUT_OUTPUT')
+              STORE_NAME               6 (SAME_INPUT_OUTPUT)
+
+ 32           LOAD_CONST               4 ('OUTPUT_EXISTS')
+              STORE_NAME               7 (OUTPUT_EXISTS)
+
+ 33           LOAD_CONST               5 ('OUTPUT_PARENT_MISSING')
+              STORE_NAME               8 (OUTPUT_PARENT_MISSING)
+
+ 34           LOAD_CONST               6 ('PERMISSION_DENIED')
+              STORE_NAME               9 (PERMISSION_DENIED)
+
+ 35           LOAD_CONST               7 ('GHOSTSCRIPT_NOT_FOUND')
+              STORE_NAME              10 (GHOSTSCRIPT_NOT_FOUND)
+
+ 36           LOAD_CONST               8 ('GHOSTSCRIPT_RUNTIME_INVALID')
+              STORE_NAME              11 (GHOSTSCRIPT_RUNTIME_INVALID)
+
+ 37           LOAD_CONST               9 ('PDF_PASSWORD_PROTECTED')
+              STORE_NAME              12 (PDF_PASSWORD_PROTECTED)
+
+ 38           LOAD_CONST              10 ('PDF_CORRUPTED')
+              STORE_NAME              13 (PDF_CORRUPTED)
+
+ 39           LOAD_CONST              11 ('PROCESS_TIMEOUT')
+              STORE_NAME              14 (PROCESS_TIMEOUT)
+
+ 40           LOAD_CONST              12 ('PROCESS_FAILED')
+              STORE_NAME              15 (PROCESS_FAILED)
+
+ 41           LOAD_CONST              13 ('CANCELLED')
+              STORE_NAME              16 (CANCELLED)
+
+ 42           LOAD_CONST              14 ('UNKNOWN_ERROR')
+              STORE_NAME              17 (UNKNOWN_ERROR)
+              LOAD_CONST              15 (())
+              STORE_NAME              18 (__static_attributes__)
+              LOAD_CONST              16 (None)
+              RETURN_VALUE
+
+Disassembly of <code object CompressionJob at 0x000000001B8C0DF0, file "v2e_pdf_compressor\domain\models.py", line 45>:
+ 45           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('CompressionJob')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          45
+              STORE_NAME               3 (__firstlineno__)
+              SETUP_ANNOTATIONS
+
+ 47           LOAD_CONST               1 ('Path')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               2 ('input_path')
+              STORE_SUBSCR
+
+ 48           LOAD_CONST               1 ('Path')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               3 ('output_path')
+              STORE_SUBSCR
+
+ 49           LOAD_NAME                5 (CompressionProfile)
+              LOAD_ATTR               12 (EBOOK)
+              STORE_NAME               7 (profile)
+              LOAD_CONST               4 ('CompressionProfile')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               5 ('profile')
+              STORE_SUBSCR
+
+ 50           LOAD_CONST               6 (False)
+              STORE_NAME               8 (overwrite)
+              LOAD_CONST               7 ('bool')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               8 ('overwrite')
+              STORE_SUBSCR
+
+ 51           LOAD_CONST               9 (True)
+              STORE_NAME               9 (optimize)
+              LOAD_CONST               7 ('bool')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST              10 ('optimize')
+              STORE_SUBSCR
+              LOAD_CONST              11 (())
+              STORE_NAME              10 (__static_attributes__)
+              LOAD_CONST              12 (None)
+              RETURN_VALUE
+
+Disassembly of <code object CompressionResult at 0x000000001B8CCC00, file "v2e_pdf_compressor\domain\models.py", line 54>:
+ 54           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('CompressionResult')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          54
+              STORE_NAME               3 (__firstlineno__)
+              SETUP_ANNOTATIONS
+
+ 56           LOAD_CONST               1 ('Path')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               2 ('input_path')
+              STORE_SUBSCR
+
+ 57           LOAD_CONST               1 ('Path')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               3 ('output_path')
+              STORE_SUBSCR
+
+ 58           LOAD_CONST               4 ('CompressionStatus')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               5 ('status')
+              STORE_SUBSCR
+
+ 59           LOAD_CONST               6 ('ErrorCode | None')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               7 ('error_code')
+              STORE_SUBSCR
+
+ 60           LOAD_CONST               8 ('float | None')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               9 ('before_mb')
+              STORE_SUBSCR
+
+ 61           LOAD_CONST               8 ('float | None')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST              10 ('after_mb')
+              STORE_SUBSCR
+
+ 62           LOAD_CONST               8 ('float | None')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST              11 ('reduction_percent')
+              STORE_SUBSCR
+
+ 63           LOAD_CONST              12 ('int')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST              13 ('elapsed_ms')
+              STORE_SUBSCR
+
+ 64           LOAD_CONST              14 (None)
+              STORE_NAME               5 (error_detail)
+              LOAD_CONST              15 ('str | None')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST              16 ('error_detail')
+              STORE_SUBSCR
+              LOAD_CONST              17 (())
+              STORE_NAME               6 (__static_attributes__)
+              LOAD_CONST              14 (None)
+              RETURN_VALUE
+
+Disassembly of <code object BatchResult at 0x000000001B58E760, file "v2e_pdf_compressor\domain\models.py", line 67>:
+ 67           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('BatchResult')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          67
+              STORE_NAME               3 (__firstlineno__)
+              SETUP_ANNOTATIONS
+
+ 69           LOAD_CONST               1 ('int')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               2 ('total')
+              STORE_SUBSCR
+
+ 70           LOAD_CONST               1 ('int')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               3 ('success')
+              STORE_SUBSCR
+
+ 71           LOAD_CONST               1 ('int')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               4 ('failed')
+              STORE_SUBSCR
+
+ 72           LOAD_CONST               1 ('int')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               5 ('cancelled')
+              STORE_SUBSCR
+
+ 73           LOAD_NAME                5 (field)
+              PUSH_NULL
+              LOAD_NAME                6 (list)
+              LOAD_CONST               6 (('default_factory',))
+              CALL_KW                  1
+              STORE_NAME               7 (items)
+              LOAD_CONST               7 ('list[CompressionResult]')
+              LOAD_NAME                4 (__annotations__)
+              LOAD_CONST               8 ('items')
+              STORE_SUBSCR
+              LOAD_CONST               9 (())
+              STORE_NAME               8 (__static_attributes__)
+              LOAD_CONST              10 (None)
+              RETURN_VALUE

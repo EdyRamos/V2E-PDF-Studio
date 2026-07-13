@@ -1,0 +1,17 @@
+MODULE: v2e_pdf_compressor.infra.ghostscript
+SOURCE FILE: v2e_pdf_compressor\infra\ghostscript\__init__.py
+
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           1
+              LOAD_CONST               1 (('GhostscriptLocator',))
+              IMPORT_NAME              0 (locator)
+              IMPORT_FROM              1 (GhostscriptLocator)
+              STORE_NAME               1 (GhostscriptLocator)
+              POP_TOP
+
+  3           LOAD_CONST               2 ('GhostscriptLocator')
+              BUILD_LIST               1
+              STORE_NAME               2 (__all__)
+              LOAD_CONST               3 (None)
+              RETURN_VALUE
