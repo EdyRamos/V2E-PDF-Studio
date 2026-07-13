@@ -8,6 +8,7 @@ import os
 import platform
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 from PySide6.QtWidgets import QApplication
@@ -159,6 +160,10 @@ def _run_full_smoke_test(logger: logging.Logger) -> int:
             settings_repository=SettingsRepository(),
         )
         window.load_pdf(source_path)
+        deadline = time.monotonic() + 5
+        while window.preview.pixmap().isNull() and time.monotonic() < deadline:
+            qt_app.processEvents()
+            time.sleep(0.01)
         if window.session is None or window.thumbnail_list.count() != 2:
             raise RuntimeError("UI nao carregou miniatura do PDF de smoke-test.")
         if window.preview.pixmap().isNull():

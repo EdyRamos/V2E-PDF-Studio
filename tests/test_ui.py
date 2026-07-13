@@ -134,10 +134,11 @@ def test_workspace_layout_does_not_overlap_at_supported_sizes(window, qtbot) -> 
     assert not window.brand_byline.isHidden()
 
 
-def test_load_select_zoom_reorder_and_temp_cleanup(window, make_pdf) -> None:
+def test_load_select_zoom_reorder_and_temp_cleanup(window, make_pdf, qtbot) -> None:
     window.load_pdf(make_pdf(pages=2))
     assert window.session is not None
     assert window.thumbnail_list.count() == 2
+    qtbot.waitUntil(lambda: not window.preview.pixmap().isNull(), timeout=3000)
     assert not window.preview.pixmap().isNull()
     initial_zoom = window.zoom
     window.zoom_in()
@@ -154,6 +155,41 @@ def test_load_select_zoom_reorder_and_temp_cleanup(window, make_pdf) -> None:
     assert temp_path.exists()
     window._cleanup_temporary_paths()
     assert not temp_path.exists()
+
+
+def test_thumbnail_workers_fill_icons_and_cache(window, make_pdf, qtbot) -> None:
+    window.load_pdf(make_pdf(pages=2))
+
+    qtbot.waitUntil(
+        lambda: all(
+            not window.thumbnail_list.item(row).icon().isNull()
+            for row in range(window.thumbnail_list.count())
+        ),
+        timeout=3000,
+    )
+
+    assert len(window._thumb_cache) == 2
+
+
+def test_preview_refresh_is_debounced(window, make_pdf, qtbot, monkeypatch) -> None:
+    window.load_pdf(make_pdf(pages=1))
+    qtbot.waitUntil(lambda: not window.preview.pixmap().isNull(), timeout=3000)
+    window._preview_cache.clear()
+    calls: list[float] = []
+    original_render = window.edit_service.render_page
+
+    def tracked_render(page, scale=1.0):
+        if scale == window.zoom:
+            calls.append(scale)
+        return original_render(page, scale)
+
+    monkeypatch.setattr(window.edit_service, "render_page", tracked_render)
+    for _ in range(5):
+        window.refresh_preview()
+
+    qtbot.waitUntil(lambda: len(calls) == 1, timeout=3000)
+    qtbot.wait(180)
+    assert calls == [window.zoom]
 
 
 def test_stale_worker_callbacks_are_ignored(window, monkeypatch: pytest.MonkeyPatch) -> None:

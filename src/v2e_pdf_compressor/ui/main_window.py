@@ -5,7 +5,17 @@ import tempfile
 import threading
 from pathlib import Path
 
-from PySide6.QtCore import QItemSelectionModel, QObject, QSize, Qt, QUrl, Signal
+from PySide6.QtCore import (
+    QItemSelectionModel,
+    QObject,
+    QRunnable,
+    QSize,
+    Qt,
+    QThreadPool,
+    QTimer,
+    QUrl,
+    Signal,
+)
 from PySide6.QtGui import QDesktopServices, QIcon, QPixmap
 from PySide6.QtWidgets import (
     QApplication,
@@ -145,12 +155,15 @@ class DropHome(QFrame):
 
     def dragEnterEvent(self, event):
         """dragActive"""
-        if self._event_has_pdf(event):
+        if not self._event_has_pdf(event):
+            event.ignore()
+            return None
+        if self.property("dragActive") is not True:
             self.setProperty("dragActive", True)
             self.style().unpolish(self)
             self.style().polish(self)
-            event.acceptProposedAction()
-            return None
+        event.acceptProposedAction()
+        return None
 
     def dragLeaveEvent(self, event):
         """dragActive"""
@@ -170,7 +183,6 @@ class DropHome(QFrame):
                 continue
             self.file_dropped.emit(path)
             event.acceptProposedAction()
-            event.mimeData().urls()
             return None
 
     def _event_has_pdf(self, event):
@@ -217,6 +229,29 @@ class CompressionWorkerSignals(QObject):
     failed = Signal(str)
 
 
+class ThumbnailWorkerSignals(QObject):
+    rendered = Signal(int, object, bytes)
+
+
+class ThumbnailWorker(QRunnable):
+    """Renderiza uma miniatura fora da thread da UI."""
+
+    def __init__(self, signals, generation, page, render_fn):
+        super().__init__()
+        self._signals = signals
+        self._generation = generation
+        self._page = page
+        self._render_fn = render_fn
+
+    def run(self):
+        try:
+            rendered = self._render_fn(self._page, scale=0.18)
+            png_bytes = rendered.png_bytes
+        except Exception:
+            png_bytes = b""
+        self._signals.rendered.emit(self._generation, self._page.page_id, png_bytes)
+
+
 class UpdateWorkerSignals(QObject):
     check_finished = Signal(object)
     download_finished = Signal(object)
@@ -257,9 +292,20 @@ class MainWindow(QMainWindow):
         self._update_generation = 0
         self._closing = False
         self._temporary_paths: set[Path] = set()
+        self._thumb_pool = QThreadPool(self)
+        self._thumb_pool.setMaxThreadCount(2)
+        self._thumb_generation = 0
+        self._thumb_cache: dict[object, bytes] = {}
+        self._thumb_signals = ThumbnailWorkerSignals()
+        self._thumb_signals.rendered.connect(self._on_thumbnail_rendered)
+        self._preview_cache: dict[tuple, bytes] = {}
+        self._preview_timer = QTimer(self)
+        self._preview_timer.setSingleShot(True)
+        self._preview_timer.setInterval(120)
+        self._preview_timer.timeout.connect(self._refresh_preview_now)
         self.setWindowTitle("V2E PDF Studio")
         self.resize(1360, 820)
-        self.setMinimumSize(1120, 700)
+        self.setMinimumSize(1024, 640)
         self.setAcceptDrops(True)
         self.status = QStatusBar()
         self.setStatusBar(self.status)
@@ -299,7 +345,7 @@ class MainWindow(QMainWindow):
         self.workspace_splitter.setStretchFactor(0, 0)
         self.workspace_splitter.setStretchFactor(1, 1)
         self.workspace_splitter.setStretchFactor(2, 0)
-        self.workspace_splitter.setSizes([240, 760, 370])
+        self.workspace_splitter.setSizes([220, 700, 340])
         root.addWidget(self.workspace_splitter, stretch=1)
         return shell
 
@@ -334,8 +380,8 @@ class MainWindow(QMainWindow):
         """pagesPanel"""
         panel = QFrame()
         panel.setObjectName("pagesPanel")
-        panel.setMinimumWidth(210)
-        panel.setMaximumWidth(280)
+        panel.setMinimumWidth(186)
+        panel.setMaximumWidth(264)
         layout = QVBoxLayout(panel)
         layout.setContentsMargins(18, 18, 14, 18)
         layout.setSpacing(12)
@@ -397,8 +443,8 @@ class MainWindow(QMainWindow):
         """toolsPanel"""
         panel = QFrame()
         panel.setObjectName("toolsPanel")
-        panel.setMinimumWidth(330)
-        panel.setMaximumWidth(420)
+        panel.setMinimumWidth(296)
+        panel.setMaximumWidth(384)
         shell_layout = QVBoxLayout(panel)
         shell_layout.setContentsMargins(0, 0, 0, 0)
         shell_layout.setSpacing(0)
@@ -446,13 +492,13 @@ class MainWindow(QMainWindow):
             "Selecionar PDF para organizar", self.open_pdf, "primaryButton"
         )
         self.insert_button = self._make_button(
-            "Adicionar paginas de outro PDF", self.insert_pdf, "toolButton"
+            "Adicionar páginas de outro PDF", self.insert_pdf, "toolButton"
         )
         self.blank_button = self._make_button(
-            "Inserir pagina em branco", self.add_blank_page, "toolButton"
+            "Inserir página em branco", self.add_blank_page, "toolButton"
         )
         self.remove_button = self._make_button(
-            "Remover paginas selecionadas", self.remove_selected_pages, "dangerButton"
+            "Remover páginas selecionadas", self.remove_selected_pages, "dangerButton"
         )
         organize_layout.addWidget(self.organize_open_button)
         organize_layout.addWidget(self.insert_button)
@@ -502,7 +548,6 @@ class MainWindow(QMainWindow):
             "Cancelar processo", self.cancel_compression, "dangerButton"
         )
         self.cancel_button.setEnabled(False)
-        self.cancel_button.setVisible(False)
         self.progress_bar = QProgressBar()
         self.progress_bar.setObjectName("progressBar")
         self.progress_bar.setRange(0, 1)
@@ -529,7 +574,7 @@ class MainWindow(QMainWindow):
         batch_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         batch_layout.addWidget(self._section_label("Comprimir lote"))
         batch_help = QLabel(
-            "Selecione varios PDFs e uma pasta de saida. Cada arquivo sera comprimido separadamente."
+            "Selecione vários PDFs e uma pasta de saída. Cada arquivo será comprimido separadamente."
         )
         batch_help.setObjectName("panelHelper")
         batch_help.setWordWrap(True)
@@ -589,7 +634,7 @@ class MainWindow(QMainWindow):
         split_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         split_layout.addWidget(self._section_label("Dividir PDF"))
         split_help = QLabel(
-            "Selecione paginas nas miniaturas ou informe intervalos como 1-3,5,8-10."
+            "Selecione páginas nas miniaturas ou informe intervalos como 1-3,5,8-10."
         )
         split_help.setObjectName("panelHelper")
         split_help.setWordWrap(True)
@@ -597,7 +642,7 @@ class MainWindow(QMainWindow):
             "Selecionar PDF para dividir", self.open_pdf, "primaryButton"
         )
         self.split_selected_button = self._make_button(
-            "Salvar paginas selecionadas", self._split_selected, "toolButton"
+            "Salvar páginas selecionadas", self._split_selected, "toolButton"
         )
         self.split_ranges_button = self._make_button(
             "Dividir por intervalos", self._split_ranges, "toolButton"
@@ -653,9 +698,9 @@ class MainWindow(QMainWindow):
         self._show_editor()
 
     def go_home(self):
-        """Escolha uma ferramenta para comecar"""
+        """Escolha uma ferramenta para começar"""
         self.main_stack.setCurrentWidget(self.home)
-        self.status.showMessage("Escolha uma ferramenta para comecar")
+        self.status.showMessage("Escolha uma ferramenta para começar")
 
     def _show_editor(self):
         self.main_stack.setCurrentWidget(self.editor)
@@ -699,22 +744,22 @@ class MainWindow(QMainWindow):
         return None
 
     def _resize_tool_stack(self):
-        page = self.tool_stack.currentWidget()
-        if page is None:
+        current = self.tool_stack.currentWidget()
+        if current is None:
             return
-        page_layout = page.layout()
-        available_width = max(self.tools_scroll.viewport().width() - 40, 240)
-        wrapped_height = page_layout.heightForWidth(available_width)
-        height = max(wrapped_height, page.sizeHint().height(), 120)
-        self.tool_stack.setFixedHeight(height)
+        for index in range(self.tool_stack.count()):
+            page = self.tool_stack.widget(index)
+            if page is current:
+                page.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Maximum)
+            else:
+                page.setSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Ignored)
+        current.updateGeometry()
+        self.tool_stack.updateGeometry()
 
     def _refresh_tools_layout(self):
-        if not hasattr(self, "tools_layout"):
+        if not hasattr(self, "tools_content"):
             return
-        self.tools_layout.invalidate()
-        self.tools_layout.activate()
-        required_height = self.tools_layout.sizeHint().height()
-        self.tools_content.setMinimumHeight(required_height)
+        self.tools_content.updateGeometry()
 
     def open_pdf(self):
         """Abrir PDF"""
@@ -730,26 +775,29 @@ class MainWindow(QMainWindow):
             path = Path(path)
             session = self.edit_service.open_document(path)
             self.session = session
+            self._thumb_cache.clear()
+            self._preview_cache.clear()
             self._update_last_directory(path.parent)
             self._show_editor()
             self._set_document_actions_enabled(True)
             self.refresh_thumbnails(select_first=True)
-            self.status.showMessage(f"{session.page_count} pagina(s) carregada(s)")
+            self.status.showMessage(f"{session.page_count} página(s) carregada(s)")
         except PdfPasswordRequiredError:
             self._show_error(
-                "PDF protegido por senha", "Este PDF precisa de senha e nao pode ser aberto."
+                "PDF protegido por senha", "Este PDF precisa de senha e não pode ser aberto."
             )
         except Exception as exc:
             self.logger.exception("Falha ao abrir PDF")
-            self._show_error("Nao foi possivel abrir o PDF", str(exc))
+            self._show_error("Não foi possível abrir o PDF", str(exc))
 
     def refresh_thumbnails(self, select_first=False, selected_ids=None, current_id=None):
         if not self.session:
             return None
+        self._thumb_generation += 1
         self.thumbnail_list.blockSignals(True)
         self.thumbnail_list.clear()
         for index, page in enumerate(self.session.pages, start=1):
-            item = QListWidgetItem(f"Pagina {index}")
+            item = QListWidgetItem(f"Página {index}")
             item.setData(Qt.ItemDataRole.UserRole, page.page_id)
             item.setSizeHint(QSize(184, 218))
             item.setFlags(
@@ -758,13 +806,20 @@ class MainWindow(QMainWindow):
                 | Qt.ItemFlag.ItemIsSelectable
                 | Qt.ItemFlag.ItemIsEnabled
             )
-            try:
-                rendered = self.edit_service.render_page(page, scale=0.18)
+            cached = self._thumb_cache.get(page.page_id)
+            if cached:
                 pixmap = QPixmap()
-                pixmap.loadFromData(rendered.png_bytes, "PNG")
+                pixmap.loadFromData(cached, "PNG")
                 item.setIcon(QIcon(pixmap))
-            except Exception:
-                item.setText(f"Pagina {index}\nErro no preview")
+            else:
+                self._thumb_pool.start(
+                    ThumbnailWorker(
+                        self._thumb_signals,
+                        self._thumb_generation,
+                        page,
+                        self.edit_service.render_page,
+                    )
+                )
             self.thumbnail_list.addItem(item)
         selected_ids = selected_ids or set()
         for row in range(self.thumbnail_list.count()):
@@ -787,10 +842,32 @@ class MainWindow(QMainWindow):
         self.refresh_preview()
         self._update_document_title()
 
+    def _on_thumbnail_rendered(self, generation, page_id, png_bytes):
+        if self._closing or generation != self._thumb_generation:
+            return None
+        if png_bytes:
+            self._thumb_cache[page_id] = png_bytes
+        for row in range(self.thumbnail_list.count()):
+            item = self.thumbnail_list.item(row)
+            if item.data(Qt.ItemDataRole.UserRole) != page_id:
+                continue
+            if png_bytes:
+                pixmap = QPixmap()
+                pixmap.loadFromData(png_bytes, "PNG")
+                item.setIcon(QIcon(pixmap))
+            else:
+                item.setText(item.text() + "\nErro no preview")
+            break
+        return None
+
     def refresh_preview(self):
-        """Nenhuma pagina para visualizar"""
+        """Agenda a atualização do preview (com debounce anti-engasgo)."""
+        self._preview_timer.start()
+
+    def _refresh_preview_now(self):
+        """Nenhuma página para visualizar"""
         if not self.session or not self.session.pages:
-            self.preview.setText("Nenhuma pagina para visualizar")
+            self.preview.setText("Nenhuma página para visualizar")
             self.preview.setPixmap(QPixmap())
             self._update_document_title()
             return None
@@ -809,31 +886,42 @@ class MainWindow(QMainWindow):
             self._update_document_title()
             return None
         try:
-            rendered = self.edit_service.render_page(page, scale=self.zoom)
+            cache_key = (page.page_id, round(self.zoom, 2))
+            png_bytes = self._preview_cache.get(cache_key)
+            if png_bytes is None:
+                rendered = self.edit_service.render_page(page, scale=self.zoom)
+                png_bytes = rendered.png_bytes
+                if len(self._preview_cache) > 24:
+                    self._preview_cache.clear()
+                self._preview_cache[cache_key] = png_bytes
             pixmap = QPixmap()
-            pixmap.loadFromData(rendered.png_bytes, "PNG")
+            pixmap.loadFromData(png_bytes, "PNG")
             self.preview.setPixmap(pixmap)
             self.preview.setText("")
             self._update_document_title()
         except Exception as exc:
             self.preview.setPixmap(QPixmap())
-            self.preview.setText(f"Nao foi possivel renderizar a pagina: {exc}")
+            self.preview.setText(f"Não foi possível renderizar a página: {exc}")
+
+    def _refresh_page_labels(self):
+        for index in range(self.thumbnail_list.count()):
+            self.thumbnail_list.item(index).setText(f"Página {index + 1}")
+        self._update_document_title()
 
     def sync_session_order_from_ui(self):
         if not self.session:
             return None
-        selected_ids = self._selected_page_ids()
-        current_id = self._current_page_id()
         page_ids = [
             self.thumbnail_list.item(index).data(Qt.ItemDataRole.UserRole)
             for index in range(self.thumbnail_list.count())
         ]
         try:
             self.edit_service.reorder_by_page_ids(self.session, page_ids)
-            self.refresh_thumbnails(selected_ids=selected_ids, current_id=current_id)
-            self.status.showMessage("Ordem das paginas atualizada")
+            self._refresh_page_labels()
+            self.refresh_preview()
+            self.status.showMessage("Ordem das páginas atualizada")
         except PdfEditError as exc:
-            self._show_error("Nao foi possivel reordenar", str(exc))
+            self._show_error("Não foi possível reordenar", str(exc))
             self.refresh_thumbnails(select_first=True)
 
     def insert_pdf(self):
@@ -856,7 +944,7 @@ class MainWindow(QMainWindow):
             )
             self.status.showMessage("PDF adicionado ao documento")
         except Exception as exc:
-            self._show_error("Nao foi possivel adicionar PDF", str(exc))
+            self._show_error("Não foi possível adicionar PDF", str(exc))
 
     def add_blank_page(self):
         if not self.session:
@@ -872,7 +960,7 @@ class MainWindow(QMainWindow):
         else:
             inserted_id = self.session.pages[-1].page_id
         self.refresh_thumbnails(selected_ids={inserted_id}, current_id=inserted_id)
-        self.status.showMessage("Pagina em branco adicionada")
+        self.status.showMessage("Página em branco adicionada")
 
     def remove_selected_pages(self):
         if not self.session:
@@ -880,17 +968,17 @@ class MainWindow(QMainWindow):
         selected_ids = self._selected_page_ids()
         if not selected_ids:
             self._show_error(
-                "Nenhuma pagina selecionada", "Selecione uma ou mais paginas para remover."
+                "Nenhuma página selecionada", "Selecione uma ou mais páginas para remover."
             )
             return None
         answer = QMessageBox.question(
-            self, "Remover paginas", f"Remover {len(selected_ids)} pagina(s) selecionada(s)?"
+            self, "Remover páginas", f"Remover {len(selected_ids)} página(s) selecionada(s)?"
         )
         if answer != QMessageBox.StandardButton.Yes:
             return None
         self.edit_service.remove_pages(self.session, selected_ids)
         self.refresh_thumbnails(select_first=True)
-        self.status.showMessage("Pagina(s) removida(s)")
+        self.status.showMessage("Página(s) removida(s)")
 
     def split_pdf(self):
         if not self.session:
@@ -899,7 +987,7 @@ class MainWindow(QMainWindow):
         message.setWindowTitle("Dividir PDF")
         message.setText("Como deseja dividir o PDF?")
         selected_button = message.addButton(
-            "Paginas selecionadas", QMessageBox.ButtonRole.AcceptRole
+            "Páginas selecionadas", QMessageBox.ButtonRole.AcceptRole
         )
         ranges_button = message.addButton("Intervalos", QMessageBox.ButtonRole.ActionRole)
         message.addButton("Cancelar", QMessageBox.ButtonRole.RejectRole)
@@ -918,12 +1006,12 @@ class MainWindow(QMainWindow):
         selected_ids = self._selected_page_ids()
         if not selected_ids:
             self._show_error(
-                "Nenhuma pagina selecionada", "Selecione as paginas que devem virar um novo PDF."
+                "Nenhuma página selecionada", "Selecione as páginas que devem virar um novo PDF."
             )
             return None
         output_path, _ = QFileDialog.getSaveFileName(
             self,
-            "Salvar paginas selecionadas",
+            "Salvar páginas selecionadas",
             self._default_output_path("paginas_selecionadas"),
             "Arquivos PDF (*.pdf)",
         )
@@ -936,7 +1024,7 @@ class MainWindow(QMainWindow):
                 self._ensure_pdf_suffix(Path(output_path)),
                 overwrite=True,
             )
-            self.status.showMessage("PDF dividido com paginas selecionadas")
+            self.status.showMessage("PDF dividido com páginas selecionadas")
         except Exception as exc:
             self._show_error("Falha ao dividir PDF", str(exc))
 
@@ -949,7 +1037,7 @@ class MainWindow(QMainWindow):
         if not ok or not ranges_text.strip():
             return None
         output_dir = QFileDialog.getExistingDirectory(
-            self, "Escolha a pasta de saida", self.settings.last_directory or ""
+            self, "Escolha a pasta de saída", self.settings.last_directory or ""
         )
         if not output_dir:
             return None
@@ -967,7 +1055,7 @@ class MainWindow(QMainWindow):
             return None
         message = QMessageBox(self)
         message.setWindowTitle("Salvar PDF")
-        message.setText("Como deseja salvar as alteracoes?")
+        message.setText("Como deseja salvar as alterações?")
         save_as_button = message.addButton("Salvar como novo", QMessageBox.ButtonRole.AcceptRole)
         overwrite_button = message.addButton(
             "Sobrescrever original", QMessageBox.ButtonRole.DestructiveRole
@@ -998,7 +1086,7 @@ class MainWindow(QMainWindow):
     def compress_current_pdf(self):
         """Nenhum PDF aberto"""
         if not self.session:
-            self._show_error("Nenhum PDF aberto", "Abra um PDF ou use a compressao em lote.")
+            self._show_error("Nenhum PDF aberto", "Abra um PDF ou use a compressão em lote.")
             return None
         output_path, _ = QFileDialog.getSaveFileName(
             self,
@@ -1032,7 +1120,7 @@ class MainWindow(QMainWindow):
         if not files:
             return None
         output_dir = QFileDialog.getExistingDirectory(
-            self, "Escolha a pasta de saida", str(Path(files[0]).parent)
+            self, "Escolha a pasta de saída", str(Path(files[0]).parent)
         )
         if not output_dir:
             return None
@@ -1053,10 +1141,10 @@ class MainWindow(QMainWindow):
     def _start_compression(self, jobs, mode):
         """Processo em andamento"""
         if self._compression_thread and self._compression_thread.is_alive():
-            self._show_error("Processo em andamento", "Aguarde ou cancele a compressao atual.")
+            self._show_error("Processo em andamento", "Aguarde ou cancele a compressão atual.")
             return None
         if not jobs:
-            self._show_error("Nenhum arquivo", "Nao ha arquivos para comprimir.")
+            self._show_error("Nenhum arquivo", "Não há arquivos para comprimir.")
             return None
         self.compression_service.reset_cancel()
         self._set_compression_busy(True)
@@ -1065,7 +1153,7 @@ class MainWindow(QMainWindow):
         self.progress_bar.setFormat(f"""0/{len(jobs)}""")
         self.log_output.clear()
         self._append_log(
-            f"""Compressao iniciada: {len(jobs)} arquivo(s), perfil {self._selected_profile().value}."""
+            f"""Compressão iniciada: {len(jobs)} arquivo(s), perfil {self._selected_profile().value}."""
         )
         signals = CompressionWorkerSignals()
         self._compression_generation += 1
@@ -1100,7 +1188,7 @@ class MainWindow(QMainWindow):
                 signals.finished.emit(batch)
                 return None
             except Exception as exc:
-                self.logger.exception("Falha inesperada na worker de compressao")
+                self.logger.exception("Falha inesperada na worker de compressão")
                 signals.failed.emit(str(exc))
 
         self._compression_thread = threading.Thread(target=run, daemon=True)
@@ -1145,13 +1233,13 @@ class MainWindow(QMainWindow):
                 return None
             self.status.showMessage("PDF comprimido com sucesso")
             return None
-        self.status.showMessage(f"Compressao {mode} finalizada")
+        self.status.showMessage(f"Compressão {mode} finalizada")
 
     def _on_compression_failed(self, message):
         self._compression_thread = None
         self._set_compression_busy(False)
         self._cleanup_temporary_paths()
-        self._show_error("Falha na compressao", message)
+        self._show_error("Falha na compressão", message)
 
     def cancel_compression(self):
         """Solicita o encerramento imediato do processo atual."""
@@ -1315,11 +1403,13 @@ class MainWindow(QMainWindow):
         self.home.update_button.setText("Verificar atualizações" if not busy else text)
 
     def zoom_in(self):
-        self.zoom = min(self.zoom + 0.15, 3)
+        self.zoom = min(self.zoom + 0.15, 3.0)
+        self.status.showMessage(f"Zoom: {round(self.zoom * 100)}%")
         self.refresh_preview()
 
     def zoom_out(self):
         self.zoom = max(self.zoom - 0.15, 0.35)
+        self.status.showMessage(f"Zoom: {round(self.zoom * 100)}%")
         self.refresh_preview()
 
     def select_all_pages(self):
@@ -1350,15 +1440,12 @@ class MainWindow(QMainWindow):
         super().resizeEvent(event)
         if hasattr(self, "brand_byline"):
             self.brand_byline.setVisible(self.width() >= 1260)
-        if hasattr(self, "tool_stack"):
-            self._resize_tool_stack()
-            self._refresh_tools_layout()
 
     def closeEvent(self, event):
         """Sair"""
         if self.session and self.session.modified:
             answer = QMessageBox.question(
-                self, "Sair", "Ha alteracoes nao salvas. Deseja sair mesmo assim?"
+                self, "Sair", "Há alterações não salvas. Deseja sair mesmo assim?"
             )
             if answer != QMessageBox.StandardButton.Yes:
                 event.ignore()
@@ -1381,7 +1468,7 @@ class MainWindow(QMainWindow):
             self.refresh_thumbnails()
             self.status.showMessage("PDF salvo")
         except Exception as exc:
-            self._show_error("Nao foi possivel salvar", str(exc))
+            self._show_error("Não foi possível salvar", str(exc))
 
     def _materialize_current_pdf(self):
         """Nenhum documento aberto."""
@@ -1408,7 +1495,7 @@ class MainWindow(QMainWindow):
             try:
                 path.unlink(missing_ok=True)
             except OSError:
-                self.logger.warning("Nao foi possivel remover temporario: %s", path)
+                self.logger.warning("Não foi possível remover temporário: %s", path)
             else:
                 self._temporary_paths.discard(path)
 
@@ -1542,7 +1629,7 @@ class MainWindow(QMainWindow):
         selected = len(self.thumbnail_list.selectedItems())
         dirty = " *" if self.session.modified else ""
         self.document_title.setText(
-            f"""{self.session.title}{dirty}  |  {self.session.page_count} pagina(s)  |  {selected} selecionada(s)"""
+            f"""{self.session.title}{dirty}  |  {self.session.page_count} página(s)  |  {selected} selecionada(s)"""
         )
 
     def _update_last_directory(self, directory):
@@ -1578,7 +1665,6 @@ class MainWindow(QMainWindow):
         self.batch_optimize_check.setEnabled(not busy)
         self.batch_overwrite_check.setEnabled(not busy)
         self.cancel_button.setEnabled(busy)
-        self.cancel_button.setVisible(busy)
         if busy:
             self.tools_scroll.ensureWidgetVisible(self.activity_panel, 0, 12)
         return None
@@ -1722,272 +1808,7 @@ class MainWindow(QMainWindow):
         )
 
     def _apply_style(self):
-        """
-        QMainWindow {
-            background: #f5f1e8;
-        }
-        QWidget {
-            color: #17211d;
-            font-family: "Segoe UI", "Aptos", sans-serif;
-            font-size: 10.5pt;
-        }
-        QLabel, QCheckBox {
-            background: transparent;
-        }
-        #appShell {
-            background: #f5f1e8;
-        }
-        #dropHome {
-            background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-                stop:0 #111d18, stop:0.56 #20372f, stop:1 #f16f3f);
-            border: 0;
-        }
-        #dropHome[dragActive="true"] {
-            border: 3px solid #ffd2bd;
-        }
-        #homeEyebrow {
-            color: #ffb28f;
-            font-size: 11pt;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        #homeTitle {
-            color: #fff8eb;
-            font-size: 31pt;
-            font-weight: 900;
-            max-width: 760px;
-        }
-        #homeSubtitle {
-            color: #eadfd2;
-            font-size: 13pt;
-            max-width: 680px;
-            line-height: 1.45;
-        }
-        #madeBy {
-            color: #ffd4c2;
-            font-size: 11pt;
-            font-weight: 800;
-        }
-        #homeHint {
-            color: #ffc8af;
-            font-weight: 600;
-        }
-        #toolTile {
-            background: rgba(255, 248, 235, 0.94);
-            color: #17211d;
-            border: 1px solid rgba(255, 255, 255, 0.55);
-            border-radius: 18px;
-            padding: 18px;
-            font-size: 11pt;
-            font-weight: 900;
-            text-align: left;
-        }
-        #toolTile:hover {
-            background: #ffffff;
-            border: 2px solid #ff8a5f;
-        }
-        #topbar {
-            background: #101713;
-            border: 0;
-        }
-        #brand {
-            color: #fff8eb;
-            font-size: 15pt;
-            font-weight: 900;
-        }
-        #brandByline {
-            color: #aeb8b1;
-            font-size: 9.5pt;
-            font-weight: 700;
-            margin-left: 8px;
-        }
-        #pagesPanel {
-            background: #e8dfd1;
-            border-right: 1px solid #d6caba;
-        }
-        #previewPanel {
-            background: #f5f1e8;
-        }
-        #toolsPanel {
-            background: #fffaf1;
-            border-left: 1px solid #dacfc0;
-        }
-        #panelTitle {
-            font-size: 16pt;
-            font-weight: 900;
-            color: #16231e;
-        }
-        #panelHelper {
-            color: #697169;
-            font-size: 9.5pt;
-        }
-        #sectionLabel {
-            color: #f16f3f;
-            font-size: 9pt;
-            font-weight: 900;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            margin-top: 4px;
-        }
-        #fieldLabel {
-            color: #3b463f;
-            font-weight: 800;
-        }
-        #documentTitle {
-            font-size: 13pt;
-            font-weight: 900;
-            color: #1a2822;
-        }
-        #pageList {
-            background: transparent;
-            border: 0;
-            outline: 0;
-        }
-        QListWidget::item {
-            background: #fffaf1;
-            color: #17211d;
-            border: 1px solid #d6caba;
-            border-radius: 14px;
-            padding: 10px;
-            margin: 2px 0;
-        }
-        QListWidget::item:hover {
-            border: 1px solid #f16f3f;
-        }
-        QListWidget::item:selected {
-            background: #fff2df;
-            border: 2px solid #f16f3f;
-            color: #17211d;
-        }
-        #previewLabel {
-            background: #ded6c7;
-            border: 1px solid #d3c6b4;
-            border-radius: 20px;
-            padding: 22px;
-            color: #59645d;
-            font-weight: 700;
-        }
-        QScrollArea {
-            border: 0;
-            background: #ded6c7;
-            border-radius: 20px;
-        }
-        QPushButton {
-            min-height: 34px;
-            border-radius: 10px;
-            padding: 8px 13px;
-            font-weight: 800;
-            text-align: center;
-        }
-        #primaryButton, #primaryButtonSmall {
-            background: #f16f3f;
-            color: #ffffff;
-            border: 0;
-        }
-        #primaryButton:hover, #primaryButtonSmall:hover {
-            background: #db5c2f;
-        }
-        #primaryButtonSmall {
-            min-height: 30px;
-        }
-        #secondaryButton, #darkButton {
-            background: #fff8eb;
-            color: #16231e;
-            border: 0;
-        }
-        #secondaryButton:hover, #darkButton:hover {
-            background: #ffffff;
-        }
-        #ghostButton {
-            background: rgba(255, 248, 235, 0.10);
-            color: #fff8eb;
-            border: 1px solid rgba(255, 248, 235, 0.25);
-        }
-        #ghostButton:hover {
-            background: rgba(255, 248, 235, 0.18);
-        }
-        #lightGhostButton {
-            background: #eee5d6;
-            color: #17211d;
-            border: 1px solid #d8ccbc;
-        }
-        #lightGhostButton:hover {
-            background: #fff8eb;
-            border-color: #f16f3f;
-        }
-        #toolButton, #flatButton {
-            background: #efe6d7;
-            color: #17211d;
-            border: 1px solid #d8ccbc;
-        }
-        #toolButton:hover, #flatButton:hover {
-            background: #fff2df;
-            border-color: #f16f3f;
-        }
-        #dangerButton {
-            background: #2b1712;
-            color: #fff8eb;
-            border: 0;
-        }
-        #dangerButton:hover {
-            background: #5a2419;
-        }
-        QPushButton:disabled {
-            background: #ded7ca;
-            color: #9a9387;
-            border: 1px solid #d2c8ba;
-        }
-        #profileCombo, #toolCombo {
-            background: #ffffff;
-            color: #17211d;
-            border: 1px solid #d6caba;
-            border-radius: 10px;
-            padding: 8px;
-            min-height: 34px;
-        }
-        #toolStack, #toolPage {
-            background: transparent;
-            border: 0;
-        }
-        #optionCheck {
-            color: #26332d;
-            font-weight: 650;
-            spacing: 8px;
-        }
-        #progressBar {
-            background: #eadfd0;
-            color: #17211d;
-            border: 0;
-            border-radius: 9px;
-            min-height: 18px;
-            text-align: center;
-            font-weight: 800;
-        }
-        #progressBar::chunk {
-            background: #f16f3f;
-            border-radius: 9px;
-        }
-        #logOutput {
-            background: #171f1b;
-            color: #fff8eb;
-            border: 0;
-            border-radius: 14px;
-            padding: 10px;
-            font-family: "Cascadia Mono", "Consolas", monospace;
-            font-size: 9pt;
-        }
-        #toolsFooter {
-            color: #7b837b;
-            font-size: 8.5pt;
-            font-weight: 700;
-        }
-        QStatusBar {
-            background: #101713;
-            color: #fff8eb;
-            border: 0;
-        }
-        """
+        """Aplica o stylesheet base da janela (fonte única, sem duplicação)."""
         self.setStyleSheet(
             '\n            QMainWindow {\n                background: #f5f1e8;\n            }\n            QWidget {\n                color: #17211d;\n                font-family: "Segoe UI", "Aptos", sans-serif;\n                font-size: 10.5pt;\n            }\n            QLabel, QCheckBox {\n                background: transparent;\n            }\n            #appShell {\n                background: #f5f1e8;\n            }\n            #dropHome {\n                background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n                    stop:0 #111d18, stop:0.56 #20372f, stop:1 #f16f3f);\n                border: 0;\n            }\n            #dropHome[dragActive="true"] {\n                border: 3px solid #ffd2bd;\n            }\n            #homeEyebrow {\n                color: #ffb28f;\n                font-size: 11pt;\n                font-weight: 800;\n                letter-spacing: 2px;\n                text-transform: uppercase;\n            }\n            #homeTitle {\n                color: #fff8eb;\n                font-size: 31pt;\n                font-weight: 900;\n                max-width: 760px;\n            }\n            #homeSubtitle {\n                color: #eadfd2;\n                font-size: 13pt;\n                max-width: 680px;\n                line-height: 1.45;\n            }\n            #madeBy {\n                color: #ffd4c2;\n                font-size: 11pt;\n                font-weight: 800;\n            }\n            #homeHint {\n                color: #ffc8af;\n                font-weight: 600;\n            }\n            #toolTile {\n                background: rgba(255, 248, 235, 0.94);\n                color: #17211d;\n                border: 1px solid rgba(255, 255, 255, 0.55);\n                border-radius: 18px;\n                padding: 18px;\n                font-size: 11pt;\n                font-weight: 900;\n                text-align: left;\n            }\n            #toolTile:hover {\n                background: #ffffff;\n                border: 2px solid #ff8a5f;\n            }\n            #topbar {\n                background: #101713;\n                border: 0;\n            }\n            #brand {\n                color: #fff8eb;\n                font-size: 15pt;\n                font-weight: 900;\n            }\n            #brandByline {\n                color: #aeb8b1;\n                font-size: 9.5pt;\n                font-weight: 700;\n                margin-left: 8px;\n            }\n            #pagesPanel {\n                background: #e8dfd1;\n                border-right: 1px solid #d6caba;\n            }\n            #previewPanel {\n                background: #f5f1e8;\n            }\n            #toolsPanel {\n                background: #fffaf1;\n                border-left: 1px solid #dacfc0;\n            }\n            #panelTitle {\n                font-size: 16pt;\n                font-weight: 900;\n                color: #16231e;\n            }\n            #panelHelper {\n                color: #697169;\n                font-size: 9.5pt;\n            }\n            #sectionLabel {\n                color: #f16f3f;\n                font-size: 9pt;\n                font-weight: 900;\n                letter-spacing: 1.2px;\n                text-transform: uppercase;\n                margin-top: 4px;\n            }\n            #fieldLabel {\n                color: #3b463f;\n                font-weight: 800;\n            }\n            #documentTitle {\n                font-size: 13pt;\n                font-weight: 900;\n                color: #1a2822;\n            }\n            #pageList {\n                background: transparent;\n                border: 0;\n                outline: 0;\n            }\n            QListWidget::item {\n                background: #fffaf1;\n                color: #17211d;\n                border: 1px solid #d6caba;\n                border-radius: 14px;\n                padding: 10px;\n                margin: 2px 0;\n            }\n            QListWidget::item:hover {\n                border: 1px solid #f16f3f;\n            }\n            QListWidget::item:selected {\n                background: #fff2df;\n                border: 2px solid #f16f3f;\n                color: #17211d;\n            }\n            #previewLabel {\n                background: #ded6c7;\n                border: 1px solid #d3c6b4;\n                border-radius: 20px;\n                padding: 22px;\n                color: #59645d;\n                font-weight: 700;\n            }\n            QScrollArea {\n                border: 0;\n                background: #ded6c7;\n                border-radius: 20px;\n            }\n            QPushButton {\n                min-height: 34px;\n                border-radius: 10px;\n                padding: 8px 13px;\n                font-weight: 800;\n                text-align: center;\n            }\n            #primaryButton, #primaryButtonSmall {\n                background: #f16f3f;\n                color: #ffffff;\n                border: 0;\n            }\n            #primaryButton:hover, #primaryButtonSmall:hover {\n                background: #db5c2f;\n            }\n            #primaryButtonSmall {\n                min-height: 30px;\n            }\n            #secondaryButton, #darkButton {\n                background: #fff8eb;\n                color: #16231e;\n                border: 0;\n            }\n            #secondaryButton:hover, #darkButton:hover {\n                background: #ffffff;\n            }\n            #ghostButton {\n                background: rgba(255, 248, 235, 0.10);\n                color: #fff8eb;\n                border: 1px solid rgba(255, 248, 235, 0.25);\n            }\n            #ghostButton:hover {\n                background: rgba(255, 248, 235, 0.18);\n            }\n            #lightGhostButton {\n                background: #eee5d6;\n                color: #17211d;\n                border: 1px solid #d8ccbc;\n            }\n            #lightGhostButton:hover {\n                background: #fff8eb;\n                border-color: #f16f3f;\n            }\n            #toolButton, #flatButton {\n                background: #efe6d7;\n                color: #17211d;\n                border: 1px solid #d8ccbc;\n            }\n            #toolButton:hover, #flatButton:hover {\n                background: #fff2df;\n                border-color: #f16f3f;\n            }\n            #dangerButton {\n                background: #2b1712;\n                color: #fff8eb;\n                border: 0;\n            }\n            #dangerButton:hover {\n                background: #5a2419;\n            }\n            QPushButton:disabled {\n                background: #ded7ca;\n                color: #9a9387;\n                border: 1px solid #d2c8ba;\n            }\n            #profileCombo, #toolCombo {\n                background: #ffffff;\n                color: #17211d;\n                border: 1px solid #d6caba;\n                border-radius: 10px;\n                padding: 8px;\n                min-height: 34px;\n            }\n            #toolStack, #toolPage {\n                background: transparent;\n                border: 0;\n            }\n            #optionCheck {\n                color: #26332d;\n                font-weight: 650;\n                spacing: 8px;\n            }\n            #progressBar {\n                background: #eadfd0;\n                color: #17211d;\n                border: 0;\n                border-radius: 9px;\n                min-height: 18px;\n                text-align: center;\n                font-weight: 800;\n            }\n            #progressBar::chunk {\n                background: #f16f3f;\n                border-radius: 9px;\n            }\n            #logOutput {\n                background: #171f1b;\n                color: #fff8eb;\n                border: 0;\n                border-radius: 14px;\n                padding: 10px;\n                font-family: "Cascadia Mono", "Consolas", monospace;\n                font-size: 9pt;\n            }\n            #toolsFooter {\n                color: #7b837b;\n                font-size: 8.5pt;\n                font-weight: 700;\n            }\n            QStatusBar {\n                background: #101713;\n                color: #fff8eb;\n                border: 0;\n            }\n            '
         )
