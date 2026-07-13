@@ -11,3 +11,4 @@ dist/
 *.log
 artifacts/official-release/
 artifacts/updater-live/
+artifacts/fixes-*.png
