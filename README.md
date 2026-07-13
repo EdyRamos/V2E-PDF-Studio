@@ -5,6 +5,9 @@ remove, insere, divide e comprime PDFs individualmente ou em lote. O código foi
 recuperado do executável original, auditado e preparado para manutenção pública
 sob a AGPL-3.0-or-later.
 
+Repositório oficial: <https://github.com/EdyRamos/V2E-PDF-Studio>  
+Downloads: <https://github.com/EdyRamos/V2E-PDF-Studio/releases/latest>
+
 ## Privacidade
 
 - O processamento ocorre localmente.

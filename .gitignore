@@ -9,3 +9,5 @@ build/V2E-PDF-Compressor/
 dist/
 *.spec.bak
 *.log
+artifacts/official-release/
+artifacts/updater-live/
