@@ -13,10 +13,10 @@ jobs:
     runs-on: windows-latest
     environment: release
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.14.6"
           cache: pip
@@ -37,7 +37,7 @@ jobs:
           if ($process.ExitCode -ne 0) { throw "Smoke-test empacotado falhou: $($process.ExitCode)" }
       - name: Upload unsigned artifact for origin verification
         id: upload-unsigned
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: v2e-unsigned-${{ github.ref_name }}
           path: dist/V2E-PDF-Compressor.exe
