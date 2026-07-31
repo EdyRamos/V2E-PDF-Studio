@@ -3,10 +3,13 @@ from __future__ import annotations
 import logging
 import os
 import subprocess
+import tempfile
 import threading
 import time
 from collections.abc import Callable
 from pathlib import Path
+
+import fitz
 
 from ..domain import (
     BatchResult,
@@ -52,14 +55,19 @@ def build_batch_jobs(
     jobs: list[CompressionJob] = []
     reserved: set[Path] = set()
     output_dir = output_dir.resolve()
-    output_dir.mkdir(parents=True, exist_ok=True)
+    if not overwrite:
+        output_dir.mkdir(parents=True, exist_ok=True)
     for input_file in input_files:
-        base_output = output_dir / f"{input_file.stem}_comprimido.pdf"
-        target_output = base_output if overwrite else _unique_output_path(base_output, reserved)
+        resolved_input = input_file.resolve()
+        if overwrite:
+            target_output = resolved_input
+        else:
+            base_output = output_dir / f"{input_file.stem}_comprimido.pdf"
+            target_output = _unique_output_path(base_output, reserved)
         reserved.add(target_output.resolve())
         jobs.append(
             CompressionJob(
-                input_path=input_file.resolve(),
+                input_path=resolved_input,
                 output_path=target_output.resolve(),
                 profile=profile,
                 overwrite=overwrite,
@@ -110,6 +118,7 @@ class PdfCompressionService:
 
     def _compress_job(self, job: CompressionJob) -> CompressionResult:
         started = time.perf_counter()
+        temporary_output: Path | None = None
         try:
             validation_error = self._validate_job(job)
             if validation_error:
@@ -119,7 +128,15 @@ class PdfCompressionService:
 
             gs_executable = self.locator.resolve_executable()
             before_mb = _to_mb(job.input_path.stat().st_size)
-            command = self._build_command(gs_executable, job)
+            temporary_output = self._temporary_output_path(job.output_path)
+            working_job = CompressionJob(
+                input_path=job.input_path,
+                output_path=temporary_output,
+                profile=job.profile,
+                overwrite=True,
+                optimize=job.optimize,
+            )
+            command = self._build_command(gs_executable, working_job)
             process_env = self._build_process_env(gs_executable)
             self.logger.info("Executando Ghostscript: %s", command)
 
@@ -128,7 +145,6 @@ class PdfCompressionService:
             )
             completed = self._run_process(command, process_env, creationflags=creationflags)
             if completed is None:
-                job.output_path.unlink(missing_ok=True)
                 return self._cancelled_result(job, started)
             if completed.returncode != 0:
                 error_code = self._map_subprocess_error(completed.stderr)
@@ -143,14 +159,23 @@ class PdfCompressionService:
                     started,
                     detail=(completed.stderr or "").strip() or None,
                 )
-            if not job.output_path.exists():
+            if not temporary_output.exists():
                 return self._error_result(
                     job,
                     ErrorCode.PROCESS_FAILED,
                     started,
                     detail="Ghostscript finalizou sem gerar arquivo de saida.",
                 )
+            if not self._is_valid_pdf(temporary_output):
+                return self._error_result(
+                    job,
+                    ErrorCode.PROCESS_FAILED,
+                    started,
+                    detail="Ghostscript gerou uma saida PDF invalida.",
+                )
 
+            os.replace(temporary_output, job.output_path)
+            temporary_output = None
             after_mb = _to_mb(job.output_path.stat().st_size)
             reduction_percent = _percent_reduction(before_mb, after_mb)
             elapsed_ms = int((time.perf_counter() - started) * 1000)
@@ -182,6 +207,9 @@ class PdfCompressionService:
         except Exception as exc:
             self.logger.exception("Erro inesperado na compressao")
             return self._error_result(job, ErrorCode.UNKNOWN_ERROR, started, detail=str(exc))
+        finally:
+            if temporary_output is not None:
+                temporary_output.unlink(missing_ok=True)
 
     def compress_many(
         self,
@@ -353,7 +381,7 @@ class PdfCompressionService:
             return ErrorCode.INPUT_NOT_FOUND
         if job.input_path.suffix.lower() != ".pdf":
             return ErrorCode.INVALID_EXTENSION
-        if job.input_path.resolve() == job.output_path.resolve():
+        if job.input_path.resolve() == job.output_path.resolve() and not job.overwrite:
             return ErrorCode.SAME_INPUT_OUTPUT
         if job.output_path.exists() and not job.overwrite:
             return ErrorCode.OUTPUT_EXISTS
@@ -364,6 +392,26 @@ class PdfCompressionService:
         except OSError:
             return ErrorCode.OUTPUT_PARENT_MISSING
         return None
+
+    @staticmethod
+    def _temporary_output_path(output_path: Path) -> Path:
+        descriptor, raw_path = tempfile.mkstemp(
+            prefix=f".{output_path.stem}.",
+            suffix=".tmp.pdf",
+            dir=output_path.parent,
+        )
+        os.close(descriptor)
+        return Path(raw_path)
+
+    @staticmethod
+    def _is_valid_pdf(path: Path) -> bool:
+        try:
+            if path.stat().st_size == 0:
+                return False
+            with fitz.open(path) as document:
+                return bool(document.is_pdf)
+        except (OSError, RuntimeError, ValueError):
+            return False
 
     def _map_subprocess_error(self, stderr: str) -> ErrorCode:
         output = (stderr or "").lower()

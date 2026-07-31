@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import subprocess
 import sys
 import threading
 import time
@@ -56,6 +57,60 @@ def test_batch_job_names_are_unique(make_pdf, tmp_path: Path) -> None:
     jobs = build_batch_jobs([first, second], outputs, CompressionProfile.EBOOK, False, True)
     assert jobs[0].output_path.name == "same_comprimido.pdf"
     assert jobs[1].output_path.name == "same_comprimido_2.pdf"
+
+
+def test_batch_overwrite_targets_each_original(make_pdf, tmp_path: Path) -> None:
+    first = make_pdf("first.pdf", 1)
+    second = make_pdf("second.pdf", 1)
+    unused_output = tmp_path / "unused-output"
+
+    jobs = build_batch_jobs([first, second], unused_output, CompressionProfile.EBOOK, True, True)
+
+    assert [job.output_path for job in jobs] == [first.resolve(), second.resolve()]
+    assert all(job.overwrite for job in jobs)
+    assert not unused_output.exists()
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Ghostscript incorporado e exclusivo do Windows")
+def test_in_place_compression_atomically_replaces_original(make_pdf) -> None:
+    input_path = make_pdf("overwrite-me.pdf", 2)
+    service = PdfCompressionService(embedded_locator(), timeout_seconds=60)
+
+    result = service.compress(
+        CompressionJob(
+            input_path,
+            input_path,
+            CompressionProfile.EBOOK,
+            overwrite=True,
+            optimize=True,
+        )
+    )
+
+    assert result.status is CompressionStatus.SUCCESS, result.error_detail
+    assert result.output_path == input_path
+    with fitz.open(input_path) as document:
+        assert document.page_count == 2
+    assert list(input_path.parent.glob(f".{input_path.stem}.*.tmp.pdf")) == []
+
+
+def test_failed_in_place_compression_preserves_original(make_pdf, monkeypatch) -> None:
+    input_path = make_pdf("preserve-me.pdf", 2)
+    original_bytes = input_path.read_bytes()
+    service = PdfCompressionService(embedded_locator())
+
+    def invalid_output(command, _env, *, creationflags):
+        del creationflags
+        output_argument = next(part for part in command if part.startswith("-sOutputFile="))
+        Path(output_argument.removeprefix("-sOutputFile=")).write_bytes(b"not a pdf")
+        return subprocess.CompletedProcess(command, 0, stdout="", stderr="")
+
+    monkeypatch.setattr(service, "_run_process", invalid_output)
+    result = service.compress(CompressionJob(input_path, input_path, overwrite=True, optimize=True))
+
+    assert result.status is CompressionStatus.FAILED
+    assert result.error_code is ErrorCode.PROCESS_FAILED
+    assert input_path.read_bytes() == original_bytes
+    assert list(input_path.parent.glob(f".{input_path.stem}.*.tmp.pdf")) == []
 
 
 def test_error_mapping_and_math(tmp_path: Path) -> None:
