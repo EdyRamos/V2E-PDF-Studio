@@ -4,7 +4,7 @@ import logging
 from pathlib import Path
 
 import pytest
-from PySide6.QtWidgets import QMessageBox
+from PySide6.QtWidgets import QFileDialog, QMessageBox
 
 from v2e_pdf_compressor.application import (
     PdfCompressionService,
@@ -190,6 +190,38 @@ def test_preview_refresh_is_debounced(window, make_pdf, qtbot, monkeypatch) -> N
     qtbot.waitUntil(lambda: len(calls) == 1, timeout=3000)
     qtbot.wait(180)
     assert calls == [window.zoom]
+
+
+def test_batch_overwrite_skips_output_folder_and_targets_originals(
+    window, make_pdf, monkeypatch
+) -> None:
+    first = make_pdf("batch-first.pdf", 1)
+    second = make_pdf("batch-second.pdf", 1)
+    window.set_active_tool("batch")
+    window.batch_overwrite_check.setChecked(True)
+    jobs_seen: list[object] = []
+    output_folder_calls: list[bool] = []
+    monkeypatch.setattr(
+        QFileDialog,
+        "getOpenFileNames",
+        lambda *args: ([str(first), str(second)], "Arquivos PDF (*.pdf)"),
+    )
+    monkeypatch.setattr(
+        QFileDialog,
+        "getExistingDirectory",
+        lambda *args: output_folder_calls.append(True) or "",
+    )
+    monkeypatch.setattr(
+        QMessageBox,
+        "question",
+        lambda *args: QMessageBox.StandardButton.Yes,
+    )
+    monkeypatch.setattr(window, "_start_compression", lambda jobs, _mode: jobs_seen.extend(jobs))
+
+    window.compress_batch()
+
+    assert output_folder_calls == []
+    assert [job.output_path for job in jobs_seen] == [first.resolve(), second.resolve()]
 
 
 def test_stale_worker_callbacks_are_ignored(window, monkeypatch: pytest.MonkeyPatch) -> None:

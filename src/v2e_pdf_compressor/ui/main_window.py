@@ -574,7 +574,7 @@ class MainWindow(QMainWindow):
         batch_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         batch_layout.addWidget(self._section_label("Comprimir lote"))
         batch_help = QLabel(
-            "Selecione vários PDFs e uma pasta de saída. Cada arquivo será comprimido separadamente."
+            "Preserve os originais em uma pasta de saída ou substitua-os com segurança."
         )
         batch_help.setObjectName("panelHelper")
         batch_help.setWordWrap(True)
@@ -610,7 +610,7 @@ class MainWindow(QMainWindow):
         self.batch_optimize_check = QCheckBox("Otimizações extras")
         self.batch_optimize_check.setObjectName("optionCheck")
         self.batch_optimize_check.setChecked(True)
-        self.batch_overwrite_check = QCheckBox("Permitir sobrescrever a saída")
+        self.batch_overwrite_check = QCheckBox("Sobrescrever os PDFs originais")
         self.batch_overwrite_check.setObjectName("optionCheck")
         self.batch_overwrite_check.setChecked(self.settings.overwrite_policy == "overwrite")
         self.batch_overwrite_check.stateChanged.connect(
@@ -1119,20 +1119,38 @@ class MainWindow(QMainWindow):
         )
         if not files:
             return None
-        output_dir = QFileDialog.getExistingDirectory(
-            self, "Escolha a pasta de saída", str(Path(files[0]).parent)
-        )
-        if not output_dir:
-            return None
         self.set_active_tool("batch")
         self._show_editor()
         input_files = [Path(file) for file in files]
+        overwrite = self.batch_overwrite_check.isChecked()
+        if overwrite:
+            answer = QMessageBox.question(
+                self,
+                "Sobrescrever PDFs originais",
+                (
+                    f"Os {len(input_files)} PDF(s) selecionados serão substituídos pelas versões "
+                    "comprimidas. O original só será trocado depois que a nova saída for validada.\n\n"
+                    "Deseja continuar?"
+                ),
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.No,
+            )
+            if answer != QMessageBox.StandardButton.Yes:
+                return None
+            output_dir = input_files[0].parent
+        else:
+            selected_output_dir = QFileDialog.getExistingDirectory(
+                self, "Escolha a pasta de saída", str(input_files[0].parent)
+            )
+            if not selected_output_dir:
+                return None
+            output_dir = Path(selected_output_dir)
         self._update_last_directory(input_files[0].parent)
         jobs = build_batch_jobs(
             input_files=input_files,
-            output_dir=Path(output_dir),
+            output_dir=output_dir,
             profile=self._selected_profile(),
-            overwrite=self._selected_overwrite(),
+            overwrite=overwrite,
             optimize=self._selected_optimize(),
         )
         self._start_compression(jobs, "batch")
