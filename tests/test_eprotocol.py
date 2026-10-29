@@ -212,6 +212,18 @@ def test_archive_rejects_collisions_without_partial_output(tmp_path: Path) -> No
     assert list(output.iterdir()) == []
 
 
+def test_archive_rejects_linked_input(tmp_path: Path, monkeypatch) -> None:
+    source = tmp_path / "arquivo.txt"
+    source.write_text("content", encoding="utf-8")
+    output = tmp_path / "output"
+    output.mkdir()
+    service = EProtocolService(PdfCompressionService(GhostscriptLocator()))
+    monkeypatch.setattr("v2e_pdf_compressor.application.eprotocol.is_link_path", lambda _p: True)
+    with pytest.raises(EProtocolError, match="link"):
+        service.prepare_archive(ArchiveRequest((ArchiveEntry(source, source.name),), output, "X"))
+    assert list(output.iterdir()) == []
+
+
 def test_small_archive_is_a_single_valid_zip(tmp_path: Path) -> None:
     source = tmp_path / "arquivo.txt"
     source.write_text("conteúdo preservado", encoding="utf-8")

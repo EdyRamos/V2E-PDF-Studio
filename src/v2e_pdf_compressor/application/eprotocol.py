@@ -81,6 +81,13 @@ def natural_key(path: Path) -> tuple[tuple[int, str | int], ...]:
     return (*tokens, (0, str(path).casefold()), (0, str(path)))
 
 
+def is_link_path(path: Path) -> bool:
+    return any(
+        item.is_symlink() or bool(getattr(item, "is_junction", lambda: False)())
+        for item in (path, *path.parents)
+    )
+
+
 def sha256_file(path: Path, check: Callable[[], None] | None = None) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as source:
@@ -164,7 +171,7 @@ class EProtocolService:
                 if key in expected:
                     raise EProtocolError(f"Nomes duplicados no pacote: {relative}")
                 source = entry.path.resolve(strict=True)
-                if not source.is_file() or entry.path.is_symlink():
+                if not source.is_file() or is_link_path(entry.path):
                     raise EProtocolError(f"Arquivo inválido ou link: {entry.path.name}")
                 notify(f"Preparando {entry.path.name}...")
                 target = inputs / relative
@@ -286,6 +293,8 @@ class EProtocolService:
         seen: set[Path] = set()
         for path in paths:
             self._check_cancelled()
+            if is_link_path(path):
+                raise EProtocolError(f"O caminho contém link ou junção: {path.name}")
             path = path.resolve(strict=True)
             if path in seen or path.suffix.lower() != ".pdf":
                 raise EProtocolError(f"Arquivo duplicado ou não é PDF: {path.name}")

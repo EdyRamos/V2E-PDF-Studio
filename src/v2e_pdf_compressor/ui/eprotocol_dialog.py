@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 import tempfile
 from pathlib import Path
@@ -27,7 +28,11 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ..application.eprotocol import natural_key
+from ..application.eprotocol import is_link_path, natural_key
+
+
+def is_link(path: Path) -> bool:
+    return path.is_symlink() or bool(getattr(path, "is_junction", lambda: False)())
 
 
 class EProtocolDialog(QDialog):
@@ -196,15 +201,20 @@ class EProtocolDialog(QDialog):
             return
         candidates = []
         for path in paths:
-            if path.is_symlink():
+            if is_link_path(path):
                 continue
             if path.is_dir():
-                iterator = path.rglob("*") if self.recursive.isChecked() else path.iterdir()
-                for item in iterator:
-                    if item.is_file() and not any(
-                        p.is_symlink() for p in [item, *item.parents] if p != path.parent
-                    ):
-                        candidates.append((item, str(item.relative_to(path))))
+                for root, directories, names in os.walk(path, followlinks=False):
+                    root_path = Path(root)
+                    directories[:] = (
+                        [name for name in directories if not is_link(root_path / name)]
+                        if self.recursive.isChecked()
+                        else []
+                    )
+                    for name in names:
+                        item = root_path / name
+                        if item.is_file() and not is_link(item):
+                            candidates.append((item, str(item.relative_to(path))))
             elif path.is_file():
                 candidates.append((path, path.name))
         for path, relative in sorted(candidates, key=lambda value: natural_key(Path(value[1]))):
