@@ -43,6 +43,11 @@ class EProtocolDialog(QDialog):
                 border-radius: 7px; padding: 8px 12px; font-weight: 600; }
             QPushButton:hover { background: #fff7ec; border-color: #f16f3f; }
             QPushButton:disabled { color: #969b96; background: #eee9df; }
+            QPushButton#eprotocolPrimary { background: #d9552a; color: white; border: 0; font-weight: 700; }
+            QPushButton#eprotocolPrimary:hover { background: #bc4620; }
+            QPushButton#eprotocolPrimary:disabled { background: #c9c0b5; color: #ece8e1; }
+            QLabel#eprotocolTitle { font-size: 19pt; font-weight: 700; color: #17211d; }
+            QLabel#eprotocolSection { font-size: 11pt; font-weight: 700; color: #304039; }
             QListWidget, QLineEdit, QComboBox, QSpinBox { background: white;
                 border: 1px solid #d6caba; border-radius: 7px; padding: 7px; }
             QListWidget::item { padding: 6px; }
@@ -69,9 +74,15 @@ class EProtocolDialog(QDialog):
         body = QWidget()
         scroll.setWidget(body)
         layout = QVBoxLayout(body)
+        title = QLabel("Preparar para eProtocolo")
+        title.setObjectName("eprotocolTitle")
+        layout.addWidget(title)
         layout.addWidget(
-            QLabel("Prepare PDFs para leitura ou um pacote que preserva os originais.")
+            QLabel("Organize documentos em partes para envio, com processamento local.")
         )
+        section = QLabel("1. Escolha o formato")
+        section.setObjectName("eprotocolSection")
+        layout.addWidget(section)
         self.mode = QComboBox()
         self.mode.addItem("PDFs independentes", "pdf")
         self.mode.addItem("Pacote de anexos (ZIP dividido)", "archive")
@@ -82,6 +93,9 @@ class EProtocolDialog(QDialog):
         )
         help_text.setWordWrap(True)
         layout.addWidget(help_text)
+        section = QLabel("2. Selecione e organize os arquivos")
+        section.setObjectName("eprotocolSection")
+        layout.addWidget(section)
         row = QHBoxLayout()
         for label, action in (
             ("Adicionar arquivos", self.add_files),
@@ -108,6 +122,9 @@ class EProtocolDialog(QDialog):
             move.addWidget(button)
             self.edit_controls.append(button)
         layout.addLayout(move)
+        section = QLabel("3. Defina o nome e o destino")
+        section.setObjectName("eprotocolSection")
+        layout.addWidget(section)
         self.base = QLineEdit("Processo")
         self.base.setPlaceholderText("Nome base dos arquivos")
         layout.addWidget(self.base)
@@ -139,6 +156,7 @@ class EProtocolDialog(QDialog):
         layout.addWidget(self.progress)
         actions = QHBoxLayout()
         self.start_button = QPushButton("Preparar documentos")
+        self.start_button.setObjectName("eprotocolPrimary")
         self.start_button.clicked.connect(self.start)
         self.cancel_button = QPushButton("Cancelar processamento")
         self.cancel_button.clicked.connect(self.cancel)
