@@ -211,6 +211,16 @@ class EProtocolDialog(QDialog):
                         if self.recursive.isChecked()
                         else []
                     )
+                    if (
+                        self.mode.currentData() == "archive"
+                        and not directories
+                        and not names
+                        and self.recursive.isChecked()
+                    ):
+                        relative = root_path.relative_to(path)
+                        candidates.append(
+                            (root_path, str(relative) if relative.parts else path.name)
+                        )
                     for name in names:
                         item = root_path / name
                         if item.is_file() and not is_link(item):
@@ -222,7 +232,10 @@ class EProtocolDialog(QDialog):
             if key in self.entries:
                 continue
             self.entries[key] = relative
-            item = QListWidgetItem(f"{relative} — {path.stat().st_size / 1_000_000:.2f} MB")
+            details = (
+                "pasta vazia" if path.is_dir() else f"{path.stat().st_size / 1_000_000:.2f} MB"
+            )
+            item = QListWidgetItem(f"{relative} — {details}")
             item.setData(Qt.ItemDataRole.UserRole, key)
             self.queue.addItem(item)
 

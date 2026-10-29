@@ -236,6 +236,21 @@ def test_small_archive_is_a_single_valid_zip(tmp_path: Path) -> None:
     assert [part.name for part in result.parts] == ["Processo.zip"]
 
 
+def test_archive_preserves_empty_folder(tmp_path: Path) -> None:
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    output = tmp_path / "output"
+    output.mkdir()
+    service = EProtocolService(PdfCompressionService(GhostscriptLocator()))
+    result = service.prepare_archive(
+        ArchiveRequest((ArchiveEntry(empty, "folder/empty"),), output, "Processo")
+    )
+    import zipfile
+
+    with zipfile.ZipFile(result.parts[0]) as archive:
+        assert "folder/empty/" in archive.namelist()
+
+
 def test_archive_cancel_leaves_no_result(tmp_path: Path) -> None:
     source = tmp_path / "original.bin"
     source.write_bytes(os.urandom(1_000_000))

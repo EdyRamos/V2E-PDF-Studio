@@ -171,10 +171,16 @@ class EProtocolService:
                 if key in expected:
                     raise EProtocolError(f"Nomes duplicados no pacote: {relative}")
                 source = entry.path.resolve(strict=True)
-                if not source.is_file() or is_link_path(entry.path):
+                if (not source.is_file() and not source.is_dir()) or is_link_path(entry.path):
                     raise EProtocolError(f"Arquivo inválido ou link: {entry.path.name}")
                 notify(f"Preparando {entry.path.name}...")
                 target = inputs / relative
+                if source.is_dir():
+                    if any(source.iterdir()):
+                        raise EProtocolError(f"Pasta deixou de estar vazia: {source.name}")
+                    target.mkdir(parents=True, exist_ok=True)
+                    expected[key] = ""
+                    continue
                 target.parent.mkdir(parents=True, exist_ok=True)
                 digest = sha256_file(source, self._check_cancelled)
                 with source.open("rb") as source_stream, target.open("wb") as target_stream:
@@ -238,10 +244,18 @@ class EProtocolService:
                 for p in verified.rglob("*")
                 if p.is_file()
             }
-            if found != expected:
+            if found != {key: digest for key, digest in expected.items() if digest}:
                 raise EProtocolError("Os arquivos extraídos diferem dos originais.")
+            for entry in request.entries:
+                key = Path(entry.relative_path).as_posix().casefold()
+                if not expected[key] and not (verified / entry.relative_path).is_dir():
+                    raise EProtocolError(f"Pasta ausente no pacote: {entry.relative_path}")
             self._check_cancelled()
             for entry in request.entries:
+                if not expected[Path(entry.relative_path).as_posix().casefold()]:
+                    if not entry.path.is_dir() or any(entry.path.iterdir()):
+                        raise EProtocolError(f"Pasta de entrada alterada: {entry.path.name}")
+                    continue
                 if (
                     sha256_file(entry.path, self._check_cancelled)
                     != expected[Path(entry.relative_path).as_posix().casefold()]
