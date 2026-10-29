@@ -90,3 +90,8 @@ SHA-256 e SBOM. Detalhes estão em `docs/RELEASING.md`.
 - `baseline/original-executable.json`: hash da referência original.
 - `BUG_INVENTORY.md`: inventário e estado dos riscos.
 - `RECOVERY_REPORT.md`: relatório técnico da recuperação.
+
+## Modo eProtocolo
+
+Consulte [o guia do modo eProtocolo](docs/eprotocolo.md) para preparar PDFs e
+pacotes de anexos divididos, sem enviar documentos automaticamente ao portal.

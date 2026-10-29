@@ -33,7 +33,7 @@ jobs:
       - name: Smoke-test packaged executable
         shell: pwsh
         run: |
-          $process = Start-Process .\dist\V2E-PDF-Compressor.exe -ArgumentList '--smoke-test' -Wait -PassThru
+          $process = Start-Process .\dist\V2E-PDF-Compressor.exe -ArgumentList '--full-smoke-test' -Wait -PassThru
           if ($process.ExitCode -ne 0) { throw "Smoke-test empacotado falhou: $($process.ExitCode)" }
       - name: Upload unsigned artifact for origin verification
         id: upload-unsigned
@@ -76,6 +76,7 @@ jobs:
         run: |
           python scripts/generate-release-metadata.py --exe dist/V2E-PDF-Compressor.exe --output dist/release-manifest.json --version $env:V2E_VERSION
           cyclonedx-py requirements requirements.lock --output-file dist/sbom.cdx.json
+          python scripts/add-7zip-sbom.py dist/sbom.cdx.json
       - name: Verify release
         shell: pwsh
         run: |

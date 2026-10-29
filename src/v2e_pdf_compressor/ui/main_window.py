@@ -140,6 +140,13 @@ class DropHome(QFrame):
             1,
             1,
         )
+        tool_grid.addWidget(
+            self._tool_button("Modo eProtocolo", "Preparar anexos e PDFs.", "eprotocol"),
+            2,
+            0,
+            1,
+            2,
+        )
         layout.addLayout(intro, stretch=4)
         layout.addLayout(tool_grid, stretch=3)
         return None
@@ -694,6 +701,16 @@ class MainWindow(QMainWindow):
         return label
 
     def start_home_tool(self, tool_key):
+        if tool_key == "eprotocol":
+            if (self._compression_thread and self._compression_thread.is_alive()) or (
+                self._update_thread and self._update_thread.is_alive()
+            ):
+                self._show_error("Processo em andamento", "Aguarde a operação atual terminar.")
+                return
+            from .eprotocol_dialog import EProtocolDialog
+
+            EProtocolDialog(self).exec()
+            return
         self.set_active_tool(tool_key)
         self._show_editor()
 

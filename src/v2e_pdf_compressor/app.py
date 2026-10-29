@@ -6,6 +6,7 @@ import json
 import logging
 import os
 import platform
+import subprocess
 import sys
 import tempfile
 import time
@@ -51,6 +52,12 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Mostra ambiente, dependencias e caminhos sem acessar documentos PDF.",
     )
     parser.add_argument("--version", action="version", version=__version__)
+    parser.add_argument(
+        "--eprotocol-worker",
+        nargs=3,
+        metavar=("REQUEST", "STATUS", "CANCEL"),
+        help=argparse.SUPPRESS,
+    )
     return parser.parse_args(argv)
 
 
@@ -195,6 +202,47 @@ def _run_full_smoke_test(logger: logging.Logger) -> int:
                 f"Compressao falhou no smoke-test: {result.error_code} {result.error_detail}"
             )
 
+        for mode in ("pdf", "archive"):
+            request_path = temp_root / f"{mode}-request.json"
+            status_path = temp_root / f"{mode}-status.json"
+            cancel_path = temp_root / f"{mode}-cancel"
+            request_path.write_text(
+                json.dumps(
+                    {
+                        "mode": mode,
+                        "entries": [{"path": str(source_path), "relative": source_path.name}],
+                        "destination": str(temp_root),
+                        "base_name": f"smoke-{mode}",
+                        "max_bytes": 5_000_000,
+                        "profile": None,
+                    }
+                ),
+                encoding="utf-8",
+            )
+            prefix = (
+                []
+                if getattr(sys, "frozen", False)
+                else [str(Path(__file__).resolve().parents[2] / "app.py")]
+            )
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    *prefix,
+                    "--eprotocol-worker",
+                    str(request_path),
+                    str(status_path),
+                    str(cancel_path),
+                ],
+                timeout=180,
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+                check=False,
+            )
+            if completed.returncode or not status_path.exists():
+                raise RuntimeError(f"Teste eProtocolo ({mode}) não terminou corretamente.")
+            worker_result = json.loads(status_path.read_text(encoding="utf-8"))
+            if worker_result.get("status") != "success":
+                raise RuntimeError(f"Teste eProtocolo ({mode}): {worker_result}")
+
         payload = {
             "ghostscript_executable": str(locator.resolve_executable()),
             "compression_status": result.status.value,
@@ -203,6 +251,7 @@ def _run_full_smoke_test(logger: logging.Logger) -> int:
             "page_reorder_ok": True,
             "thumbnail_count": window.thumbnail_list.count(),
             "ui_loaded": True,
+            "eprotocol_pdf_and_archive": "success",
         }
         print(json.dumps(payload, ensure_ascii=False))
         qt_app.processEvents()
@@ -213,6 +262,10 @@ def _run_full_smoke_test(logger: logging.Logger) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     args = _parse_args(argv)
+    if args.eprotocol_worker:
+        from .application.eprotocol_worker import run_worker
+
+        return run_worker(*(Path(value) for value in args.eprotocol_worker))
     configure_logging()
     logger = logging.getLogger("v2e")
     if args.smoke_test:
