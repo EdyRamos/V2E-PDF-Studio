@@ -42,3 +42,8 @@ Este projeto inclui e distribui componentes de terceiros.
   - `docs/SOURCE_CODE_OFFER.md`
   - `vendor/ghostscript/win64/COPYING`
 - Mantenha estes avisos de terceiros sem remover termos de licenca.
+# 7-Zip
+
+The application includes the 7-Zip 26.05 standalone executable. Its license and
+source information are included in `vendor/7zip/License.txt` and
+`vendor/7zip/README.md`.

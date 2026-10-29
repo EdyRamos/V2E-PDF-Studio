@@ -10,6 +10,7 @@ pymupdf_datas, pymupdf_binaries, pymupdf_hidden = collect_all("pymupdf")
 
 datas = [
     (str(project_root / "vendor" / "ghostscript" / "win64"), "vendor/ghostscript/win64"),
+    (str(project_root / "vendor" / "7zip"), "vendor/7zip"),
     (str(project_root / "docs"), "docs"),
     (str(project_root / "LICENSE"), "."),
     (str(project_root / "THIRD_PARTY_NOTICES.md"), "."),
