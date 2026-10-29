@@ -237,3 +237,23 @@ def test_ui_runs_worker_in_separate_process(make_pdf, tmp_path: Path, qtbot, mon
     qtbot.waitUntil(lambda: dialog.session is None, timeout=30000)
     assert dialog.open_button.isEnabled(), dialog.state.text()
     assert list(Path(dialog.result_dir).glob("*.pdf"))
+
+
+def test_ui_skips_non_pdf_and_reports_it(make_pdf, tmp_path: Path, qtbot, monkeypatch) -> None:
+    from PySide6.QtWidgets import QMessageBox
+
+    source = make_pdf("source.pdf", 1)
+    ignored = tmp_path / "notes.txt"
+    ignored.write_text("not a PDF", encoding="utf-8")
+    output = tmp_path / "output"
+    output.mkdir()
+    dialog = EProtocolDialog()
+    qtbot.addWidget(dialog)
+    dialog.add_paths([ignored, source])
+    dialog.destination = str(output)
+    dialog.profile.setCurrentIndex(2)
+    monkeypatch.setattr(QMessageBox, "information", lambda *args: QMessageBox.StandardButton.Ok)
+    dialog.start()
+    qtbot.waitUntil(lambda: dialog.session is None, timeout=30000)
+    assert dialog.open_button.isEnabled(), dialog.state.text()
+    assert "notes.txt" in dialog.state.text()

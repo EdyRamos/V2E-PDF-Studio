@@ -64,6 +64,7 @@ class EProtocolDialog(QDialog):
         self.timer.timeout.connect(self.poll)
         self.destination = ""
         self.result_dir = ""
+        self.ignored_files = []
         self.edit_controls = []
         self.close_after_cancel = False
         outer = QVBoxLayout(self)
@@ -265,12 +266,18 @@ class EProtocolDialog(QDialog):
         if self.mode.currentData() == "pdf":
             ignored = [e["relative"] for e in entries if Path(e["path"]).suffix.lower() != ".pdf"]
             if ignored:
-                QMessageBox.warning(
+                QMessageBox.information(
                     self,
                     "Arquivos ignorados",
-                    "Remova arquivos que não são PDFs:\n" + "\n".join(ignored),
+                    "Os arquivos abaixo não são PDFs e não serão incluídos:\n" + "\n".join(ignored),
                 )
+                entries = [e for e in entries if Path(e["path"]).suffix.lower() == ".pdf"]
+            if not entries:
+                QMessageBox.warning(self, "Documentos", "A lista não contém PDFs.")
                 return
+            self.ignored_files = ignored
+        else:
+            self.ignored_files = []
         self.session = tempfile.TemporaryDirectory(prefix="v2e-worker-")
         root = Path(self.session.name)
         self.status_path, self.cancel_path = root / "status.json", root / "cancel"
@@ -341,11 +348,14 @@ class EProtocolDialog(QDialog):
         if payload.get("status") == "inspected" and not self.cancel_path.exists():
             signed = [Path(item["path"]).name for item in payload["items"] if item["signed"]]
             forms = [Path(item["path"]).name for item in payload["items"] if item["forms"]]
-            for index, item in enumerate(payload["items"]):
-                entry = self.queue.item(index)
-                entry.setText(
-                    f"{self.entries[entry.data(Qt.ItemDataRole.UserRole)]} — {item['pages']} páginas"
-                )
+            for item in payload["items"]:
+                for index in range(self.queue.count()):
+                    entry = self.queue.item(index)
+                    if Path(entry.data(Qt.ItemDataRole.UserRole)) == Path(item["path"]):
+                        entry.setText(
+                            f"{self.entries[entry.data(Qt.ItemDataRole.UserRole)]} — {item['pages']} páginas"
+                        )
+                        break
             if forms:
                 allow_forms = (
                     QMessageBox.question(
@@ -398,6 +408,7 @@ class EProtocolDialog(QDialog):
             self.state.setText(
                 f"Concluído: {len(payload['parts'])} parte(s). Envie uma por vez, em ordem. "
                 + " ".join(payload.get("warnings", []))
+                + (" Ignorados: " + ", ".join(self.ignored_files) if self.ignored_files else "")
             )
         else:
             self.state.setText(payload.get("message", "Falha no processamento."))
