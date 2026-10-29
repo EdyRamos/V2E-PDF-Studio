@@ -61,6 +61,28 @@ def test_pdf_preparation_uses_real_ghostscript(make_pdf, tmp_path: Path) -> None
     assert not list(result.directory.glob("*.tmp.pdf"))
 
 
+@pytest.mark.skipif(os.name != "nt", reason="Ghostscript incorporado somente para Windows")
+def test_existing_ocr_text_remains_searchable_after_preparation(tmp_path: Path) -> None:
+    source = tmp_path / "ocr.pdf"
+    with fitz.open() as document:
+        page = document.new_page()
+        page.draw_rect(fitz.Rect(40, 40, 400, 200), color=(0, 0, 0), fill=(0.9, 0.9, 0.9))
+        page.insert_text((50, 80), "SCANNED CONTENT", fontsize=15)
+        page.insert_text((50, 120), "OCR hidden text 123", render_mode=3)
+        document.save(source)
+    output = tmp_path / "output"
+    output.mkdir()
+    project = Path(__file__).resolve().parents[1]
+    service = EProtocolService(
+        PdfCompressionService(
+            GhostscriptLocator(search_roots=[project], include_default_roots=False)
+        )
+    )
+    result = service.prepare_pdfs(EProtocolRequest((source,), output, "Processo"))
+    with fitz.open(result.parts[0]) as document:
+        assert "OCR hidden text 123" in document[0].get_text()
+
+
 def test_bad_pdf_does_not_publish_partial_set(make_pdf, tmp_path: Path) -> None:
     valid = make_pdf("valid.pdf")
     bad = tmp_path / "bad.pdf"
